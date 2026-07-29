@@ -15,6 +15,8 @@ const {
 } = process.env;
 
 let testSummary = '';
+let passedCount = 0;
+let failedCount = 0;
 
 console.log('Current working directory:', process.cwd());
 console.log('Checking for results.json...');
@@ -28,14 +30,42 @@ try {
   const results = JSON.parse(fs.readFileSync('results.json', 'utf8'));
   console.log('results.json parsed successfully.');
   
-  testSummary = results.suites.flatMap(suite => suite.specs).map(spec => {
-    // Check if tests exist before accessing
+  const getAllSpecs = (suite) => {
+    let specs = [];
+    if (suite.specs) {
+      specs.push(...suite.specs);
+    }
+    if (suite.suites) {
+      for (const subSuite of suite.suites) {
+        specs.push(...getAllSpecs(subSuite));
+      }
+    }
+    return specs;
+  };
+
+  const allSpecs = [];
+  if (results.suites) {
+    for (const suite of results.suites) {
+      allSpecs.push(...getAllSpecs(suite));
+    }
+  }
+
+  testSummary = allSpecs.map(spec => {
     if (!spec.tests || spec.tests.length === 0) return `⚠️ ${spec.title} (No tests)`;
-    const status = spec.tests[0].results[0]?.status || 'unknown';
-    const browser = spec.tests[0].projectName;
+    const status = spec.tests[0].results?.[0]?.status || 'unknown';
+    const browser = spec.tests[0].projectName || 'unknown';
     const emoji = status === 'passed' ? '✅' : '❌';
+    if (status === 'passed') {
+      passedCount++;
+    } else {
+      failedCount++;
+    }
     return `${emoji} ${spec.title} (${browser})`;
   }).join('\n');
+
+  if (!testSummary) {
+    testSummary = 'No tests found in results.json.';
+  }
   console.log('Test summary generated:', testSummary);
 } catch (e) {
   console.error('Error parsing results.json:', e);
@@ -67,7 +97,7 @@ if (REPORT_URL) {
 }
 
 const payload = {
-  text: `${statusEmoji} Prod Member area monitoring (functional & Cross browser testflow) - *${statusText}*`,
+  text: `${statusEmoji} Prod Member area monitoring (functional & Cross browser testflow) - *${statusText}* (Passed: ${passedCount} | Failed: ${failedCount})`,
   blocks: [
     {
       type: 'section',
@@ -78,22 +108,23 @@ const payload = {
     },
     {
       type: 'section',
+      fields: [
+        { type: 'mrkdwn', text: `*Status:*\nPassed: \`${passedCount}\` | Failed: \`${failedCount}\`` },
+        { type: 'mrkdwn', text: `*Site:*\n${site}` },
+        { type: 'mrkdwn', text: `*Env:*\n${env}` },
+        { type: 'mrkdwn', text: `*Base URL:*\n${BASE_URL || 'N/A'}` },
+        { type: 'mrkdwn', text: `*Repository:*\n${GITHUB_REPO || 'N/A'}` },
+        { type: 'mrkdwn', text: `*Branch:*\n${GITHUB_REF || 'N/A'}` },
+        { type: 'mrkdwn', text: `*Actor:*\n${GITHUB_ACTOR || 'N/A'}` },
+        { type: 'mrkdwn', text: `*Event:*\n${GITHUB_EVENT || 'N/A'}` }
+      ]
+    },
+    {
+      type: 'section',
       text: {
         type: 'mrkdwn',
         text: `*Test Summary:*\n${testSummary}`
       }
-    },
-    {
-      type: 'section',
-      fields: [
-        { type: 'mrkdwn', text: `*Repository:*\n${GITHUB_REPO}` },
-        { type: 'mrkdwn', text: `*Branch:*\n${GITHUB_REF}` },
-        { type: 'mrkdwn', text: `*Site:*\n${site}` },
-        { type: 'mrkdwn', text: `*Env:*\n${env}` },
-        { type: 'mrkdwn', text: `*Base URL:*\n${BASE_URL || 'N/A'}` },
-        { type: 'mrkdwn', text: `*Actor:*\n${GITHUB_ACTOR}` },
-        { type: 'mrkdwn', text: `*Event:*\n${GITHUB_EVENT}` }
-      ]
     },
     {
       type: 'actions',

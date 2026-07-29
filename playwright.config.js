@@ -3,7 +3,10 @@ const { defineConfig, devices } = require('@playwright/test');
 module.exports = defineConfig({
   testDir: './test',
   timeout: 5400000, // 90 minutes in milliseconds
-  reporter: 'html', // Enable HTML report
+  reporter: [
+    ['html', { open: 'never' }],
+    ['json', { outputFile: 'results.json' }]
+  ],
   use: {
     headless: false,
   },

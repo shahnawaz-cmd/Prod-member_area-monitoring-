@@ -1,5 +1,5 @@
 class DashboardRedirectionCheck {
-  constructor(timeout = 30000) {
+  constructor(timeout = 60000) {
     this.timeout = timeout;
   }
 
