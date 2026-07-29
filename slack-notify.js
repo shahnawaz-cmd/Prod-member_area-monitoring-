@@ -16,16 +16,29 @@ const {
 
 let testSummary = '';
 
+console.log('Current working directory:', process.cwd());
+console.log('Checking for results.json...');
+if (fs.existsSync('results.json')) {
+  console.log('results.json found.');
+} else {
+  console.log('results.json NOT found.');
+}
+
 try {
   const results = JSON.parse(fs.readFileSync('results.json', 'utf8'));
+  console.log('results.json parsed successfully.');
   
   testSummary = results.suites.flatMap(suite => suite.specs).map(spec => {
-    const status = spec.tests[0].results[0].status;
+    // Check if tests exist before accessing
+    if (!spec.tests || spec.tests.length === 0) return `⚠️ ${spec.title} (No tests)`;
+    const status = spec.tests[0].results[0]?.status || 'unknown';
     const browser = spec.tests[0].projectName;
     const emoji = status === 'passed' ? '✅' : '❌';
     return `${emoji} ${spec.title} (${browser})`;
   }).join('\n');
+  console.log('Test summary generated:', testSummary);
 } catch (e) {
+  console.error('Error parsing results.json:', e);
   testSummary = 'Could not parse test results.';
 }
 
@@ -54,13 +67,13 @@ if (REPORT_URL) {
 }
 
 const payload = {
-  text: `${statusEmoji} Playwright Test Run *${statusText}*`,
+  text: `${statusEmoji} Prod Member area monitoring (functional & Cross browser testflow) - *${statusText}*`,
   blocks: [
     {
       type: 'section',
       text: {
         type: 'mrkdwn',
-        text: `${statusEmoji} *Playwright Test Run ${statusText}*`
+        text: `${statusEmoji} *Prod Member area monitoring (functional & Cross browser testflow)* - *${statusText}*`
       }
     },
     {
