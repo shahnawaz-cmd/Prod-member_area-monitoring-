@@ -77,6 +77,10 @@ const site = BASE_URL ? (BASE_URL.includes('vehiclehistory') ? 'VHR' : 'Other') 
 const env = BASE_URL ? (BASE_URL.includes('members') ? 'Prod' : 'Dev') : 'Unknown';
 
 const runUrl = `${GITHUB_SERVER}/${GITHUB_REPO}/actions/runs/${GITHUB_RUN}`;
+const owner = GITHUB_REPO ? GITHUB_REPO.split('/')[0] : '';
+const repoName = GITHUB_REPO ? GITHUB_REPO.split('/')[1] : '';
+const reportUrl = REPORT_URL || ((owner && repoName) ? `https://${owner}.github.io/${repoName}/` : '');
+
 const isSuccess = failedCount === 0 && passedCount > 0;
 const statusEmoji = isSuccess ? '✅' : '❌';
 const statusText = isSuccess ? 'Passed' : 'Failed';
@@ -84,6 +88,14 @@ const statusText = isSuccess ? 'Passed' : 'Failed';
 const payload = {
   text: `${statusEmoji} Prod Member area monitoring (functional & Cross browser testflow)`,
   blocks: [
+    {
+      type: 'header',
+      text: {
+        type: 'plain_text',
+        text: `${statusEmoji} Prod Member area monitoring (functional & Cross browser testflow)`,
+        emoji: true
+      }
+    },
     {
       type: 'section',
       fields: [
@@ -108,7 +120,7 @@ const payload = {
       type: 'section',
       text: {
         type: 'mrkdwn',
-        text: `*Links:*\n• <${runUrl}|View Workflow Run>` + (REPORT_URL ? `\n• <${REPORT_URL}|View HTML Report>` : '')
+        text: `*Links:*\n• <${runUrl}|View Workflow Run>` + (reportUrl ? `\n• <${reportUrl}|View HTML Report>` : '')
       }
     }
   ]
