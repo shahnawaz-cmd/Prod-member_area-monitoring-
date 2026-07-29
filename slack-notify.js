@@ -77,35 +77,13 @@ const site = BASE_URL ? (BASE_URL.includes('vehiclehistory') ? 'VHR' : 'Other') 
 const env = BASE_URL ? (BASE_URL.includes('members') ? 'Prod' : 'Dev') : 'Unknown';
 
 const runUrl = `${GITHUB_SERVER}/${GITHUB_REPO}/actions/runs/${GITHUB_RUN}`;
-const statusEmoji = TEST_RESULT === 'success' ? '✅' : '❌';
-const statusText = TEST_RESULT === 'success' ? 'Passed' : 'Failed';
-
-const buttons = [
-  {
-    type: 'button',
-    text: { type: 'plain_text', text: 'View Workflow Run' },
-    url: runUrl
-  }
-];
-
-if (REPORT_URL) {
-  buttons.push({
-    type: 'button',
-    text: { type: 'plain_text', text: 'View HTML Report' },
-    url: REPORT_URL
-  });
-}
+const isSuccess = failedCount === 0 && passedCount > 0;
+const statusEmoji = isSuccess ? '✅' : '❌';
+const statusText = isSuccess ? 'Passed' : 'Failed';
 
 const payload = {
-  text: `${statusEmoji} Prod Member area monitoring (functional & Cross browser testflow) - *${statusText}* (Passed: ${passedCount} | Failed: ${failedCount})`,
+  text: `${statusEmoji} Prod Member area monitoring (functional & Cross browser testflow)`,
   blocks: [
-    {
-      type: 'section',
-      text: {
-        type: 'mrkdwn',
-        text: `${statusEmoji} *Prod Member area monitoring (functional & Cross browser testflow)* - *${statusText}*`
-      }
-    },
     {
       type: 'section',
       fields: [
@@ -127,11 +105,16 @@ const payload = {
       }
     },
     {
-      type: 'actions',
-      elements: buttons
+      type: 'section',
+      text: {
+        type: 'mrkdwn',
+        text: `*Links:*\n• <${runUrl}|View Workflow Run>` + (REPORT_URL ? `\n• <${REPORT_URL}|View HTML Report>` : '')
+      }
     }
   ]
 };
+
+console.log('Slack Payload:', JSON.stringify(payload, null, 2));
 
 if (SLACK_WEBHOOK_URL) {
   axios.post(SLACK_WEBHOOK_URL, payload)

@@ -8,7 +8,7 @@ module.exports = defineConfig({
     ['json', { outputFile: 'results.json' }]
   ],
   use: {
-    headless: false,
+    headless: process.env.CI ? true : false,
   },
   projects: [
     {
