@@ -35,8 +35,57 @@ class SelectPlan {
       await page.getByLabel('Unlimited VIN Check').click();
       await page.getByRole('button', { name: /Proceed to checkout/i }).click();
     } else {
-      // Standard flow for other plans
-      // Use exact match to avoid strict mode violation with multiple "proceed" buttons
+      console.log("Dynamically scanning page to select the highest report package available...");
+      const checkTimeout = this.isSlowNetwork ? 15000 : 5000;
+      
+      // Locate all elements that could represent plan cards/buttons
+      const candidateLocators = page.locator('button, label, [class*="card" i], [class*="plan" i], div');
+      
+      // Wait for at least one report option to become visible
+      await page.locator('div, button, label').filter({ hasText: /Reports?/i }).first().waitFor({ state: 'visible', timeout: checkTimeout }).catch(() => {});
+      
+      const count = await candidateLocators.count();
+      let highestReportNum = 0;
+      let highestPlanLocator = null;
+
+      for (let i = 0; i < count; i++) {
+        const candidate = candidateLocators.nth(i);
+        try {
+          if (await candidate.isVisible()) {
+            const text = await candidate.innerText();
+            
+            // Match patterns representing report selection packages (e.g., "Report..." or "25 Reports...")
+            if (/Reports?/i.test(text)) {
+              const match = text.match(/^(\d+)\s*Reports?/i);
+              let reportNum = 1; // Default to 1 if it starts with "Report"
+              if (match) {
+                reportNum = parseInt(match[1], 10);
+              }
+              
+              // Validate that the element is a plan option (not a large page layout container)
+              if (text.length < 150 && (/credit|Pay|\$/i.test(text) || text.includes('Value'))) {
+                console.log(`Parsed option: "${text.replace(/\n/g, ' ')}" -> Reports: ${reportNum}`);
+                if (reportNum > highestReportNum) {
+                  highestReportNum = reportNum;
+                  highestPlanLocator = candidate;
+                }
+              }
+            }
+          }
+        } catch (err) {
+          // Skip elements that might have detached or failed state checks
+        }
+      }
+
+      if (highestPlanLocator) {
+        console.log(`Selecting the highest available package: ${highestReportNum} Reports`);
+        await highestPlanLocator.scrollIntoViewIfNeeded();
+        await highestPlanLocator.click({ force: true });
+      } else {
+        console.log("No dynamic report package cards detected; proceeding directly.");
+      }
+
+      // Click the exact Proceed button
       const proceedButton = page.getByRole('button', { name: 'Proceed to Checkout', exact: true });
       await proceedButton.waitFor({ state: 'visible', timeout: timeout });
       await proceedButton.click({ force: true });

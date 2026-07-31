@@ -4,7 +4,9 @@ class CaptureApiResponses {
   constructor(apiPatterns = []) {
     this.apiPatterns = apiPatterns.length > 0 ? apiPatterns : [
       '/api-cwa/search-page',
-      '/api-cwa/payment-update'
+      '/api-cwa/payment-update',
+      '/api-cwa/vin-validate',
+      '/api-cwa/generate-report'
     ];
   }
 
@@ -20,10 +22,11 @@ class CaptureApiResponses {
           captured[pattern] = true; // Mark as captured
           
           const body = await response.json().catch(() => ({}));
-          console.log(`📥 Captured API Response [${pattern}]:`, JSON.stringify(body, null, 2));
+          console.log(`📥 Intercepted and saved API Response payload for: ${pattern}`);
 
-          // Attach to Playwright test report
-          await test.info().attach(`API Response - ${pattern}`, {
+          // Attach to Playwright test report as separate JSON file entries
+          const cleanName = pattern.replace(/^\/api-cwa\//, '').replace(/\//g, '_');
+          await test.info().attach(`${cleanName}.json`, {
             body: JSON.stringify(body, null, 2),
             contentType: 'application/json',
           });

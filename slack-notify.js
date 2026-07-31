@@ -17,6 +17,7 @@ const {
 let testSummary = '';
 let passedCount = 0;
 let failedCount = 0;
+let totalRetries = 0;
 
 console.log('Current working directory:', process.cwd());
 console.log('Checking for results.json...');
@@ -52,6 +53,14 @@ try {
 
   testSummary = allSpecs.map(spec => {
     if (!spec.tests || spec.tests.length === 0) return `⚠️ ${spec.title} (No tests)`;
+    
+    // Count retries across all attempts of this test
+    for (const testInstance of spec.tests) {
+      if (testInstance.results) {
+        totalRetries += Math.max(0, testInstance.results.length - 1);
+      }
+    }
+
     const status = spec.tests[0].results?.[0]?.status || 'unknown';
     const browser = spec.tests[0].projectName || 'unknown';
     const emoji = status === 'passed' ? '✅' : '❌';
@@ -84,9 +93,10 @@ const reportUrl = REPORT_URL || ((owner && repoName) ? `https://${owner}.github.
 const isSuccess = failedCount === 0 && passedCount > 0;
 const statusEmoji = isSuccess ? '✅' : '❌';
 const statusText = isSuccess ? 'Passed' : 'Failed';
+const mentions = !isSuccess ? ' CC: <@U03UR6FFQKB> <@U09UE83AWGP>' : '';
 
 const payload = {
-  text: `${statusEmoji} Prod Member area monitoring (functional & Cross browser testflow)`,
+  text: `${statusEmoji} Prod Member area monitoring (functional & Cross browser testflow)${mentions}`,
   blocks: [
     {
       type: 'header',
@@ -99,7 +109,9 @@ const payload = {
     {
       type: 'section',
       fields: [
-        { type: 'mrkdwn', text: `*Status:*\nPassed: \`${passedCount}\` | Failed: \`${failedCount}\`` },
+        { type: 'mrkdwn', text: `*Overall Status:*\n${statusEmoji} ${statusText}${mentions}` },
+        { type: 'mrkdwn', text: `*Total Tests:*\n\`${passedCount + failedCount}\` (Passed: \`${passedCount}\` | Failed: \`${failedCount}\`)` },
+        { type: 'mrkdwn', text: `*Retries:*\n\`${totalRetries}\`` },
         { type: 'mrkdwn', text: `*Site:*\n${site}` },
         { type: 'mrkdwn', text: `*Env:*\n${env}` },
         { type: 'mrkdwn', text: `*Base URL:*\n${BASE_URL || 'N/A'}` },
@@ -129,8 +141,29 @@ const payload = {
 console.log('Slack Payload:', JSON.stringify(payload, null, 2));
 
 if (SLACK_WEBHOOK_URL) {
+  // 1. Post main channel notification
   axios.post(SLACK_WEBHOOK_URL, payload)
-    .then(() => console.log('Slack notification sent successfully.'))
+    .then(() => {
+      console.log('Slack main channel notification sent successfully.');
+      
+      // 2. If failed, send direct personal notifications to the member IDs
+      if (!isSuccess) {
+        console.log('Test failed. Distributing personal notifications...');
+        const personalIds = ['U03UR6FFQKB', 'U09UE83AWGP'];
+        
+        for (const memberId of personalIds) {
+          const personalPayload = {
+            ...payload,
+            channel: `@${memberId}`, // Target the user directly
+            text: `⚠️ [DIRECT ALERT] Prod Member area monitoring failed!\n${mentions}`
+          };
+          
+          axios.post(SLACK_WEBHOOK_URL, personalPayload)
+            .then(() => console.log(`Direct notification sent successfully to Slack Member: ${memberId}`))
+            .catch(err => console.error(`Failed to send direct notification to ${memberId}: ${err.message}`));
+        }
+      }
+    })
     .catch(err => console.error('Error sending Slack notification:', err));
 } else {
   console.log('SLACK_WEBHOOK_URL not set, skipping notification.');

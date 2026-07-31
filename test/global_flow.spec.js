@@ -1,19 +1,16 @@
 const { test, expect } = require('@playwright/test');
 const Actor = require('../actor/Actor');
 const ConfigureBaseUrl = require('../task/ConfigureBaseUrl');
-const SignupAuthFlow = require('../task/SignupAuthFlow');
-const SelectPlan = require('../task/SelectPlan');
-const PurchaseFlow = require('../task/PurchaseFlow');
 const CaptureApiResponses = require('../task/CaptureApiResponses');
-const DashboardRedirectionCheck = require('../task/DashboardRedirectionCheck');
+const { GenerateVinReport, GenerateEUReport } = require('../task/GenerateVinReport');
+const { GenerateUSVIN, ClassicMappedVIN, EUMappedVIN } = require('../task/GenerateVINs');
 
-test.describe('Global Member Area Flow', () => {
-  test('CS-Global — Full Signup, Plan Selection, and Purchase Flow', async ({ page }) => {
-    test.setTimeout(300000); // 5 minutes
-    
+test.describe('Global Member Area Report Generation Flow', () => {
+  test('CS-02 — 17 Character VIN (US) report generate', async ({ page }) => {
+    test.setTimeout(300000);
+
     const actor = new Actor(page);
-    const email = `test_${Date.now()}@example.com`;
-    const password = "Password123!";
+    const isSlowNetwork = process.env.SLOW_NETWORK === 'true';
 
     // 0. Setup API Monitoring
     await actor.attemptsTo(new CaptureApiResponses());
@@ -21,23 +18,75 @@ test.describe('Global Member Area Flow', () => {
     // 1. Configure Base URL
     await actor.attemptsTo(new ConfigureBaseUrl());
 
-    // 2. Auth Flow
-    await actor.attemptsTo(new SignupAuthFlow(email, password));
+    // 2. Direct Navigation to Dashboard (using cached session)
+    console.log("Navigating directly to Dashboard...");
+    await page.goto(`${actor.baseUrl}/dashboard`, { waitUntil: 'domcontentloaded' });
+    await page.waitForURL('**/dashboard**', { timeout: 60000 });
 
-    // 3. Plan Selection
-    await actor.attemptsTo(new SelectPlan('Vehicle Report'));
+    // 3. Generate Dynamic US VIN
+    await actor.attemptsTo(new GenerateUSVIN('mongo'));
 
-    // 4. Purchase Flow
-    await actor.attemptsTo(new PurchaseFlow());
+    // 4. Generate US VIN Report
+    await actor.attemptsTo(new GenerateVinReport(null, isSlowNetwork));
 
-    // 5. Dashboard Redirection
-    await actor.attemptsTo(new DashboardRedirectionCheck());
+    await expect(page).toHaveURL(/my-reports/, { timeout: isSlowNetwork ? 120000 : 60000 });
+    console.log("US VIN report generation completed successfully.");
+    await page.close();
+  });
 
-    // Verification
-    await expect(page).toHaveURL(/dashboard/, { timeout: 60000 });
-    console.log("Global flow completed successfully.");
-    
-    // Explicitly close page/browser context
+  test('CS-03 — Classic Mapped VIN report generate', async ({ page }) => {
+    test.setTimeout(300000);
+
+    const actor = new Actor(page);
+    const isSlowNetwork = process.env.SLOW_NETWORK === 'true';
+
+    // 0. Setup API Monitoring
+    await actor.attemptsTo(new CaptureApiResponses());
+
+    // 1. Configure Base URL
+    await actor.attemptsTo(new ConfigureBaseUrl());
+
+    // 2. Direct Navigation to Dashboard
+    console.log("Navigating directly to Dashboard...");
+    await page.goto(`${actor.baseUrl}/dashboard`, { waitUntil: 'domcontentloaded' });
+    await page.waitForURL('**/dashboard**', { timeout: 60000 });
+
+    // 3. Generate Classic Mapped VIN
+    await actor.attemptsTo(new ClassicMappedVIN('228871N111628', isSlowNetwork));
+
+    // 4. Generate Classic VIN Report
+    await actor.attemptsTo(new GenerateVinReport(null, isSlowNetwork));
+
+    await expect(page).toHaveURL(/my-reports/, { timeout: isSlowNetwork ? 120000 : 60000 });
+    console.log("Classic VIN report generation completed successfully.");
+    await page.close();
+  });
+
+  test('CS-04 — EU Mapped VIN report generate', async ({ page }) => {
+    test.setTimeout(300000);
+
+    const actor = new Actor(page);
+    const isSlowNetwork = process.env.SLOW_NETWORK === 'true';
+
+    // 0. Setup API Monitoring
+    await actor.attemptsTo(new CaptureApiResponses());
+
+    // 1. Configure Base URL
+    await actor.attemptsTo(new ConfigureBaseUrl());
+
+    // 2. Direct Navigation to Dashboard
+    console.log("Navigating directly to Dashboard...");
+    await page.goto(`${actor.baseUrl}/dashboard`, { waitUntil: 'domcontentloaded' });
+    await page.waitForURL('**/dashboard**', { timeout: 60000 });
+
+    // 3. Generate EU Mapped VIN
+    await actor.attemptsTo(new EUMappedVIN(['VF1AGVYB055491691', 'WAUZZZ8P6CA083445'], isSlowNetwork));
+
+    // 4. Generate EU VIN Report
+    await actor.attemptsTo(new GenerateEUReport(null, isSlowNetwork));
+
+    await expect(page).toHaveURL(/my-reports/, { timeout: isSlowNetwork ? 120000 : 60000 });
+    console.log("EU VIN report generation completed successfully.");
     await page.close();
   });
 });

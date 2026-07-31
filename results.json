@@ -1,0 +1,582 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\Shahnawaz\\Desktop\\PROD STABILITY MONITOR\\Member area monitoring\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--headed"
+    ],
+    "configFile": "C:\\Users\\Shahnawaz\\Desktop\\PROD STABILITY MONITOR\\Member area monitoring\\playwright.config.js",
+    "rootDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "setup",
+        "name": "setup",
+        "testDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test",
+        "testIgnore": [],
+        "testMatch": [
+          "/global_flow\\.setup\\.js/"
+        ],
+        "timeout": 5400000
+      },
+      {
+        "outputDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile-safari",
+        "name": "mobile-safari",
+        "testDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test",
+        "testIgnore": [],
+        "testMatch": [
+          "/global_flow\\.spec\\.js/"
+        ],
+        "timeout": 5400000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "html",
+        {
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 4,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "global_flow.setup.js",
+      "file": "global_flow.setup.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Setup Session — Full Signup, Plan Selection, and Purchase Flow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "setup",
+              "projectName": "setup",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 56890,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Setting up listener for: /api-cwa/search-page\n"
+                    },
+                    {
+                      "text": "Setting up listener for: /api-cwa/payment-update\n"
+                    },
+                    {
+                      "text": "Setting up listener for: /api-cwa/vin-validate\n"
+                    },
+                    {
+                      "text": "Setting up listener for: /api-cwa/generate-report\n"
+                    },
+                    {
+                      "text": "API listeners attached with report attachments (one-time capture).\n"
+                    },
+                    {
+                      "text": "Base URL configured to: https://members.vehiclehistory.report/members\n"
+                    },
+                    {
+                      "text": "Generated unique email: test_ftpg@tms90ii2g.com\n"
+                    },
+                    {
+                      "text": "Generated unique password: Pass_ftpgms90ii2g!\n"
+                    },
+                    {
+                      "text": "Navigating to Signup URL: https://members.vehiclehistory.report/members/signup (Timeout: 60000ms)\n"
+                    },
+                    {
+                      "text": "📥 Intercepted and saved API Response payload for: /api-cwa/search-page\n"
+                    },
+                    {
+                      "text": "Signup successful.\n"
+                    },
+                    {
+                      "text": "Mobile view detected, opening side navigation...\n"
+                    },
+                    {
+                      "text": "Dynamically scanning page to select the highest report package available...\n"
+                    },
+                    {
+                      "text": "Parsed option: \"Search My Reports Saved Cars Decode Tools Dealers Order Credits Vehicle Report Window Sticker Subscriptions B  Basic Account  Help\" -> Reports: 1\n"
+                    },
+                    {
+                      "text": "Parsed option: \"Search My Reports Saved Cars Decode Tools Dealers Order Credits Vehicle Report Window Sticker Subscriptions B  Basic Account  Help\" -> Reports: 1\n"
+                    },
+                    {
+                      "text": "Parsed option: \"Search My Reports Saved Cars Decode Tools Dealers Order Credits Vehicle Report Window Sticker Subscriptions B  Basic Account  Help\" -> Reports: 1\n"
+                    },
+                    {
+                      "text": "Parsed option: \"1 Report  $25 /credit  You Pay: $25\" -> Reports: 1\n"
+                    },
+                    {
+                      "text": "Parsed option: \"5 Reports  $15 /credit  Save 40% You Pay: $75 $125\" -> Reports: 5\n"
+                    },
+                    {
+                      "text": "Parsed option: \"10 Reports Best Value  $10 /credit  Save 60% You Pay: $100 $250\" -> Reports: 10\n"
+                    },
+                    {
+                      "text": "Parsed option: \"10 Reports Best Value\" -> Reports: 10\n"
+                    },
+                    {
+                      "text": "Parsed option: \"10 Reports Best Value  $10 /credit  Save 60% You Pay: $100 $250\" -> Reports: 10\n"
+                    },
+                    {
+                      "text": "Parsed option: \"10 Reports Best Value\" -> Reports: 10\n"
+                    },
+                    {
+                      "text": "Parsed option: \"VHR Report Subscription Save BIG  $49.99 /month\" -> Reports: 1\n"
+                    },
+                    {
+                      "text": "Selecting the highest available package: 10 Reports\n"
+                    },
+                    {
+                      "text": "Clicked 'Proceed' button.\n"
+                    },
+                    {
+                      "text": "Determining checkout page layout/strategy dynamically...\n"
+                    },
+                    {
+                      "text": "Active Stripe Layout Status -> SingleFrame: true, MultiFrame: true\n"
+                    },
+                    {
+                      "text": "Proceeding with Multi-Frame Checkout Strategy.\n"
+                    },
+                    {
+                      "text": "Purchase flow completed.\n"
+                    },
+                    {
+                      "text": "Waiting for redirection to dashboard...\n"
+                    },
+                    {
+                      "text": "📥 Intercepted and saved API Response payload for: /api-cwa/payment-update\n"
+                    },
+                    {
+                      "text": "Successfully redirected to: https://members.vehiclehistory.report/members/dashboard#vehicle-history-report\n"
+                    },
+                    {
+                      "text": "Global setup flow completed successfully. Saving session state...\n"
+                    },
+                    {
+                      "text": "Session state saved to state.json.\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-31T14:02:53.743Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "search-page.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidmhyX2NyZWRpdCI6IDAsCiAgICAicHJvZmlsZSI6IHsKICAgICAgImlkIjogIjUxMzA3NyIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2Y2FiMTkyNzM4ZiIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogIiIsCiAgICAgICJhY2NvdW50X3R5cGUiOiAicGVyc29uYWwiLAogICAgICAidXNlcl90eXBlIjogInVzZXIiLAogICAgICAiYnVzaW5lc3NfdHlwZSI6IG51bGwsCiAgICAgICJ0b2tlbiI6ICIyRTg5MkU4OS0yQzJDLTE5NDAtNjdDRC0yMkQyNjcxRTQ1MTUiLAogICAgICAiZW1haWwiOiAidGVzdF9mdHBnQHRtczkwaWkyZy5jb20iLAogICAgICAiZmlyc3QiOiAiIiwKICAgICAgImxhc3QiOiAiIiwKICAgICAgImFkZHJlc3MiOiAiIiwKICAgICAgInBob25lIjogIiIsCiAgICAgICJjb21wYW55X25hbWUiOiBudWxsLAogICAgICAiY29tcGFueV93ZWJzaXRlIjogbnVsbCwKICAgICAgImluc3RhZ3JhbSI6IG51bGwsCiAgICAgICJmYWNlYm9vayI6IG51bGwsCiAgICAgICJ0d2l0dGVyIjogbnVsbCwKICAgICAgImNpdHkiOiAiIiwKICAgICAgInN0YXRlIjogIldhc2hpbmd0b24gRC5DLiIsCiAgICAgICJjb3VudHJ5IjogIlVTIiwKICAgICAgInBpbmNvZGUiOiAiMCIsCiAgICAgICJub19vZl9lbXBsb3llZXMiOiBudWxsLAogICAgICAiY2R0IjogIjIwMjYtMDctMzEgMTA6MDM6MDUiCiAgICB9LAogICAgInZocl9jcmVkaXRfc3Vic2NyaXB0aW9uIjogMCwKICAgICJzdGlja2VyX2NyZWRpdCI6IDAsCiAgICAiYXVjdGlvbl9jcmVkaXQiOiAwCiAgfQp9"
+                    },
+                    {
+                      "name": "payment-update.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidXNlciI6IHsKICAgICAgImlkIjogIjUxMzA3NyIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2Y2FiMTkyNzM4ZiIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogbnVsbCwKICAgICAgImFjY291bnRfdHlwZSI6ICJwZXJzb25hbCIsCiAgICAgICJ1c2VyX3R5cGUiOiAidXNlciIsCiAgICAgICJidXNpbmVzc190eXBlIjogbnVsbCwKICAgICAgInRva2VuIjogIjJFODkyRTg5LTJDMkMtMTk0MC02N0NELTIyRDI2NzFFNDUxNSIsCiAgICAgICJlbWFpbCI6ICJ0ZXN0X2Z0cGdAdG1zOTBpaTJnLmNvbSIsCiAgICAgICJmaXJzdCI6ICIiLAogICAgICAibGFzdCI6ICIiLAogICAgICAiYWRkcmVzcyI6ICIiLAogICAgICAicGhvbmUiOiAiIiwKICAgICAgImNvbXBhbnlfbmFtZSI6IG51bGwsCiAgICAgICJjb21wYW55X3dlYnNpdGUiOiBudWxsLAogICAgICAiaW5zdGFncmFtIjogbnVsbCwKICAgICAgImZhY2Vib29rIjogbnVsbCwKICAgICAgInR3aXR0ZXIiOiBudWxsLAogICAgICAiY2l0eSI6ICIiLAogICAgICAic3RhdGUiOiAiV2FzaGluZ3RvbiBELkMuIiwKICAgICAgImNvdW50cnkiOiAiVVMiLAogICAgICAicGluY29kZSI6ICIwIiwKICAgICAgIm5vX29mX2VtcGxveWVlcyI6IG51bGwsCiAgICAgICJjZHQiOiAiMjAyNi0wNy0zMSAxMDowMzowNSIKICAgIH0sCiAgICAicGFnZSI6ICJzZWFyY2giLAogICAgInZpbiI6ICJDUkVESVQiLAogICAgInZocl9jcmVkaXQiOiAxMCwKICAgICJ2aHJfY3JlZGl0X3N1YnNjcmlwdGlvbiI6IDAsCiAgICAic3RpY2tlcl9jcmVkaXQiOiAwLAogICAgImF1Y3Rpb25fY3JlZGl0IjogMAogIH0KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7b25eb415c3688f67989-eac2dec3b5888af0b7f7",
+          "file": "global_flow.setup.js",
+          "line": 11,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "global_flow.spec.js",
+      "file": "global_flow.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Global Member Area Report Generation Flow",
+          "file": "global_flow.spec.js",
+          "line": 8,
+          "column": 6,
+          "specs": [
+            {
+              "title": "CS-02 — 17 Character VIN (US) report generate",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-safari",
+                  "projectName": "mobile-safari",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 80132,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Setting up listener for: /api-cwa/search-page\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/payment-update\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/vin-validate\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/generate-report\n"
+                        },
+                        {
+                          "text": "API listeners attached with report attachments (one-time capture).\n"
+                        },
+                        {
+                          "text": "Base URL configured to: https://members.vehiclehistory.report/members\n"
+                        },
+                        {
+                          "text": "Navigating directly to Dashboard...\n"
+                        },
+                        {
+                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/search-page\n"
+                        },
+                        {
+                          "text": "US VIN generated and set on actor: 5NPEB4ACXEH866119\n"
+                        },
+                        {
+                          "text": "Generating report for VIN: 5NPEB4ACXEH866119\n"
+                        },
+                        {
+                          "text": "Clicked 'Get vehicle History' button.\n"
+                        },
+                        {
+                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/vin-validate\n"
+                        },
+                        {
+                          "text": "Generate-Report API call completed successfully.\n"
+                        },
+                        {
+                          "text": "Navigating to /my-reports...\n"
+                        },
+                        {
+                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/generate-report\n"
+                        },
+                        {
+                          "text": "Navigated to /my-reports\n"
+                        },
+                        {
+                          "text": "US VIN report generation completed successfully.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-31T14:03:52.547Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "search-page.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidmhyX2NyZWRpdCI6IDEwLAogICAgInByb2ZpbGUiOiB7CiAgICAgICJpZCI6ICI1MTMwNzciLAogICAgICAidHJhY2tpbmdfaWQiOiAiVVNFUjZhNmNhYjE5MjczOGYiLAogICAgICAicHJvZmlsZV9pbWFnZSI6ICIiLAogICAgICAiYWNjb3VudF90eXBlIjogInBlcnNvbmFsIiwKICAgICAgInVzZXJfdHlwZSI6ICJ1c2VyIiwKICAgICAgImJ1c2luZXNzX3R5cGUiOiBudWxsLAogICAgICAidG9rZW4iOiAiMkU4OTJFODktMkMyQy0xOTQwLTY3Q0QtMjJEMjY3MUU0NTE1IiwKICAgICAgImVtYWlsIjogInRlc3RfZnRwZ0B0bXM5MGlpMmcuY29tIiwKICAgICAgImZpcnN0IjogIiIsCiAgICAgICJsYXN0IjogIiIsCiAgICAgICJhZGRyZXNzIjogIiIsCiAgICAgICJwaG9uZSI6ICIiLAogICAgICAiY29tcGFueV9uYW1lIjogbnVsbCwKICAgICAgImNvbXBhbnlfd2Vic2l0ZSI6IG51bGwsCiAgICAgICJpbnN0YWdyYW0iOiBudWxsLAogICAgICAiZmFjZWJvb2siOiBudWxsLAogICAgICAidHdpdHRlciI6IG51bGwsCiAgICAgICJjaXR5IjogIiIsCiAgICAgICJzdGF0ZSI6ICJXYXNoaW5ndG9uIEQuQy4iLAogICAgICAiY291bnRyeSI6ICJVUyIsCiAgICAgICJwaW5jb2RlIjogIjAiLAogICAgICAibm9fb2ZfZW1wbG95ZWVzIjogbnVsbCwKICAgICAgImNkdCI6ICIyMDI2LTA3LTMxIDEwOjAzOjA1IgogICAgfSwKICAgICJ2aHJfY3JlZGl0X3N1YnNjcmlwdGlvbiI6IDAsCiAgICAic3RpY2tlcl9jcmVkaXQiOiAwLAogICAgImF1Y3Rpb25fY3JlZGl0IjogMAogIH0KfQ=="
+                        },
+                        {
+                          "name": "vin-validate.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAiaW5kaWdvIjogZmFsc2UsCiAgICAidmluZGVjaXBoZXIiOiB0cnVlLAogICAgInZwaWMiOiBmYWxzZSwKICAgICJldXJvcGUiOiBmYWxzZSwKICAgICJkZWVwbWluZCI6IGZhbHNlCiAgfQp9"
+                        },
+                        {
+                          "name": "generate-report.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgIm1zZyI6ICJUaGFuayB5b3UgZm9yIG9yZGVyaW5nIHdpdGggVkhSLiBZb3VyIG9yZGVyIGlzIHByb2Nlc3NpbmcgYW5kIHRoZSByZXBvcnQgaXMgZ2VuZXJhdGluZy4gWW91IHdpbGwgYmUgcmVkaXJlY3RlZCB0byB0aGUgUmVwb3J0Igp9"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "33d8e9c5e66333882a2a-366dc39d8d5b85928cce",
+              "file": "global_flow.spec.js",
+              "line": 9,
+              "column": 3
+            },
+            {
+              "title": "CS-03 — Classic Mapped VIN report generate",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-safari",
+                  "projectName": "mobile-safari",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 44801,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Setting up listener for: /api-cwa/search-page\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/payment-update\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/vin-validate\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/generate-report\n"
+                        },
+                        {
+                          "text": "API listeners attached with report attachments (one-time capture).\n"
+                        },
+                        {
+                          "text": "Base URL configured to: https://members.vehiclehistory.report/members\n"
+                        },
+                        {
+                          "text": "Navigating directly to Dashboard...\n"
+                        },
+                        {
+                          "text": "Generating Classic Mapped VIN (Condition-based timeout check: 5000ms)...\n"
+                        },
+                        {
+                          "text": "Classic VIN randomized: 228871N111685\n"
+                        },
+                        {
+                          "text": "Generating report for VIN: 228871N111685\n"
+                        },
+                        {
+                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/search-page\n"
+                        },
+                        {
+                          "text": "Clicked 'Get vehicle History' button.\n"
+                        },
+                        {
+                          "text": "Generate-Report API call completed successfully.\n"
+                        },
+                        {
+                          "text": "Navigating to /my-reports...\n"
+                        },
+                        {
+                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/generate-report\n"
+                        },
+                        {
+                          "text": "Navigated to /my-reports\n"
+                        },
+                        {
+                          "text": "Classic VIN report generation completed successfully.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-31T14:05:12.835Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "search-page.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidmhyX2NyZWRpdCI6IDksCiAgICAicHJvZmlsZSI6IHsKICAgICAgImlkIjogIjUxMzA3NyIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2Y2FiMTkyNzM4ZiIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogIiIsCiAgICAgICJhY2NvdW50X3R5cGUiOiAicGVyc29uYWwiLAogICAgICAidXNlcl90eXBlIjogInVzZXIiLAogICAgICAiYnVzaW5lc3NfdHlwZSI6IG51bGwsCiAgICAgICJ0b2tlbiI6ICIyRTg5MkU4OS0yQzJDLTE5NDAtNjdDRC0yMkQyNjcxRTQ1MTUiLAogICAgICAiZW1haWwiOiAidGVzdF9mdHBnQHRtczkwaWkyZy5jb20iLAogICAgICAiZmlyc3QiOiAiIiwKICAgICAgImxhc3QiOiAiIiwKICAgICAgImFkZHJlc3MiOiAiIiwKICAgICAgInBob25lIjogIiIsCiAgICAgICJjb21wYW55X25hbWUiOiBudWxsLAogICAgICAiY29tcGFueV93ZWJzaXRlIjogbnVsbCwKICAgICAgImluc3RhZ3JhbSI6IG51bGwsCiAgICAgICJmYWNlYm9vayI6IG51bGwsCiAgICAgICJ0d2l0dGVyIjogbnVsbCwKICAgICAgImNpdHkiOiAiIiwKICAgICAgInN0YXRlIjogIldhc2hpbmd0b24gRC5DLiIsCiAgICAgICJjb3VudHJ5IjogIlVTIiwKICAgICAgInBpbmNvZGUiOiAiMCIsCiAgICAgICJub19vZl9lbXBsb3llZXMiOiBudWxsLAogICAgICAiY2R0IjogIjIwMjYtMDctMzEgMTA6MDM6MDUiCiAgICB9LAogICAgInZocl9jcmVkaXRfc3Vic2NyaXB0aW9uIjogMCwKICAgICJzdGlja2VyX2NyZWRpdCI6IDAsCiAgICAiYXVjdGlvbl9jcmVkaXQiOiAwCiAgfQp9"
+                        },
+                        {
+                          "name": "generate-report.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgIm1zZyI6ICJUaGFuayB5b3UgZm9yIG9yZGVyaW5nIHdpdGggVkhSLiBZb3VyIG9yZGVyIGlzIHByb2Nlc3NpbmcgYW5kIHRoZSByZXBvcnQgaXMgZ2VuZXJhdGluZy4gWW91IHdpbGwgYmUgcmVkaXJlY3RlZCB0byB0aGUgUmVwb3J0Igp9"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "33d8e9c5e66333882a2a-41353be5dc6c2119a40c",
+              "file": "global_flow.spec.js",
+              "line": 37,
+              "column": 3
+            },
+            {
+              "title": "CS-04 — EU Mapped VIN report generate",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-safari",
+                  "projectName": "mobile-safari",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 33257,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Setting up listener for: /api-cwa/search-page\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/payment-update\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/vin-validate\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/generate-report\n"
+                        },
+                        {
+                          "text": "API listeners attached with report attachments (one-time capture).\n"
+                        },
+                        {
+                          "text": "Base URL configured to: https://members.vehiclehistory.report/members\n"
+                        },
+                        {
+                          "text": "Navigating directly to Dashboard...\n"
+                        },
+                        {
+                          "text": "Generating EU VIN from list (Condition-based timeout check: 5000ms)...\n"
+                        },
+                        {
+                          "text": "Selected and randomized EU VIN: VF1AGVYB055491691\n"
+                        },
+                        {
+                          "text": "Generating EU report for VIN: VF1AGVYB055491691\n"
+                        },
+                        {
+                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/search-page\n"
+                        },
+                        {
+                          "text": "Clicked 'Get vehicle History' button.\n"
+                        },
+                        {
+                          "text": "Vin-Validate API call resolved.\n"
+                        },
+                        {
+                          "text": "Waiting for EU confirmation popup 'Yes' button...\n"
+                        },
+                        {
+                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/vin-validate\n"
+                        },
+                        {
+                          "text": "✅ Clicked Yes confirmation button for EU VIN.\n"
+                        },
+                        {
+                          "text": "Generate-Report API call completed successfully.\n"
+                        },
+                        {
+                          "text": "Navigating to /my-reports...\n"
+                        },
+                        {
+                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/generate-report\n"
+                        },
+                        {
+                          "text": "Navigated to /my-reports\n"
+                        },
+                        {
+                          "text": "EU VIN report generation completed successfully.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-31T14:05:57.689Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "search-page.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidmhyX2NyZWRpdCI6IDgsCiAgICAicHJvZmlsZSI6IHsKICAgICAgImlkIjogIjUxMzA3NyIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2Y2FiMTkyNzM4ZiIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogIiIsCiAgICAgICJhY2NvdW50X3R5cGUiOiAicGVyc29uYWwiLAogICAgICAidXNlcl90eXBlIjogInVzZXIiLAogICAgICAiYnVzaW5lc3NfdHlwZSI6IG51bGwsCiAgICAgICJ0b2tlbiI6ICIyRTg5MkU4OS0yQzJDLTE5NDAtNjdDRC0yMkQyNjcxRTQ1MTUiLAogICAgICAiZW1haWwiOiAidGVzdF9mdHBnQHRtczkwaWkyZy5jb20iLAogICAgICAiZmlyc3QiOiAiIiwKICAgICAgImxhc3QiOiAiIiwKICAgICAgImFkZHJlc3MiOiAiIiwKICAgICAgInBob25lIjogIiIsCiAgICAgICJjb21wYW55X25hbWUiOiBudWxsLAogICAgICAiY29tcGFueV93ZWJzaXRlIjogbnVsbCwKICAgICAgImluc3RhZ3JhbSI6IG51bGwsCiAgICAgICJmYWNlYm9vayI6IG51bGwsCiAgICAgICJ0d2l0dGVyIjogbnVsbCwKICAgICAgImNpdHkiOiAiIiwKICAgICAgInN0YXRlIjogIldhc2hpbmd0b24gRC5DLiIsCiAgICAgICJjb3VudHJ5IjogIlVTIiwKICAgICAgInBpbmNvZGUiOiAiMCIsCiAgICAgICJub19vZl9lbXBsb3llZXMiOiBudWxsLAogICAgICAiY2R0IjogIjIwMjYtMDctMzEgMTA6MDM6MDUiCiAgICB9LAogICAgInZocl9jcmVkaXRfc3Vic2NyaXB0aW9uIjogMCwKICAgICJzdGlja2VyX2NyZWRpdCI6IDAsCiAgICAiYXVjdGlvbl9jcmVkaXQiOiAwCiAgfQp9"
+                        },
+                        {
+                          "name": "vin-validate.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAiaW5kaWdvIjogZmFsc2UsCiAgICAidmluZGVjaXBoZXIiOiBmYWxzZSwKICAgICJ2cGljIjogZmFsc2UsCiAgICAiZXVyb3BlIjogdHJ1ZSwKICAgICJkZWVwbWluZCI6IGZhbHNlCiAgfQp9"
+                        },
+                        {
+                          "name": "generate-report.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgIm1zZyI6ICJUaGFuayB5b3UgZm9yIG9yZGVyaW5nIHdpdGggVkhSLiBZb3VyIG9yZGVyIGlzIHByb2Nlc3NpbmcgYW5kIHRoZSByZXBvcnQgaXMgZ2VuZXJhdGluZy4gWW91IHdpbGwgYmUgcmVkaXJlY3RlZCB0byB0aGUgUmVwb3J0Igp9"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "33d8e9c5e66333882a2a-9bf53593353bd1889021",
+              "file": "global_flow.spec.js",
+              "line": 65,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-07-31T14:02:51.921Z",
+    "duration": 219206.145,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
