@@ -5,6 +5,7 @@ module.exports = defineConfig({
   testDir: './test',
   timeout: 5400000, // 90 minutes in milliseconds
   retries: process.env.CI ? 1 : 0,
+  workers: 1,
   reporter: [
     ['html', { open: 'never' }],
     ['json', { outputFile: 'results.json' }]

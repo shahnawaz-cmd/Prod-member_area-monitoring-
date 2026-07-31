@@ -4,8 +4,7 @@
       "C:\\Program Files\\nodejs\\node.exe",
       "C:\\Users\\Shahnawaz\\Desktop\\PROD STABILITY MONITOR\\Member area monitoring\\node_modules\\@playwright\\test\\cli.js",
       "test",
-      "-g",
-      "CS-04"
+      "--headed"
     ],
     "configFile": "C:\\Users\\Shahnawaz\\Desktop\\PROD STABILITY MONITOR\\Member area monitoring\\playwright.config.js",
     "rootDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test",
@@ -80,7 +79,7 @@
     "updateSnapshots": "missing",
     "updateSourceMethod": "patch",
     "version": "1.62.0",
-    "workers": 4,
+    "workers": 1,
     "webServer": null
   },
   "suites": [
@@ -106,7 +105,7 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 59791,
+                  "duration": 57559,
                   "errors": [],
                   "stdout": [
                     {
@@ -122,28 +121,34 @@
                       "text": "Setting up listener for: /api-cwa/generate-report\n"
                     },
                     {
+                      "text": "Setting up listener for: /api-cwa/generate_uvc_report\n"
+                    },
+                    {
+                      "text": "Setting up listener for: cancel-subscription\n"
+                    },
+                    {
                       "text": "API listeners attached with report attachments (one-time capture).\n"
                     },
                     {
                       "text": "Base URL configured to: https://members.vehiclehistory.report/members\n"
                     },
                     {
-                      "text": "Generated unique email: test_w57z@tms94i17v.com\n"
+                      "text": "Generated unique email: test_6trr@tms97zxnx.com\n"
                     },
                     {
-                      "text": "Generated unique password: Pass_w57zms94i17v!\n"
+                      "text": "Generated unique password: Pass_6trrms97zxnx!\n"
                     },
                     {
                       "text": "Navigating to Signup URL: https://members.vehiclehistory.report/members/signup (Timeout: 60000ms)\n"
+                    },
+                    {
+                      "text": "📥 Intercepted and saved API Response payload for: /api-cwa/search-page\n"
                     },
                     {
                       "text": "Signup successful.\n"
                     },
                     {
                       "text": "Mobile view detected, opening side navigation...\n"
-                    },
-                    {
-                      "text": "📥 Intercepted and saved API Response payload for: /api-cwa/search-page\n"
                     },
                     {
                       "text": "Locating the highest report package option available on the page...\n"
@@ -184,18 +189,18 @@
                   ],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-07-31T15:54:30.344Z",
+                  "startTime": "2026-07-31T17:32:24.325Z",
                   "annotations": [],
                   "attachments": [
                     {
                       "name": "search-page.json",
                       "contentType": "application/json",
-                      "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidmhyX2NyZWRpdCI6IDAsCiAgICAicHJvZmlsZSI6IHsKICAgICAgImlkIjogIjUxMzEwOSIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2Y2M1NDIyMDVmMSIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogIiIsCiAgICAgICJhY2NvdW50X3R5cGUiOiAicGVyc29uYWwiLAogICAgICAidXNlcl90eXBlIjogInVzZXIiLAogICAgICAiYnVzaW5lc3NfdHlwZSI6IG51bGwsCiAgICAgICJ0b2tlbiI6ICIxMjc1MTI3NS0wNTA1LTI4NkMtQzY0RS05NEYzQTU4Q0ExQzkiLAogICAgICAiZW1haWwiOiAidGVzdF93NTd6QHRtczk0aTE3di5jb20iLAogICAgICAiZmlyc3QiOiAiIiwKICAgICAgImxhc3QiOiAiIiwKICAgICAgImFkZHJlc3MiOiAiIiwKICAgICAgInBob25lIjogIiIsCiAgICAgICJjb21wYW55X25hbWUiOiBudWxsLAogICAgICAiY29tcGFueV93ZWJzaXRlIjogbnVsbCwKICAgICAgImluc3RhZ3JhbSI6IG51bGwsCiAgICAgICJmYWNlYm9vayI6IG51bGwsCiAgICAgICJ0d2l0dGVyIjogbnVsbCwKICAgICAgImNpdHkiOiAiIiwKICAgICAgInN0YXRlIjogIkRlbnRvbiIsCiAgICAgICJjb3VudHJ5IjogIlVTIiwKICAgICAgInBpbmNvZGUiOiAiMCIsCiAgICAgICJub19vZl9lbXBsb3llZXMiOiBudWxsLAogICAgICAiY2R0IjogIjIwMjYtMDctMzEgMTE6NTQ6NDIiCiAgICB9LAogICAgInZocl9jcmVkaXRfc3Vic2NyaXB0aW9uIjogMCwKICAgICJzdGlja2VyX2NyZWRpdCI6IDAsCiAgICAiYXVjdGlvbl9jcmVkaXQiOiAwCiAgfQp9"
+                      "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidmhyX2NyZWRpdCI6IDAsCiAgICAicHJvZmlsZSI6IHsKICAgICAgImlkIjogIjUxMzEzNyIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2Y2RjMzZiM2M0ZiIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogIiIsCiAgICAgICJhY2NvdW50X3R5cGUiOiAicGVyc29uYWwiLAogICAgICAidXNlcl90eXBlIjogInVzZXIiLAogICAgICAiYnVzaW5lc3NfdHlwZSI6IG51bGwsCiAgICAgICJ0b2tlbiI6ICI5NTI4OTUyOC0zNzM3LURDNkMtMUM4Qi1GNzAxNjAxQUUzMjEiLAogICAgICAiZW1haWwiOiAidGVzdF82dHJyQHRtczk3enhueC5jb20iLAogICAgICAiZmlyc3QiOiAiIiwKICAgICAgImxhc3QiOiAiIiwKICAgICAgImFkZHJlc3MiOiAiIiwKICAgICAgInBob25lIjogIiIsCiAgICAgICJjb21wYW55X25hbWUiOiBudWxsLAogICAgICAiY29tcGFueV93ZWJzaXRlIjogbnVsbCwKICAgICAgImluc3RhZ3JhbSI6IG51bGwsCiAgICAgICJmYWNlYm9vayI6IG51bGwsCiAgICAgICJ0d2l0dGVyIjogbnVsbCwKICAgICAgImNpdHkiOiAiIiwKICAgICAgInN0YXRlIjogIkRlbnRvbiIsCiAgICAgICJjb3VudHJ5IjogIlVTIiwKICAgICAgInBpbmNvZGUiOiAiMCIsCiAgICAgICJub19vZl9lbXBsb3llZXMiOiBudWxsLAogICAgICAiY2R0IjogIjIwMjYtMDctMzEgMTM6MzI6MzkiCiAgICB9LAogICAgInZocl9jcmVkaXRfc3Vic2NyaXB0aW9uIjogMCwKICAgICJzdGlja2VyX2NyZWRpdCI6IDAsCiAgICAiYXVjdGlvbl9jcmVkaXQiOiAwCiAgfQp9"
                     },
                     {
                       "name": "payment-update.json",
                       "contentType": "application/json",
-                      "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidXNlciI6IHsKICAgICAgImlkIjogIjUxMzEwOSIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2Y2M1NDIyMDVmMSIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogbnVsbCwKICAgICAgImFjY291bnRfdHlwZSI6ICJwZXJzb25hbCIsCiAgICAgICJ1c2VyX3R5cGUiOiAidXNlciIsCiAgICAgICJidXNpbmVzc190eXBlIjogbnVsbCwKICAgICAgInRva2VuIjogIjEyNzUxMjc1LTA1MDUtMjg2Qy1DNjRFLTk0RjNBNThDQTFDOSIsCiAgICAgICJlbWFpbCI6ICJ0ZXN0X3c1N3pAdG1zOTRpMTd2LmNvbSIsCiAgICAgICJmaXJzdCI6ICIiLAogICAgICAibGFzdCI6ICIiLAogICAgICAiYWRkcmVzcyI6ICIiLAogICAgICAicGhvbmUiOiAiIiwKICAgICAgImNvbXBhbnlfbmFtZSI6IG51bGwsCiAgICAgICJjb21wYW55X3dlYnNpdGUiOiBudWxsLAogICAgICAiaW5zdGFncmFtIjogbnVsbCwKICAgICAgImZhY2Vib29rIjogbnVsbCwKICAgICAgInR3aXR0ZXIiOiBudWxsLAogICAgICAiY2l0eSI6ICIiLAogICAgICAic3RhdGUiOiAiRGVudG9uIiwKICAgICAgImNvdW50cnkiOiAiVVMiLAogICAgICAicGluY29kZSI6ICIwIiwKICAgICAgIm5vX29mX2VtcGxveWVlcyI6IG51bGwsCiAgICAgICJjZHQiOiAiMjAyNi0wNy0zMSAxMTo1NDo0MiIKICAgIH0sCiAgICAicGFnZSI6ICJzZWFyY2giLAogICAgInZpbiI6ICJDUkVESVQiLAogICAgInZocl9jcmVkaXQiOiAxMCwKICAgICJ2aHJfY3JlZGl0X3N1YnNjcmlwdGlvbiI6IDAsCiAgICAic3RpY2tlcl9jcmVkaXQiOiAwLAogICAgImF1Y3Rpb25fY3JlZGl0IjogMAogIH0KfQ=="
+                      "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidXNlciI6IHsKICAgICAgImlkIjogIjUxMzEzNyIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2Y2RjMzZiM2M0ZiIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogbnVsbCwKICAgICAgImFjY291bnRfdHlwZSI6ICJwZXJzb25hbCIsCiAgICAgICJ1c2VyX3R5cGUiOiAidXNlciIsCiAgICAgICJidXNpbmVzc190eXBlIjogbnVsbCwKICAgICAgInRva2VuIjogIjk1Mjg5NTI4LTM3MzctREM2Qy0xQzhCLUY3MDE2MDFBRTMyMSIsCiAgICAgICJlbWFpbCI6ICJ0ZXN0XzZ0cnJAdG1zOTd6eG54LmNvbSIsCiAgICAgICJmaXJzdCI6ICIiLAogICAgICAibGFzdCI6ICIiLAogICAgICAiYWRkcmVzcyI6ICIiLAogICAgICAicGhvbmUiOiAiIiwKICAgICAgImNvbXBhbnlfbmFtZSI6IG51bGwsCiAgICAgICJjb21wYW55X3dlYnNpdGUiOiBudWxsLAogICAgICAiaW5zdGFncmFtIjogbnVsbCwKICAgICAgImZhY2Vib29rIjogbnVsbCwKICAgICAgInR3aXR0ZXIiOiBudWxsLAogICAgICAiY2l0eSI6ICIiLAogICAgICAic3RhdGUiOiAiRGVudG9uIiwKICAgICAgImNvdW50cnkiOiAiVVMiLAogICAgICAicGluY29kZSI6ICIwIiwKICAgICAgIm5vX29mX2VtcGxveWVlcyI6IG51bGwsCiAgICAgICJjZHQiOiAiMjAyNi0wNy0zMSAxMzozMjozOSIKICAgIH0sCiAgICAicGFnZSI6ICJzZWFyY2giLAogICAgInZpbiI6ICJDUkVESVQiLAogICAgInZocl9jcmVkaXQiOiAxMCwKICAgICJ2aHJfY3JlZGl0X3N1YnNjcmlwdGlvbiI6IDAsCiAgICAic3RpY2tlcl9jcmVkaXQiOiAwLAogICAgImF1Y3Rpb25fY3JlZGl0IjogMAogIH0KfQ=="
                     }
                   ]
                 }
@@ -220,9 +225,220 @@
         {
           "title": "Global Member Area Report Generation Flow",
           "file": "global_flow.spec.js",
-          "line": 8,
+          "line": 14,
           "column": 6,
           "specs": [
+            {
+              "title": "CS-02 — 17 Character VIN (US) report generate",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-safari",
+                  "projectName": "mobile-safari",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 63228,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Setting up listener for: /api-cwa/search-page\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/payment-update\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/vin-validate\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/generate-report\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/generate_uvc_report\n"
+                        },
+                        {
+                          "text": "Setting up listener for: cancel-subscription\n"
+                        },
+                        {
+                          "text": "API listeners attached with report attachments (one-time capture).\n"
+                        },
+                        {
+                          "text": "Base URL configured to: https://members.vehiclehistory.report/members\n"
+                        },
+                        {
+                          "text": "Navigating directly to Dashboard...\n"
+                        },
+                        {
+                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/search-page\n"
+                        },
+                        {
+                          "text": "US VIN generated and set on actor: YV4A22RL1J1036716\n"
+                        },
+                        {
+                          "text": "Generating report for VIN: YV4A22RL1J1036716\n"
+                        },
+                        {
+                          "text": "Clicked 'Get vehicle History' button.\n"
+                        },
+                        {
+                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/vin-validate\n"
+                        },
+                        {
+                          "text": "Generate-Report API call completed successfully.\n"
+                        },
+                        {
+                          "text": "Navigating to /my-reports...\n"
+                        },
+                        {
+                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/generate-report\n"
+                        },
+                        {
+                          "text": "Navigated to /my-reports\n"
+                        },
+                        {
+                          "text": "US VIN report generation completed successfully.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-31T17:33:24.028Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "search-page.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidmhyX2NyZWRpdCI6IDEwLAogICAgInByb2ZpbGUiOiB7CiAgICAgICJpZCI6ICI1MTMxMzciLAogICAgICAidHJhY2tpbmdfaWQiOiAiVVNFUjZhNmNkYzM2YjNjNGYiLAogICAgICAicHJvZmlsZV9pbWFnZSI6ICIiLAogICAgICAiYWNjb3VudF90eXBlIjogInBlcnNvbmFsIiwKICAgICAgInVzZXJfdHlwZSI6ICJ1c2VyIiwKICAgICAgImJ1c2luZXNzX3R5cGUiOiBudWxsLAogICAgICAidG9rZW4iOiAiOTUyODk1MjgtMzczNy1EQzZDLTFDOEItRjcwMTYwMUFFMzIxIiwKICAgICAgImVtYWlsIjogInRlc3RfNnRyckB0bXM5N3p4bnguY29tIiwKICAgICAgImZpcnN0IjogIiIsCiAgICAgICJsYXN0IjogIiIsCiAgICAgICJhZGRyZXNzIjogIiIsCiAgICAgICJwaG9uZSI6ICIiLAogICAgICAiY29tcGFueV9uYW1lIjogbnVsbCwKICAgICAgImNvbXBhbnlfd2Vic2l0ZSI6IG51bGwsCiAgICAgICJpbnN0YWdyYW0iOiBudWxsLAogICAgICAiZmFjZWJvb2siOiBudWxsLAogICAgICAidHdpdHRlciI6IG51bGwsCiAgICAgICJjaXR5IjogIiIsCiAgICAgICJzdGF0ZSI6ICJEZW50b24iLAogICAgICAiY291bnRyeSI6ICJVUyIsCiAgICAgICJwaW5jb2RlIjogIjAiLAogICAgICAibm9fb2ZfZW1wbG95ZWVzIjogbnVsbCwKICAgICAgImNkdCI6ICIyMDI2LTA3LTMxIDEzOjMyOjM5IgogICAgfSwKICAgICJ2aHJfY3JlZGl0X3N1YnNjcmlwdGlvbiI6IDAsCiAgICAic3RpY2tlcl9jcmVkaXQiOiAwLAogICAgImF1Y3Rpb25fY3JlZGl0IjogMAogIH0KfQ=="
+                        },
+                        {
+                          "name": "vin-validate.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAiaW5kaWdvIjogZmFsc2UsCiAgICAidmluZGVjaXBoZXIiOiB0cnVlLAogICAgInZwaWMiOiBmYWxzZSwKICAgICJldXJvcGUiOiBmYWxzZSwKICAgICJkZWVwbWluZCI6IGZhbHNlCiAgfQp9"
+                        },
+                        {
+                          "name": "generate-report.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgIm1zZyI6ICJUaGFuayB5b3UgZm9yIG9yZGVyaW5nIHdpdGggVkhSLiBZb3VyIG9yZGVyIGlzIHByb2Nlc3NpbmcgYW5kIHRoZSByZXBvcnQgaXMgZ2VuZXJhdGluZy4gWW91IHdpbGwgYmUgcmVkaXJlY3RlZCB0byB0aGUgUmVwb3J0Igp9"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "33d8e9c5e66333882a2a-366dc39d8d5b85928cce",
+              "file": "global_flow.spec.js",
+              "line": 15,
+              "column": 3
+            },
+            {
+              "title": "CS-03 — Classic Mapped VIN report generate",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-safari",
+                  "projectName": "mobile-safari",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 46236,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Setting up listener for: /api-cwa/search-page\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/payment-update\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/vin-validate\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/generate-report\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/generate_uvc_report\n"
+                        },
+                        {
+                          "text": "Setting up listener for: cancel-subscription\n"
+                        },
+                        {
+                          "text": "API listeners attached with report attachments (one-time capture).\n"
+                        },
+                        {
+                          "text": "Base URL configured to: https://members.vehiclehistory.report/members\n"
+                        },
+                        {
+                          "text": "Navigating directly to Dashboard...\n"
+                        },
+                        {
+                          "text": "Generating Classic Mapped VIN (Condition-based timeout check: 5000ms)...\n"
+                        },
+                        {
+                          "text": "Classic VIN randomized: 228871N111616\n"
+                        },
+                        {
+                          "text": "Generating report for VIN: 228871N111616\n"
+                        },
+                        {
+                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/search-page\n"
+                        },
+                        {
+                          "text": "Clicked 'Get vehicle History' button.\n"
+                        },
+                        {
+                          "text": "Generate-Report API call completed successfully.\n"
+                        },
+                        {
+                          "text": "Navigating to /my-reports...\n"
+                        },
+                        {
+                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/generate-report\n"
+                        },
+                        {
+                          "text": "Navigated to /my-reports\n"
+                        },
+                        {
+                          "text": "Classic VIN report generation completed successfully.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-31T17:34:27.476Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "search-page.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidmhyX2NyZWRpdCI6IDksCiAgICAicHJvZmlsZSI6IHsKICAgICAgImlkIjogIjUxMzEzNyIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2Y2RjMzZiM2M0ZiIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogIiIsCiAgICAgICJhY2NvdW50X3R5cGUiOiAicGVyc29uYWwiLAogICAgICAidXNlcl90eXBlIjogInVzZXIiLAogICAgICAiYnVzaW5lc3NfdHlwZSI6IG51bGwsCiAgICAgICJ0b2tlbiI6ICI5NTI4OTUyOC0zNzM3LURDNkMtMUM4Qi1GNzAxNjAxQUUzMjEiLAogICAgICAiZW1haWwiOiAidGVzdF82dHJyQHRtczk3enhueC5jb20iLAogICAgICAiZmlyc3QiOiAiIiwKICAgICAgImxhc3QiOiAiIiwKICAgICAgImFkZHJlc3MiOiAiIiwKICAgICAgInBob25lIjogIiIsCiAgICAgICJjb21wYW55X25hbWUiOiBudWxsLAogICAgICAiY29tcGFueV93ZWJzaXRlIjogbnVsbCwKICAgICAgImluc3RhZ3JhbSI6IG51bGwsCiAgICAgICJmYWNlYm9vayI6IG51bGwsCiAgICAgICJ0d2l0dGVyIjogbnVsbCwKICAgICAgImNpdHkiOiAiIiwKICAgICAgInN0YXRlIjogIkRlbnRvbiIsCiAgICAgICJjb3VudHJ5IjogIlVTIiwKICAgICAgInBpbmNvZGUiOiAiMCIsCiAgICAgICJub19vZl9lbXBsb3llZXMiOiBudWxsLAogICAgICAiY2R0IjogIjIwMjYtMDctMzEgMTM6MzI6MzkiCiAgICB9LAogICAgInZocl9jcmVkaXRfc3Vic2NyaXB0aW9uIjogMCwKICAgICJzdGlja2VyX2NyZWRpdCI6IDAsCiAgICAiYXVjdGlvbl9jcmVkaXQiOiAwCiAgfQp9"
+                        },
+                        {
+                          "name": "generate-report.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgIm1zZyI6ICJUaGFuayB5b3UgZm9yIG9yZGVyaW5nIHdpdGggVkhSLiBZb3VyIG9yZGVyIGlzIHByb2Nlc3NpbmcgYW5kIHRoZSByZXBvcnQgaXMgZ2VuZXJhdGluZy4gWW91IHdpbGwgYmUgcmVkaXJlY3RlZCB0byB0aGUgUmVwb3J0Igp9"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "33d8e9c5e66333882a2a-41353be5dc6c2119a40c",
+              "file": "global_flow.spec.js",
+              "line": 43,
+              "column": 3
+            },
             {
               "title": "CS-04 — EU Mapped VIN report generate",
               "ok": true,
@@ -239,7 +455,7 @@
                       "workerIndex": 1,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 43938,
+                      "duration": 59331,
                       "errors": [],
                       "stdout": [
                         {
@@ -255,6 +471,12 @@
                           "text": "Setting up listener for: /api-cwa/generate-report\n"
                         },
                         {
+                          "text": "Setting up listener for: /api-cwa/generate_uvc_report\n"
+                        },
+                        {
+                          "text": "Setting up listener for: cancel-subscription\n"
+                        },
+                        {
                           "text": "API listeners attached with report attachments (one-time capture).\n"
                         },
                         {
@@ -264,19 +486,19 @@
                           "text": "Navigating directly to Dashboard...\n"
                         },
                         {
-                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/search-page\n"
-                        },
-                        {
                           "text": "Generating EU VIN from list (Condition-based timeout check: 5000ms)...\n"
                         },
                         {
-                          "text": "Selected and randomized EU VIN: WAUZZZ8P6CA083449\n"
+                          "text": "Selected and randomized EU VIN: VF1AGVYB055491692\n"
                         },
                         {
-                          "text": "Generating EU report for VIN: WAUZZZ8P6CA083449\n"
+                          "text": "Generating EU report for VIN: VF1AGVYB055491692\n"
                         },
                         {
                           "text": "Clicked 'Get vehicle History' button.\n"
+                        },
+                        {
+                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/search-page\n"
                         },
                         {
                           "text": "Vin-Validate API call resolved.\n"
@@ -308,13 +530,13 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-07-31T15:55:32.134Z",
+                      "startTime": "2026-07-31T17:35:13.766Z",
                       "annotations": [],
                       "attachments": [
                         {
                           "name": "search-page.json",
                           "contentType": "application/json",
-                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidmhyX2NyZWRpdCI6IDEwLAogICAgInByb2ZpbGUiOiB7CiAgICAgICJpZCI6ICI1MTMxMDkiLAogICAgICAidHJhY2tpbmdfaWQiOiAiVVNFUjZhNmNjNTQyMjA1ZjEiLAogICAgICAicHJvZmlsZV9pbWFnZSI6ICIiLAogICAgICAiYWNjb3VudF90eXBlIjogInBlcnNvbmFsIiwKICAgICAgInVzZXJfdHlwZSI6ICJ1c2VyIiwKICAgICAgImJ1c2luZXNzX3R5cGUiOiBudWxsLAogICAgICAidG9rZW4iOiAiMTI3NTEyNzUtMDUwNS0yODZDLUM2NEUtOTRGM0E1OENBMUM5IiwKICAgICAgImVtYWlsIjogInRlc3RfdzU3ekB0bXM5NGkxN3YuY29tIiwKICAgICAgImZpcnN0IjogIiIsCiAgICAgICJsYXN0IjogIiIsCiAgICAgICJhZGRyZXNzIjogIiIsCiAgICAgICJwaG9uZSI6ICIiLAogICAgICAiY29tcGFueV9uYW1lIjogbnVsbCwKICAgICAgImNvbXBhbnlfd2Vic2l0ZSI6IG51bGwsCiAgICAgICJpbnN0YWdyYW0iOiBudWxsLAogICAgICAiZmFjZWJvb2siOiBudWxsLAogICAgICAidHdpdHRlciI6IG51bGwsCiAgICAgICJjaXR5IjogIiIsCiAgICAgICJzdGF0ZSI6ICJEZW50b24iLAogICAgICAiY291bnRyeSI6ICJVUyIsCiAgICAgICJwaW5jb2RlIjogIjAiLAogICAgICAibm9fb2ZfZW1wbG95ZWVzIjogbnVsbCwKICAgICAgImNkdCI6ICIyMDI2LTA3LTMxIDExOjU0OjQyIgogICAgfSwKICAgICJ2aHJfY3JlZGl0X3N1YnNjcmlwdGlvbiI6IDAsCiAgICAic3RpY2tlcl9jcmVkaXQiOiAwLAogICAgImF1Y3Rpb25fY3JlZGl0IjogMAogIH0KfQ=="
+                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidmhyX2NyZWRpdCI6IDgsCiAgICAicHJvZmlsZSI6IHsKICAgICAgImlkIjogIjUxMzEzNyIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2Y2RjMzZiM2M0ZiIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogIiIsCiAgICAgICJhY2NvdW50X3R5cGUiOiAicGVyc29uYWwiLAogICAgICAidXNlcl90eXBlIjogInVzZXIiLAogICAgICAiYnVzaW5lc3NfdHlwZSI6IG51bGwsCiAgICAgICJ0b2tlbiI6ICI5NTI4OTUyOC0zNzM3LURDNkMtMUM4Qi1GNzAxNjAxQUUzMjEiLAogICAgICAiZW1haWwiOiAidGVzdF82dHJyQHRtczk3enhueC5jb20iLAogICAgICAiZmlyc3QiOiAiIiwKICAgICAgImxhc3QiOiAiIiwKICAgICAgImFkZHJlc3MiOiAiIiwKICAgICAgInBob25lIjogIiIsCiAgICAgICJjb21wYW55X25hbWUiOiBudWxsLAogICAgICAiY29tcGFueV93ZWJzaXRlIjogbnVsbCwKICAgICAgImluc3RhZ3JhbSI6IG51bGwsCiAgICAgICJmYWNlYm9vayI6IG51bGwsCiAgICAgICJ0d2l0dGVyIjogbnVsbCwKICAgICAgImNpdHkiOiAiIiwKICAgICAgInN0YXRlIjogIkRlbnRvbiIsCiAgICAgICJjb3VudHJ5IjogIlVTIiwKICAgICAgInBpbmNvZGUiOiAiMCIsCiAgICAgICJub19vZl9lbXBsb3llZXMiOiBudWxsLAogICAgICAiY2R0IjogIjIwMjYtMDctMzEgMTM6MzI6MzkiCiAgICB9LAogICAgInZocl9jcmVkaXRfc3Vic2NyaXB0aW9uIjogMCwKICAgICJzdGlja2VyX2NyZWRpdCI6IDAsCiAgICAiYXVjdGlvbl9jcmVkaXQiOiAwCiAgfQp9"
                         },
                         {
                           "name": "vin-validate.json",
@@ -334,7 +556,164 @@
               ],
               "id": "33d8e9c5e66333882a2a-9bf53593353bd1889021",
               "file": "global_flow.spec.js",
-              "line": 65,
+              "line": 71,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "Independent UVC Subscription Operations",
+          "file": "global_flow.spec.js",
+          "line": 101,
+          "column": 6,
+          "specs": [
+            {
+              "title": "CS-05 — UVC Report purchase and generate",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-safari",
+                  "projectName": "mobile-safari",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 119451,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Setting up listener for: /api-cwa/search-page\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/payment-update\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/vin-validate\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/generate-report\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/generate_uvc_report\n"
+                        },
+                        {
+                          "text": "Setting up listener for: cancel-subscription\n"
+                        },
+                        {
+                          "text": "API listeners attached with report attachments (one-time capture).\n"
+                        },
+                        {
+                          "text": "Base URL configured to: https://members.vehiclehistory.report/members\n"
+                        },
+                        {
+                          "text": "Generated unique email: test_brgc@tms984u7f.com\n"
+                        },
+                        {
+                          "text": "Generated unique password: Pass_brgcms984u7f!\n"
+                        },
+                        {
+                          "text": "Navigating to Signup URL: https://members.vehiclehistory.report/members/signup (Timeout: 60000ms)\n"
+                        },
+                        {
+                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/search-page\n"
+                        },
+                        {
+                          "text": "Signup successful.\n"
+                        },
+                        {
+                          "text": "Mobile view detected, opening side navigation...\n"
+                        },
+                        {
+                          "text": "Selecting 'Unlimited VIN Check' plan...\n"
+                        },
+                        {
+                          "text": "Clicked 'Proceed' button for UVC.\n"
+                        },
+                        {
+                          "text": "Determining checkout page layout/strategy dynamically...\n"
+                        },
+                        {
+                          "text": "Active Stripe Layout Status -> SingleFrame: true, MultiFrame: true\n"
+                        },
+                        {
+                          "text": "Proceeding with Multi-Frame Checkout Strategy.\n"
+                        },
+                        {
+                          "text": "Purchase flow completed.\n"
+                        },
+                        {
+                          "text": "US VIN generated and set on actor: 1FM5K8AC7LGA19840\n"
+                        },
+                        {
+                          "text": "Generating UVC report for VIN: 1FM5K8AC7LGA19840\n"
+                        },
+                        {
+                          "text": "Waiting 5 seconds for dashboard stabilization...\n"
+                        },
+                        {
+                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/payment-update\n"
+                        },
+                        {
+                          "text": "Attempting to click 'Get vehicle History' button for UVC...\n"
+                        },
+                        {
+                          "text": "Clicked 'Get vehicle History' button.\n"
+                        },
+                        {
+                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/vin-validate\n"
+                        },
+                        {
+                          "text": "UVC Report generation API call resolved.\n"
+                        },
+                        {
+                          "text": "Navigating statically to My Reports...\n"
+                        },
+                        {
+                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/generate_uvc_report\n"
+                        },
+                        {
+                          "text": "UVC report purchase and generation completed successfully.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-31T17:36:13.165Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "search-page.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidmhyX2NyZWRpdCI6IDAsCiAgICAicHJvZmlsZSI6IHsKICAgICAgImlkIjogIjUxMzEzOCIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2Y2RkMTk3MzU5NyIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogIiIsCiAgICAgICJhY2NvdW50X3R5cGUiOiAicGVyc29uYWwiLAogICAgICAidXNlcl90eXBlIjogInVzZXIiLAogICAgICAiYnVzaW5lc3NfdHlwZSI6IG51bGwsCiAgICAgICJ0b2tlbiI6ICJEMEJDRDBCQy1FN0U3LTNDRTAtN0Y3OS1BMjM2MUVCN0U1OEEiLAogICAgICAiZW1haWwiOiAidGVzdF9icmdjQHRtczk4NHU3Zi5jb20iLAogICAgICAiZmlyc3QiOiAiIiwKICAgICAgImxhc3QiOiAiIiwKICAgICAgImFkZHJlc3MiOiAiIiwKICAgICAgInBob25lIjogIiIsCiAgICAgICJjb21wYW55X25hbWUiOiBudWxsLAogICAgICAiY29tcGFueV93ZWJzaXRlIjogbnVsbCwKICAgICAgImluc3RhZ3JhbSI6IG51bGwsCiAgICAgICJmYWNlYm9vayI6IG51bGwsCiAgICAgICJ0d2l0dGVyIjogbnVsbCwKICAgICAgImNpdHkiOiAiIiwKICAgICAgInN0YXRlIjogIkRlbnRvbiIsCiAgICAgICJjb3VudHJ5IjogIlVTIiwKICAgICAgInBpbmNvZGUiOiAiMCIsCiAgICAgICJub19vZl9lbXBsb3llZXMiOiBudWxsLAogICAgICAiY2R0IjogIjIwMjYtMDctMzEgMTM6MzY6MjYiCiAgICB9LAogICAgInZocl9jcmVkaXRfc3Vic2NyaXB0aW9uIjogMCwKICAgICJzdGlja2VyX2NyZWRpdCI6IDAsCiAgICAiYXVjdGlvbl9jcmVkaXQiOiAwCiAgfQp9"
+                        },
+                        {
+                          "name": "payment-update.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidXNlciI6IHsKICAgICAgImlkIjogIjUxMzEzOCIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2Y2RkMTk3MzU5NyIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogbnVsbCwKICAgICAgImFjY291bnRfdHlwZSI6ICJwZXJzb25hbCIsCiAgICAgICJ1c2VyX3R5cGUiOiAidXNlciIsCiAgICAgICJidXNpbmVzc190eXBlIjogbnVsbCwKICAgICAgInRva2VuIjogIkQwQkNEMEJDLUU3RTctM0NFMC03Rjc5LUEyMzYxRUI3RTU4QSIsCiAgICAgICJlbWFpbCI6ICJ0ZXN0X2JyZ2NAdG1zOTg0dTdmLmNvbSIsCiAgICAgICJmaXJzdCI6ICIiLAogICAgICAibGFzdCI6ICIiLAogICAgICAiYWRkcmVzcyI6ICIiLAogICAgICAicGhvbmUiOiAiIiwKICAgICAgImNvbXBhbnlfbmFtZSI6IG51bGwsCiAgICAgICJjb21wYW55X3dlYnNpdGUiOiBudWxsLAogICAgICAiaW5zdGFncmFtIjogbnVsbCwKICAgICAgImZhY2Vib29rIjogbnVsbCwKICAgICAgInR3aXR0ZXIiOiBudWxsLAogICAgICAiY2l0eSI6ICIiLAogICAgICAic3RhdGUiOiAiRGVudG9uIiwKICAgICAgImNvdW50cnkiOiAiVVMiLAogICAgICAicGluY29kZSI6ICIwIiwKICAgICAgIm5vX29mX2VtcGxveWVlcyI6IG51bGwsCiAgICAgICJjZHQiOiAiMjAyNi0wNy0zMSAxMzozNjoyNiIKICAgIH0sCiAgICAicGFnZSI6ICJzZWFyY2giLAogICAgInZpbiI6IG51bGwsCiAgICAidmhyX2NyZWRpdCI6IG51bGwsCiAgICAidmhyX2NyZWRpdF9zdWJzY3JpcHRpb24iOiAwLAogICAgInN0aWNrZXJfY3JlZGl0IjogMCwKICAgICJhdWN0aW9uX2NyZWRpdCI6IDAKICB9Cn0="
+                        },
+                        {
+                          "name": "vin-validate.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAiaW5kaWdvIjogZmFsc2UsCiAgICAidmluZGVjaXBoZXIiOiB0cnVlLAogICAgInZwaWMiOiBmYWxzZSwKICAgICJldXJvcGUiOiBmYWxzZSwKICAgICJkZWVwbWluZCI6IGZhbHNlCiAgfQp9"
+                        },
+                        {
+                          "name": "generate_uvc_report.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJzdGF0dXMiOiAiZXJyb3IiLAogICJ0eXBlIjogImludmFsaWQiLAogICJtc2ciOiAiV3JvbmcgdmluIG51bWJlciIsCiAgImNvdW50IjogbnVsbAp9"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "33d8e9c5e66333882a2a-b1a087b84dee199a4bc7",
+              "file": "global_flow.spec.js",
+              "line": 104,
               "column": 3
             }
           ]
@@ -344,9 +723,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-07-31T15:54:28.442Z",
-    "duration": 107914.635,
-    "expected": 2,
+    "startTime": "2026-07-31T17:32:22.471Z",
+    "duration": 350398.584,
+    "expected": 5,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

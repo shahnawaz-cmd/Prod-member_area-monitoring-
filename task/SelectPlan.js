@@ -34,7 +34,15 @@ class SelectPlan {
     if (this.planName === 'UVC Subscription') {
       console.log("Selecting 'Unlimited VIN Check' plan...");
       await page.getByLabel('Unlimited VIN Check').click();
-      await page.getByRole('button', { name: /Proceed to checkout/i }).click();
+      
+      const proceedButton = page.getByRole('button', { name: /^Proceed to Checkout$/i })
+        .or(page.getByRole('button', { name: /^Proceed$/i }))
+        .or(page.locator('button').filter({ hasText: /^Proceed$/i }))
+        .first();
+        
+      await proceedButton.waitFor({ state: 'visible', timeout: timeout });
+      await proceedButton.click({ force: true });
+      console.log("Clicked 'Proceed' button for UVC.");
     } else {
       console.log("Locating the highest report package option available on the page...");
       const planLoadTimeout = this.isSlowNetwork ? 45000 : 20000;

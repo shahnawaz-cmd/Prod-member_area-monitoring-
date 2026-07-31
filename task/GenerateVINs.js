@@ -63,11 +63,12 @@ class ClassicMappedVIN {
 
   async performAs(actor) {
     const timeout = this.isSlowNetwork ? 10000 : 5000;
-    console.log(`Generating Classic Mapped VIN (Condition-based timeout check: ${timeout}ms)...`);
+    console.log(`Using base Classic Mapped VIN directly (Condition-based timeout check: ${timeout}ms)...`);
     
     // Simulating a condition-based timeout delay if needed
     await actor.page.waitForTimeout(timeout / 5); 
 
+    /*
     const chars = this.baseVin.split('');
     const random1 = Math.floor(Math.random() * 10).toString();
     const random2 = Math.floor(Math.random() * 10).toString();
@@ -78,7 +79,10 @@ class ClassicMappedVIN {
     }
     
     actor.classicVin = chars.join('');
-    console.log(`Classic VIN randomized: ${actor.classicVin}`);
+    */
+    
+    actor.classicVin = this.baseVin;
+    console.log(`Classic VIN set to base value: ${actor.classicVin}`);
   }
 }
 

@@ -6,7 +6,9 @@ class CaptureApiResponses {
       '/api-cwa/search-page',
       '/api-cwa/payment-update',
       '/api-cwa/vin-validate',
-      '/api-cwa/generate-report'
+      '/api-cwa/generate-report',
+      '/api-cwa/generate_uvc_report',
+      'cancel-subscription'
     ];
   }
 
