@@ -70,16 +70,20 @@ class GenerateEUReport {
     await validateResPromise;
     console.log("Vin-Validate API call resolved.");
     
-    // Robust selector: looks for any button containing "Yes" (case-insensitive)
-    const yesButton = page.locator('button').filter({ hasText: /Yes/i }).first();
+    // Target the button matching your exact working locator, scoped inside the Europe container
+    const yesButton = page.locator('div:has-text("Europe")')
+      .getByRole('button', { name: 'Yes' })
+      .first();
+
     try {
-      console.log("Waiting for EU confirmation popup 'Yes' button...");
+      console.log("Waiting for EU confirmation popup...");
       await yesButton.waitFor({ state: 'visible', timeout: checkTimeout });
-      await yesButton.scrollIntoViewIfNeeded();
-      await yesButton.click({ force: true });
-      console.log("✅ Clicked Yes confirmation button for EU VIN.");
+      // Standard click to ensure actionability & stable rendering
+      await yesButton.click();
+      console.log("✅ Clicked Yes confirmation button.");
     } catch (e) {
-      console.log(`⚠️ Yes confirmation button not found or did not appear: ${e.message}. Skipping.`);
+      console.log(`Attempting fallback force click: ${e.message}`);
+      await yesButton.click({ force: true }).catch(() => {});
     }
     
     // Flow control promise: Wait for the API request to complete before navigating

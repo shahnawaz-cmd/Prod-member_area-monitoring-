@@ -28,6 +28,8 @@ jobs:
     - name: Run Playwright tests
       env:
         MONGO_URI: ${{ secrets.MONGO_URI }}
+        MONGO_DB_NAME: ${{ secrets.MONGO_DB_NAME }}
+        MONGO_COLL_NAME: ${{ secrets.MONGO_COLL_NAME }}
       run: npx playwright test
       
     - uses: actions/upload-artifact@v4

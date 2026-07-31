@@ -1,8 +1,8 @@
 const { MongoClient } = require('mongodb');
 
 const MONGO_URI = process.env.MONGO_URI;
-const DB_NAME = 'sales_history';
-const COLL_NAME = 'sales13';
+const DB_NAME = process.env.MONGO_DB_NAME || 'sales_history';
+const COLL_NAME = process.env.MONGO_COLL_NAME || 'sales13';
 const BASE_VIN = '1FTFW1ET2DFD78356';
 
 class GenerateUSVIN {
@@ -41,7 +41,7 @@ class GenerateUSVIN {
         generatedVin = await GenerateUSVIN.getVinFromMongo();
       }
     } catch (e) {
-      console.warn(`⚠️ VIN retrieval via ${this.method} failed: ${e.message}. Falling back to random generation.`);
+      console.warn(`⚠️ VIN retrieval via ${this.method} failed: ${e.message}. Falling back to default VIN.`);
     }
     
     // Fallback to specific fallback VIN if Mongo retrieval fails

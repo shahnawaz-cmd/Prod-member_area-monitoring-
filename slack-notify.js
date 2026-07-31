@@ -17,6 +17,7 @@ const {
 let testSummary = '';
 let passedCount = 0;
 let failedCount = 0;
+let flakyCount = 0;
 let totalRetries = 0;
 
 console.log('Current working directory:', process.cwd());
@@ -52,7 +53,7 @@ try {
   }
 
   testSummary = allSpecs.map(spec => {
-    if (!spec.tests || spec.tests.length === 0) return `⚠️ ${spec.title} (No tests)`;
+    if (!spec.tests || spec.tests.length === 0) return `• ⚠️ ${spec.title} (No tests)`;
     
     // Count retries across all attempts of this test
     for (const testInstance of spec.tests) {
@@ -61,15 +62,41 @@ try {
       }
     }
 
-    const status = spec.tests[0].results?.[0]?.status || 'unknown';
-    const browser = spec.tests[0].projectName || 'unknown';
-    const emoji = status === 'passed' ? '✅' : '❌';
-    if (status === 'passed') {
+    const attempts = spec.tests[0].results || [];
+    const hasFailures = attempts.some(r => r.status === 'failed' || r.status === 'timedOut');
+    const hasPass = attempts.some(r => r.status === 'passed');
+    
+    let isFlaky = false;
+    let finalStatus = 'unknown';
+    
+    if (hasFailures && hasPass) {
+      isFlaky = true;
+      finalStatus = 'flaky';
+    } else if (hasPass) {
+      finalStatus = 'passed';
+    } else if (hasFailures) {
+      finalStatus = 'failed';
+    } else {
+      finalStatus = attempts[0]?.status || 'unknown';
+    }
+
+    let emoji = '❌';
+    let suffix = '';
+    
+    if (isFlaky) {
+      flakyCount++;
+      emoji = '⚠️';
+      suffix = ' *[Flaky - Passed on Retry]*';
+    } else if (finalStatus === 'passed') {
       passedCount++;
+      emoji = '✅';
     } else {
       failedCount++;
+      emoji = '❌';
     }
-    return `${emoji} ${spec.title} (${browser})`;
+
+    const browser = spec.tests[0].projectName || 'unknown';
+    return `• ${emoji} *${spec.title}* (_${browser}_)${suffix}`;
   }).join('\n');
 
   if (!testSummary) {
@@ -90,50 +117,78 @@ const owner = GITHUB_REPO ? GITHUB_REPO.split('/')[0] : '';
 const repoName = GITHUB_REPO ? GITHUB_REPO.split('/')[1] : '';
 const reportUrl = REPORT_URL || ((owner && repoName) ? `https://${owner}.github.io/${repoName}/` : '');
 
-const isSuccess = failedCount === 0 && passedCount > 0;
+// A run is successful if there are zero failed tests (flaky tests are allowed)
+const isSuccess = failedCount === 0 && (passedCount > 0 || flakyCount > 0);
 const statusEmoji = isSuccess ? '✅' : '❌';
 const statusText = isSuccess ? 'Passed' : 'Failed';
 const mentions = !isSuccess ? ' CC: <@U03UR6FFQKB> <@U09UE83AWGP>' : '';
+const barColor = isSuccess ? '#2EB67D' : '#E01E5A'; // Slack Green or Red
 
 const payload = {
   text: `${statusEmoji} Prod Member area monitoring (functional & Cross browser testflow)${mentions}`,
-  blocks: [
+  attachments: [
     {
-      type: 'header',
-      text: {
-        type: 'plain_text',
-        text: `${statusEmoji} Prod Member area monitoring (functional & Cross browser testflow)`,
-        emoji: true
-      }
-    },
-    {
-      type: 'section',
-      fields: [
-        { type: 'mrkdwn', text: `*Overall Status:*\n${statusEmoji} ${statusText}${mentions}` },
-        { type: 'mrkdwn', text: `*Total Tests:*\n\`${passedCount + failedCount}\` (Passed: \`${passedCount}\` | Failed: \`${failedCount}\`)` },
-        { type: 'mrkdwn', text: `*Retries:*\n\`${totalRetries}\`` },
-        { type: 'mrkdwn', text: `*Site:*\n${site}` },
-        { type: 'mrkdwn', text: `*Env:*\n${env}` },
-        { type: 'mrkdwn', text: `*Base URL:*\n${BASE_URL || 'N/A'}` },
-        { type: 'mrkdwn', text: `*Repository:*\n${GITHUB_REPO || 'N/A'}` },
-        { type: 'mrkdwn', text: `*Branch:*\n${GITHUB_REF || 'N/A'}` },
-        { type: 'mrkdwn', text: `*Actor:*\n${GITHUB_ACTOR || 'N/A'}` },
-        { type: 'mrkdwn', text: `*Event:*\n${GITHUB_EVENT || 'N/A'}` }
+      color: barColor,
+      blocks: [
+        {
+          type: 'header',
+          text: {
+            type: 'plain_text',
+            text: `${statusEmoji} Prod Member Area Monitoring`,
+            emoji: true
+          }
+        },
+        {
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: `*Status:* ${statusEmoji} *${statusText}*${mentions}\n*Total Tests:* \`${passedCount + failedCount + flakyCount}\` | *Passed:* \`${passedCount}\` | *Failed:* \`${failedCount}\` | *Flaky:* \`${flakyCount}\` | *Retries:* \`${totalRetries}\``
+          }
+        },
+        {
+          type: 'divider'
+        },
+        {
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: `*Environment:* \`${env}\` (${site})\n` +
+                  `*Base URL:* <${BASE_URL}|${BASE_URL || 'N/A'}>\n` +
+                  `*Trigger Details:* \`${GITHUB_ACTOR || 'N/A'}\` via \`${GITHUB_EVENT || 'N/A'}\` (\`${GITHUB_REF || 'N/A'}\`)`
+          }
+        },
+        {
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: `*Test Summary:*\n${testSummary}`
+          }
+        },
+        {
+          type: 'actions',
+          elements: [
+            {
+              type: 'button',
+              text: {
+                type: 'plain_text',
+                text: 'View Workflow Run 🛠️',
+                emoji: true
+              },
+              url: runUrl,
+              style: 'primary'
+            },
+            ...(reportUrl ? [{
+              type: 'button',
+              text: {
+                type: 'plain_text',
+                text: 'View HTML Report 📊',
+                emoji: true
+              },
+              url: reportUrl
+            }] : [])
+          ]
+        }
       ]
-    },
-    {
-      type: 'section',
-      text: {
-        type: 'mrkdwn',
-        text: `*Test Summary:*\n${testSummary}`
-      }
-    },
-    {
-      type: 'section',
-      text: {
-        type: 'mrkdwn',
-        text: `*Links:*\n• <${runUrl}|View Workflow Run>` + (reportUrl ? `\n• <${reportUrl}|View HTML Report>` : '')
-      }
     }
   ]
 };

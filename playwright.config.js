@@ -4,7 +4,7 @@ const { defineConfig, devices } = require('@playwright/test');
 module.exports = defineConfig({
   testDir: './test',
   timeout: 5400000, // 90 minutes in milliseconds
-  retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 1 : 0,
   reporter: [
     ['html', { open: 'never' }],
     ['json', { outputFile: 'results.json' }]
