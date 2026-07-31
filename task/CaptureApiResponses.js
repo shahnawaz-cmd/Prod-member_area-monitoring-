@@ -8,7 +8,8 @@ class CaptureApiResponses {
       '/api-cwa/vin-validate',
       '/api-cwa/generate-report',
       '/api-cwa/generate_uvc_report',
-      'cancel-subscription'
+      'cancel-subscription',
+      'license_plate_decode'
     ];
   }
 
