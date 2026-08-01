@@ -52,8 +52,11 @@ try {
     }
   }
 
-  testSummary = allSpecs.map(spec => {
-    if (!spec.tests || spec.tests.length === 0) return `• ⚠️ ${spec.title} (No tests)`;
+  const failedSpecs = [];
+  const flakySpecs = [];
+
+  allSpecs.forEach(spec => {
+    if (!spec.tests || spec.tests.length === 0) return;
     
     // Count retries across all attempts of this test
     for (const testInstance of spec.tests) {
@@ -80,29 +83,31 @@ try {
       finalStatus = attempts[0]?.status || 'unknown';
     }
 
-    let emoji = '❌';
-    let suffix = '';
-    
+    const browser = spec.tests[0].projectName || 'unknown';
+
     if (isFlaky) {
       flakyCount++;
-      emoji = '⚠️';
-      suffix = ' *[Flaky - Passed on Retry]*';
+      flakySpecs.push({ title: spec.title, browser });
     } else if (finalStatus === 'passed') {
       passedCount++;
-      emoji = '✅';
     } else {
       failedCount++;
-      emoji = '❌';
+      failedSpecs.push({ title: spec.title, browser });
     }
+  });
 
-    const browser = spec.tests[0].projectName || 'unknown';
-    return `• ${emoji} *${spec.title}* (_${browser}_)${suffix}`;
-  }).join('\n');
-
-  if (!testSummary) {
-    testSummary = 'No tests found in results.json.';
+  // Build enhanced grouped summary
+  let summaryParts = [];
+  if (failedSpecs.length > 0) {
+    summaryParts.push(`*🔴 Failed Tests (${failedSpecs.length}):*\n` + failedSpecs.map(s => `• *${s.title}* (_${s.browser}_)`).join('\n'));
   }
-  console.log('Test summary generated:', testSummary);
+  if (flakySpecs.length > 0) {
+    summaryParts.push(`*🟡 Flaky Tests (Passed on Retry) (${flakySpecs.length}):*\n` + flakySpecs.map(s => `• *${s.title}* (_${s.browser}_)`).join('\n'));
+  }
+  summaryParts.push(`*🟢 Passed Tests:* \`${passedCount}\` specs completed successfully.`);
+  
+  testSummary = summaryParts.join('\n\n');
+  console.log('Grouped test summary generated:', testSummary);
 } catch (e) {
   console.error('Error parsing results.json:', e);
   testSummary = 'Could not parse test results.';
@@ -154,6 +159,8 @@ const payload = {
             type: 'mrkdwn',
             text: `*Environment:* \`${env}\` (${site})\n` +
                   `*Base URL:* <${BASE_URL}|${BASE_URL || 'N/A'}>\n` +
+                  `*Workflow Run:* <${runUrl}|View Workflow Run 🛠️>\n` +
+                  (reportUrl ? `*HTML Report:* <${reportUrl}|View HTML Report 📊>\n` : '') +
                   `*Trigger Details:* \`${GITHUB_ACTOR || 'N/A'}\` via \`${GITHUB_EVENT || 'N/A'}\` (\`${GITHUB_REF || 'N/A'}\`)`
           }
         },
@@ -163,30 +170,6 @@ const payload = {
             type: 'mrkdwn',
             text: `*Test Summary:*\n${testSummary}`
           }
-        },
-        {
-          type: 'actions',
-          elements: [
-            {
-              type: 'button',
-              text: {
-                type: 'plain_text',
-                text: 'View Workflow Run 🛠️',
-                emoji: true
-              },
-              url: runUrl,
-              style: 'primary'
-            },
-            ...(reportUrl ? [{
-              type: 'button',
-              text: {
-                type: 'plain_text',
-                text: 'View HTML Report 📊',
-                emoji: true
-              },
-              url: reportUrl
-            }] : [])
-          ]
         }
       ]
     }

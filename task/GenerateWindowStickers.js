@@ -199,8 +199,136 @@ class ClassicUnmappedSticker {
   }
 }
 
+class GenerateEUSticker {
+  constructor(vins = ['VF1AGVYB055491691', 'WAUZZZ8P6CA083445'], isSlowNetwork = false) {
+    this.vins = vins;
+    this.isSlowNetwork = isSlowNetwork;
+  }
+
+  async performAs(actor) {
+    const page = actor.page;
+    const timeout = this.isSlowNetwork ? 60000 : 30000;
+    const apiTimeout = this.isSlowNetwork ? 300000 : 180000;
+    const checkTimeout = this.isSlowNetwork ? 15000 : 5000;
+
+    // Pick a random base VIN and randomize the last digit
+    const baseVin = this.vins[Math.floor(Math.random() * this.vins.length)];
+    const chars = baseVin.split('');
+    const randomDigit = Math.floor(Math.random() * 10).toString();
+    if (chars.length >= 1) {
+      chars[chars.length - 1] = randomDigit;
+    }
+    const randomizedVin = chars.join('');
+    console.log(`Starting EU VIN Sticker Generate for randomized VIN: ${randomizedVin}`);
+
+    // Fill VIN
+    const vinInput = page.getByRole('textbox', { name: 'VIN Number' });
+    await vinInput.waitFor({ state: 'visible', timeout: timeout });
+    await vinInput.click();
+
+    // Set up validate listener
+    const validatePromise = page.waitForResponse(
+      res => res.url().includes('/api-cwa/vin-validate'),
+      { timeout: apiTimeout }
+    ).catch(() => null);
+
+    await vinInput.fill(randomizedVin);
+
+    // Click Get Window Sticker
+    const submitButton = page.getByRole('button', { name: 'Get Window Sticker' });
+    await submitButton.waitFor({ state: 'visible', timeout: timeout });
+    await submitButton.click();
+    console.log("Clicked 'Get Window Sticker' button.");
+
+    // Await validate API resolution
+    await validatePromise;
+    console.log("VIN validation API call resolved.");
+
+    // Handle EU popup Yes click
+    const yesButton = page.locator('div:has-text("Europe")')
+      .getByRole('button', { name: 'Yes' })
+      .first();
+
+    try {
+      console.log("Waiting for EU confirmation popup...");
+      await yesButton.waitFor({ state: 'visible', timeout: checkTimeout });
+      await yesButton.click();
+      console.log("✅ Clicked Yes confirmation button.");
+    } catch (e) {
+      console.log(`Attempting fallback force click: ${e.message}`);
+      await yesButton.click({ force: true }).catch(() => {});
+    }
+
+    // Check if dropdowns appear (uses Year filter or fallback index)
+    const yearCombobox = page.getByRole('combobox').filter({ hasText: 'Year' }).first()
+      .or(page.getByRole('combobox').nth(0));
+    await yearCombobox.waitFor({ state: 'visible', timeout: 10000 }).catch(() => {});
+
+    if (await yearCombobox.isVisible().catch(() => false)) {
+      console.log("EU VIN unmapped dropdown flow confirmed. Selecting Audi 200 values...");
+      try {
+        // Select Year (1980)
+        await yearCombobox.click();
+        await page.waitForTimeout(1000);
+        await page.getByRole('button', { name: '1980' }).click();
+        await page.waitForTimeout(1000);
+
+        // Select Make (Audi)
+        const makeCombobox = page.getByRole('combobox').filter({ hasText: 'Make' }).first();
+        await makeCombobox.waitFor({ state: 'visible', timeout: timeout });
+        await makeCombobox.click();
+        await page.waitForTimeout(1000);
+        await page.getByRole('button', { name: 'Audi' }).click();
+        await page.waitForTimeout(1000);
+
+        // Select Model (200)
+        const modelCombobox = page.getByRole('combobox').filter({ hasText: 'Model' }).first();
+        await modelCombobox.waitFor({ state: 'visible', timeout: timeout });
+        await modelCombobox.click();
+        await page.waitForTimeout(1000);
+        await page.getByRole('button', { name: '200' }).click();
+        await page.waitForTimeout(1000);
+
+        // Select Trim (/e Inline 5)
+        const trimCombobox = page.getByRole('combobox').filter({ hasText: 'Trim' }).first();
+        await trimCombobox.waitFor({ state: 'visible', timeout: timeout });
+        await trimCombobox.click();
+        await page.waitForTimeout(1000);
+        const trimOption = page.getByRole('button', { name: '/e Inline 5' })
+          .or(page.getByRole('button', { name: /\/e Inline 5/ }))
+          .or(page.getByRole('button', { name: /Inline 5/i }))
+          .first();
+        await trimOption.waitFor({ state: 'visible', timeout: timeout });
+        await trimOption.click();
+        await page.waitForTimeout(1000);
+
+        // Set up generation listener
+        const generatePromise = page.waitForResponse(
+          res => res.url().includes('generate_classic_sticker') || res.url().includes('generate_sticker'),
+          { timeout: apiTimeout }
+        ).catch(() => null);
+
+        // Submit overridden selections
+        console.log("Submitting overridden selections...");
+        const submitBtn = page.getByRole('button', { name: 'Get Window Sticker' });
+        await submitBtn.waitFor({ state: 'visible', timeout: timeout });
+        await submitBtn.click({ force: true });
+        console.log("Clicked 'Get Window Sticker' after dropdown selection.");
+
+        // Await generation API
+        await generatePromise;
+        console.log("Sticker generation API call resolved.");
+        await page.waitForTimeout(5000);
+      } catch (err) {
+        console.error("⚠️ Dropdown interactions failed, proceeding:", err.message);
+      }
+    }
+  }
+}
+
 module.exports = {
   ReverseDecode,
   ClassicMappedSticker,
-  ClassicUnmappedSticker
+  ClassicUnmappedSticker,
+  GenerateEUSticker
 };
