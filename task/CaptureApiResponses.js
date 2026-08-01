@@ -21,6 +21,31 @@ class CaptureApiResponses {
     const page = actor.page;
     const captured = {}; // To track what's been captured
 
+    // 1. Block non-essential resources (images, fonts, media, tracking scripts) to speed up loading
+    await page.route('**/*', (route) => {
+      const url = route.request().url().toLowerCase();
+      const resourceType = route.request().resourceType();
+
+      if (
+        resourceType === 'image' ||
+        resourceType === 'font' ||
+        resourceType === 'media' ||
+        url.includes('google-analytics') ||
+        url.includes('googletagmanager') ||
+        url.includes('hotjar') ||
+        url.includes('facebook') ||
+        url.includes('pixel') ||
+        url.includes('mixpanel') ||
+        url.includes('amplitude')
+      ) {
+        route.abort().catch(() => {});
+      } else {
+        route.continue().catch(() => {});
+      }
+    });
+    console.log("Blocked non-essential resources (images, fonts, trackers) for speed optimization.");
+
+    // 2. Set up AJAX API listeners
     for (const pattern of this.apiPatterns) {
       console.log(`Setting up listener for: ${pattern}`);
       

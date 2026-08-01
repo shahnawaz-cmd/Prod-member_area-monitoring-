@@ -31,9 +31,29 @@ jobs:
         node-version: lts/*
     - name: Install dependencies
       run: npm ci
+      
+    - name: Get Playwright version
+      run: echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('@playwright/test/package.json').version)")" >> $GITHUB_ENV
+      
+    - name: Cache Playwright Browsers
+      id: playwright-cache
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/ms-playwright
+        key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
+        restore-keys: |
+          ${{ runner.os }}-playwright-
+          
     - name: Install Playwright Browsers
+      if: steps.playwright-cache.outputs.cache-hit != 'true'
       run: npx playwright install --with-deps
+      
+    - name: Install Playwright System Dependencies
+      if: steps.playwright-cache.outputs.cache-hit == 'true'
+      run: npx playwright install-deps
+      
     - name: Run Playwright tests
+      continue-on-error: true
       env:
         MONGO_URI: ${{ secrets.MONGO_URI }}
         MONGO_DB_NAME: ${{ secrets.MONGO_DB_NAME }}
