@@ -11,6 +11,7 @@ const PurchaseFlow = require('../task/PurchaseFlow');
 const GenerateEmail = require('../task/GenerateEmail');
 const CancelSubscriptionFlow = require('../task/CancelSubscriptionFlow');
 const GenerateLPReport = require('../task/GenerateLPReport');
+const { GenerateClassicUnmappedVIN, GenerateClassicUnmappedVINManual } = require('../task/GenerateClassicUnmappedVIN');
 
 test.describe('Global Member Area Report Generation Flow', () => {
   test('CS-02 — 17 Character VIN (US) report generate', async ({ page }) => {
@@ -122,13 +123,65 @@ test.describe('Global Member Area Report Generation Flow', () => {
     console.log("License Plate report generation completed successfully.");
     await page.close();
   });
+
+  test('CS-06 — Classic Unmapped VIN Report Generation', async ({ page }) => {
+    test.setTimeout(300000);
+
+    const actor = new Actor(page);
+    const isSlowNetwork = process.env.SLOW_NETWORK === 'true';
+
+    // 0. Setup API Monitoring
+    await actor.attemptsTo(new CaptureApiResponses());
+
+    // 1. Configure Base URL
+    await actor.attemptsTo(new ConfigureBaseUrl());
+
+    // 2. Direct Navigation to Dashboard (using cached session)
+    console.log("Navigating directly to Dashboard...");
+    await page.goto(`${actor.baseUrl}/dashboard`, { waitUntil: 'domcontentloaded' });
+    await page.waitForURL('**/dashboard**', { timeout: 60000 });
+
+    // 3. Generate Classic Unmapped VIN & dropdown selectors
+    await actor.attemptsTo(new GenerateClassicUnmappedVIN('245GH4156001', isSlowNetwork));
+
+    // 4. Expect Redirection to My Reports
+    await expect(page).toHaveURL(/my-reports/, { timeout: isSlowNetwork ? 120000 : 60000 });
+    console.log("Classic Unmapped VIN report generation completed successfully.");
+    await page.close();
+  });
+
+  test('CS-07 — Classic unmapped (using manual input)', async ({ page }) => {
+    test.setTimeout(300000);
+
+    const actor = new Actor(page);
+    const isSlowNetwork = process.env.SLOW_NETWORK === 'true';
+
+    // 0. Setup API Monitoring
+    await actor.attemptsTo(new CaptureApiResponses());
+
+    // 1. Configure Base URL
+    await actor.attemptsTo(new ConfigureBaseUrl());
+
+    // 2. Direct Navigation to Dashboard (using cached session)
+    console.log("Navigating directly to Dashboard...");
+    await page.goto(`${actor.baseUrl}/dashboard`, { waitUntil: 'domcontentloaded' });
+    await page.waitForURL('**/dashboard**', { timeout: 60000 });
+
+    // 3. Generate Classic Unmapped VIN & fill manual input textboxes
+    await actor.attemptsTo(new GenerateClassicUnmappedVINManual('245GH4156001', isSlowNetwork));
+
+    // 4. Expect Redirection to My Reports
+    await expect(page).toHaveURL(/my-reports/, { timeout: isSlowNetwork ? 120000 : 60000 });
+    console.log("Classic Unmapped VIN report (manual input) completed successfully.");
+    await page.close();
+  });
 });
 
 // Independent Test Suite for UVC (runs fully independent with a clean state per test)
 test.describe('Independent UVC Subscription Operations', () => {
   test.use({ storageState: { cookies: [], origins: [] } }); // Clean state for UVC tests
 
-  test('CS-06 — UVC Report purchase and generate', async ({ page }) => {
+  test('CS-08 — UVC Report purchase and generate', async ({ page }) => {
     test.setTimeout(300000);
 
     const actor = new Actor(page);
@@ -157,18 +210,18 @@ test.describe('Independent UVC Subscription Operations', () => {
 
     // 7. Generate UVC Report
     await actor.attemptsTo(new GenerateUVCReport(actor.usVin, isSlowNetwork));
-    
-    // Stability Wait: Allow UI to finalize after report generation
-    await page.waitForTimeout(2000);
 
-    // 8. Expect Redirection to My Reports
+    // 8. Static Redirection
+    console.log("Navigating statically to My Reports...");
+    await page.goto(`${actor.baseUrl}/my-reports`, { waitUntil: 'domcontentloaded' });
+
     await expect(page).toHaveURL(/my-reports/, { timeout: isSlowNetwork ? 120000 : 60000 });
     console.log("UVC report purchase and generation completed successfully.");
     await page.close();
   });
 
   /*
-  test('CS-07 — UVC Subscription cancel', async ({ page }) => {
+  test('CS-09 — UVC Subscription cancel', async ({ page }) => {
     test.setTimeout(300000);
 
     const actor = new Actor(page);

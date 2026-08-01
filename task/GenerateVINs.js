@@ -3,18 +3,7 @@ const { MongoClient } = require('mongodb');
 const MONGO_URI = process.env.MONGO_URI;
 const DB_NAME = process.env.MONGO_DB_NAME || 'sales_history';
 const COLL_NAME = process.env.MONGO_COLL_NAME || 'sales13';
-const BASE_VIN = '1FTFW1ET2DFD78356';
-
 class GenerateUSVIN {
-  constructor(method = 'mongo') {
-    this.method = method; // 'random' or 'mongo'
-  }
-
-  static randomVin() {
-    const chars = 'ABCDEFGHJKLMNPRSTUVWXYZ0123456789';
-    return BASE_VIN.slice(0, -1) + chars[Math.floor(Math.random() * chars.length)];
-  }
-
   static async getVinFromMongo() {
     if (!MONGO_URI) {
       console.warn("⚠️ MONGO_URI environment variable is not defined. Skipping database connection.");
@@ -37,11 +26,9 @@ class GenerateUSVIN {
   async performAs(actor) {
     let generatedVin = null;
     try {
-      if (this.method === 'mongo') {
-        generatedVin = await GenerateUSVIN.getVinFromMongo();
-      }
+      generatedVin = await GenerateUSVIN.getVinFromMongo();
     } catch (e) {
-      console.warn(`⚠️ VIN retrieval via ${this.method} failed: ${e.message}. Falling back to default VIN.`);
+      console.warn(`⚠️ VIN retrieval from MongoDB failed: ${e.message}. Falling back to default VIN.`);
     }
     
     // Fallback to specific fallback VIN if Mongo retrieval fails
@@ -51,7 +38,7 @@ class GenerateUSVIN {
     }
     
     actor.usVin = generatedVin;
-    console.log(`US VIN generated and set on actor: ${actor.usVin}`);
+    console.log("US VIN generated and set on actor:", actor.usVin);
   }
 }
 
