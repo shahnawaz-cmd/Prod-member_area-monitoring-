@@ -92,6 +92,14 @@ class ClassicMappedSticker {
       const genData = await generateRes.json().catch(() => ({}));
       console.log("📥 GenerateClassicSticker API Response Status:", genData.status);
     }
+
+    // Handle "Sticker Already Exists" popup if the sticker has been generated in a prior run
+    const viewStickerBtn = page.getByRole('button', { name: 'View Sticker' });
+    await page.waitForTimeout(3000);
+    if (await viewStickerBtn.isVisible().catch(() => false)) {
+      console.log("Modal 'Sticker Already Exists' detected. Clicking 'View Sticker'...");
+      await viewStickerBtn.click();
+    }
   }
 }
 

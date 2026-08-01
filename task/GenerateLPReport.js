@@ -59,6 +59,14 @@ class GenerateLPReport {
     console.log("Awaiting Report generation API response...");
     await generatePromise;
     console.log("License Plate Report generation APIs resolved successfully.");
+
+    // Handle "Whoops.. Already generated" duplication state by manually redirecting to my-reports
+    const alreadyGeneratedText = page.getByText(/Whoops\.\. Already generated/i);
+    await page.waitForTimeout(3000);
+    if (await alreadyGeneratedText.isVisible().catch(() => false)) {
+      console.log("Detecting 'Already Generated' message. Statically navigating to My Reports...");
+      await page.goto(`${actor.baseUrl}/my-reports`, { waitUntil: 'domcontentloaded' });
+    }
   }
 }
 
