@@ -4,8 +4,8 @@
       "C:\\Program Files\\nodejs\\node.exe",
       "C:\\Users\\Shahnawaz\\Desktop\\PROD STABILITY MONITOR\\Member area monitoring\\node_modules\\@playwright\\test\\cli.js",
       "test",
-      "-g",
-      "Classic Unmapped",
+      "--project=sticker-setup",
+      "--project=sticker-mobile-safari",
       "--headed"
     ],
     "configFile": "C:\\Users\\Shahnawaz\\Desktop\\PROD STABILITY MONITOR\\Member area monitoring\\playwright.config.js",
@@ -55,6 +55,38 @@
           "/global_flow\\.spec\\.js/"
         ],
         "timeout": 5400000
+      },
+      {
+        "outputDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "sticker-setup",
+        "name": "sticker-setup",
+        "testDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test",
+        "testIgnore": [],
+        "testMatch": [
+          "/sticker_flow\\.setup\\.js/"
+        ],
+        "timeout": 5400000
+      },
+      {
+        "outputDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "sticker-mobile-safari",
+        "name": "sticker-mobile-safari",
+        "testDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test",
+        "testIgnore": [],
+        "testMatch": [
+          "/sticker_flow\\.spec\\.js/"
+        ],
+        "timeout": 5400000
       }
     ],
     "quiet": false,
@@ -86,13 +118,13 @@
   },
   "suites": [
     {
-      "title": "global_flow.setup.js",
-      "file": "global_flow.setup.js",
+      "title": "sticker_flow.setup.js",
+      "file": "sticker_flow.setup.js",
       "column": 0,
       "line": 0,
       "specs": [
         {
-          "title": "Setup Session — Full Signup, Plan Selection, and Purchase Flow",
+          "title": "Setup Session — Window Sticker Signup and Purchase Flow",
           "ok": true,
           "tags": [],
           "tests": [
@@ -100,14 +132,14 @@
               "timeout": 300000,
               "annotations": [],
               "expectedStatus": "passed",
-              "projectId": "setup",
-              "projectName": "setup",
+              "projectId": "sticker-setup",
+              "projectName": "sticker-setup",
               "results": [
                 {
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 46168,
+                  "duration": 68190,
                   "errors": [],
                   "stdout": [
                     {
@@ -132,16 +164,22 @@
                       "text": "Setting up listener for: license_plate_decode\n"
                     },
                     {
+                      "text": "Setting up listener for: generate_sticker\n"
+                    },
+                    {
+                      "text": "Setting up listener for: generate-sticker\n"
+                    },
+                    {
                       "text": "API listeners attached with report attachments (one-time capture).\n"
                     },
                     {
                       "text": "Base URL configured to: https://members.vehiclehistory.report/members\n"
                     },
                     {
-                      "text": "Generated unique email: test_sfkb@tms9nxrzs.com\n"
+                      "text": "Generated unique email: sticker_9tj1@tms9p9c1h.com\n"
                     },
                     {
-                      "text": "Generated unique password: Pass_sfkbms9nxrzs!\n"
+                      "text": "Generated unique password: Pass_9tj1ms9p9c1h!\n"
                     },
                     {
                       "text": "Navigating to Signup URL: https://members.vehiclehistory.report/members/signup (Timeout: 60000ms)\n"
@@ -156,10 +194,16 @@
                       "text": "Mobile view detected, opening side navigation...\n"
                     },
                     {
-                      "text": "Locating the highest report package option available on the page...\n"
+                      "text": "Locating the highest sticker package option available on the page...\n"
                     },
                     {
-                      "text": "Found and selecting plan matching pattern: /10\\s*Reports/i\n"
+                      "text": "Waiting for plan cards to render...\n"
+                    },
+                    {
+                      "text": "⚠️ Timeout waiting for '25 Stickers' card to render. Proceeding to scan remaining plans...\n"
+                    },
+                    {
+                      "text": "Found and selecting plan matching pattern: /10\\s*Stickers/i\n"
                     },
                     {
                       "text": "Clicked 'Proceed' button.\n"
@@ -183,29 +227,29 @@
                       "text": "📥 Intercepted and saved API Response payload for: /api-cwa/payment-update\n"
                     },
                     {
-                      "text": "Successfully redirected to: https://members.vehiclehistory.report/members/dashboard#vehicle-history-report\n"
+                      "text": "Successfully redirected to: https://members.vehiclehistory.report/members/dashboard#window-sticker\n"
                     },
                     {
-                      "text": "Global setup flow completed successfully. Saving session state...\n"
+                      "text": "Sticker setup flow completed successfully. Saving session state...\n"
                     },
                     {
-                      "text": "Session state saved to state.json.\n"
+                      "text": "Session state saved to sticker_state.json.\n"
                     }
                   ],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-01T00:58:37.250Z",
+                  "startTime": "2026-08-01T01:35:36.028Z",
                   "annotations": [],
                   "attachments": [
                     {
                       "name": "search-page.json",
                       "contentType": "application/json",
-                      "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidmhyX2NyZWRpdCI6IDAsCiAgICAicHJvZmlsZSI6IHsKICAgICAgImlkIjogIjUxMzE5MyIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2ZDQ0YzI1YTFhYSIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogIiIsCiAgICAgICJhY2NvdW50X3R5cGUiOiAicGVyc29uYWwiLAogICAgICAidXNlcl90eXBlIjogInVzZXIiLAogICAgICAiYnVzaW5lc3NfdHlwZSI6IG51bGwsCiAgICAgICJ0b2tlbiI6ICJCREEyQkRBMi01NDU0LTE5QTEtOEY0OS1BQkU2NDFFNzVDNTEiLAogICAgICAiZW1haWwiOiAidGVzdF9zZmtiQHRtczlueHJ6cy5jb20iLAogICAgICAiZmlyc3QiOiAiIiwKICAgICAgImxhc3QiOiAiIiwKICAgICAgImFkZHJlc3MiOiAiIiwKICAgICAgInBob25lIjogIiIsCiAgICAgICJjb21wYW55X25hbWUiOiBudWxsLAogICAgICAiY29tcGFueV93ZWJzaXRlIjogbnVsbCwKICAgICAgImluc3RhZ3JhbSI6IG51bGwsCiAgICAgICJmYWNlYm9vayI6IG51bGwsCiAgICAgICJ0d2l0dGVyIjogbnVsbCwKICAgICAgImNpdHkiOiAiIiwKICAgICAgInN0YXRlIjogIklzbGFtYWJhZCAoSCA5LzEpIiwKICAgICAgImNvdW50cnkiOiAiUEsiLAogICAgICAicGluY29kZSI6ICIwIiwKICAgICAgIm5vX29mX2VtcGxveWVlcyI6IG51bGwsCiAgICAgICJjZHQiOiAiMjAyNi0wNy0zMSAyMDo1ODo0MiIKICAgIH0sCiAgICAidmhyX2NyZWRpdF9zdWJzY3JpcHRpb24iOiAwLAogICAgInN0aWNrZXJfY3JlZGl0IjogMCwKICAgICJhdWN0aW9uX2NyZWRpdCI6IDAKICB9Cn0="
+                      "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidmhyX2NyZWRpdCI6IDAsCiAgICAicHJvZmlsZSI6IHsKICAgICAgImlkIjogIjUxMzIwMCIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2ZDRkNmM5ZTk1YSIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogIiIsCiAgICAgICJhY2NvdW50X3R5cGUiOiAicGVyc29uYWwiLAogICAgICAidXNlcl90eXBlIjogInVzZXIiLAogICAgICAiYnVzaW5lc3NfdHlwZSI6IG51bGwsCiAgICAgICJ0b2tlbiI6ICJBRDlDQUQ5Qy0zOTM5LTAyMEUtMUIxNi1CM0Q4Q0ZFOTYwMjAiLAogICAgICAiZW1haWwiOiAic3RpY2tlcl85dGoxQHRtczlwOWMxaC5jb20iLAogICAgICAiZmlyc3QiOiAiIiwKICAgICAgImxhc3QiOiAiIiwKICAgICAgImFkZHJlc3MiOiAiIiwKICAgICAgInBob25lIjogIiIsCiAgICAgICJjb21wYW55X25hbWUiOiBudWxsLAogICAgICAiY29tcGFueV93ZWJzaXRlIjogbnVsbCwKICAgICAgImluc3RhZ3JhbSI6IG51bGwsCiAgICAgICJmYWNlYm9vayI6IG51bGwsCiAgICAgICJ0d2l0dGVyIjogbnVsbCwKICAgICAgImNpdHkiOiAiIiwKICAgICAgInN0YXRlIjogIklzbGFtYWJhZCAoSCA5LzEpIiwKICAgICAgImNvdW50cnkiOiAiUEsiLAogICAgICAicGluY29kZSI6ICIwIiwKICAgICAgIm5vX29mX2VtcGxveWVlcyI6IG51bGwsCiAgICAgICJjZHQiOiAiMjAyNi0wNy0zMSAyMTozNTo0MSIKICAgIH0sCiAgICAidmhyX2NyZWRpdF9zdWJzY3JpcHRpb24iOiAwLAogICAgInN0aWNrZXJfY3JlZGl0IjogMCwKICAgICJhdWN0aW9uX2NyZWRpdCI6IDAKICB9Cn0="
                     },
                     {
                       "name": "payment-update.json",
                       "contentType": "application/json",
-                      "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidXNlciI6IHsKICAgICAgImlkIjogIjUxMzE5MyIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2ZDQ0YzI1YTFhYSIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogbnVsbCwKICAgICAgImFjY291bnRfdHlwZSI6ICJwZXJzb25hbCIsCiAgICAgICJ1c2VyX3R5cGUiOiAidXNlciIsCiAgICAgICJidXNpbmVzc190eXBlIjogbnVsbCwKICAgICAgInRva2VuIjogIkJEQTJCREEyLTU0NTQtMTlBMS04RjQ5LUFCRTY0MUU3NUM1MSIsCiAgICAgICJlbWFpbCI6ICJ0ZXN0X3Nma2JAdG1zOW54cnpzLmNvbSIsCiAgICAgICJmaXJzdCI6ICIiLAogICAgICAibGFzdCI6ICIiLAogICAgICAiYWRkcmVzcyI6ICIiLAogICAgICAicGhvbmUiOiAiIiwKICAgICAgImNvbXBhbnlfbmFtZSI6IG51bGwsCiAgICAgICJjb21wYW55X3dlYnNpdGUiOiBudWxsLAogICAgICAiaW5zdGFncmFtIjogbnVsbCwKICAgICAgImZhY2Vib29rIjogbnVsbCwKICAgICAgInR3aXR0ZXIiOiBudWxsLAogICAgICAiY2l0eSI6ICIiLAogICAgICAic3RhdGUiOiAiSXNsYW1hYmFkIChIIDkvMSkiLAogICAgICAiY291bnRyeSI6ICJQSyIsCiAgICAgICJwaW5jb2RlIjogIjAiLAogICAgICAibm9fb2ZfZW1wbG95ZWVzIjogbnVsbCwKICAgICAgImNkdCI6ICIyMDI2LTA3LTMxIDIwOjU4OjQyIgogICAgfSwKICAgICJwYWdlIjogInNlYXJjaCIsCiAgICAidmluIjogIkNSRURJVCIsCiAgICAidmhyX2NyZWRpdCI6IDEwLAogICAgInZocl9jcmVkaXRfc3Vic2NyaXB0aW9uIjogMCwKICAgICJzdGlja2VyX2NyZWRpdCI6IDAsCiAgICAiYXVjdGlvbl9jcmVkaXQiOiAwCiAgfQp9"
+                      "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidXNlciI6IHsKICAgICAgImlkIjogIjUxMzIwMCIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2ZDRkNmM5ZTk1YSIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogbnVsbCwKICAgICAgImFjY291bnRfdHlwZSI6ICJwZXJzb25hbCIsCiAgICAgICJ1c2VyX3R5cGUiOiAidXNlciIsCiAgICAgICJidXNpbmVzc190eXBlIjogbnVsbCwKICAgICAgInRva2VuIjogIkFEOUNBRDlDLTM5MzktMDIwRS0xQjE2LUIzRDhDRkU5NjAyMCIsCiAgICAgICJlbWFpbCI6ICJzdGlja2VyXzl0ajFAdG1zOXA5YzFoLmNvbSIsCiAgICAgICJmaXJzdCI6ICIiLAogICAgICAibGFzdCI6ICIiLAogICAgICAiYWRkcmVzcyI6ICIiLAogICAgICAicGhvbmUiOiAiIiwKICAgICAgImNvbXBhbnlfbmFtZSI6IG51bGwsCiAgICAgICJjb21wYW55X3dlYnNpdGUiOiBudWxsLAogICAgICAiaW5zdGFncmFtIjogbnVsbCwKICAgICAgImZhY2Vib29rIjogbnVsbCwKICAgICAgInR3aXR0ZXIiOiBudWxsLAogICAgICAiY2l0eSI6ICIiLAogICAgICAic3RhdGUiOiAiSXNsYW1hYmFkIChIIDkvMSkiLAogICAgICAiY291bnRyeSI6ICJQSyIsCiAgICAgICJwaW5jb2RlIjogIjAiLAogICAgICAibm9fb2ZfZW1wbG95ZWVzIjogbnVsbCwKICAgICAgImNkdCI6ICIyMDI2LTA3LTMxIDIxOjM1OjQxIgogICAgfSwKICAgICJwYWdlIjogInN0aWNrZXIiLAogICAgInZpbiI6ICJDUkVESVQiLAogICAgInZocl9jcmVkaXQiOiBudWxsLAogICAgInZocl9jcmVkaXRfc3Vic2NyaXB0aW9uIjogMCwKICAgICJzdGlja2VyX2NyZWRpdCI6IDEwLAogICAgImF1Y3Rpb25fY3JlZGl0IjogMAogIH0KfQ=="
                     }
                   ]
                 }
@@ -213,28 +257,28 @@
               "status": "expected"
             }
           ],
-          "id": "7b25eb415c3688f67989-eac2dec3b5888af0b7f7",
-          "file": "global_flow.setup.js",
+          "id": "003ff80f0b75e7e6c584-ab3eb471942937287f09",
+          "file": "sticker_flow.setup.js",
           "line": 11,
           "column": 1
         }
       ]
     },
     {
-      "title": "global_flow.spec.js",
-      "file": "global_flow.spec.js",
+      "title": "sticker_flow.spec.js",
+      "file": "sticker_flow.spec.js",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "Global Member Area Report Generation Flow",
-          "file": "global_flow.spec.js",
-          "line": 16,
+          "title": "Global Window Sticker Generation Flow",
+          "file": "sticker_flow.spec.js",
+          "line": 7,
           "column": 6,
           "specs": [
             {
-              "title": "CS-06 — Classic Unmapped VIN Report Generation",
+              "title": "CS-01 — Reverse Decode (motorcycle, ATV, Sticker generate)",
               "ok": true,
               "tags": [],
               "tests": [
@@ -242,14 +286,14 @@
                   "timeout": 300000,
                   "annotations": [],
                   "expectedStatus": "passed",
-                  "projectId": "mobile-safari",
-                  "projectName": "mobile-safari",
+                  "projectId": "sticker-mobile-safari",
+                  "projectName": "sticker-mobile-safari",
                   "results": [
                     {
                       "workerIndex": 1,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 190209,
+                      "duration": 55813,
                       "errors": [],
                       "stdout": [
                         {
@@ -274,107 +318,10 @@
                           "text": "Setting up listener for: license_plate_decode\n"
                         },
                         {
-                          "text": "API listeners attached with report attachments (one-time capture).\n"
+                          "text": "Setting up listener for: generate_sticker\n"
                         },
                         {
-                          "text": "Base URL configured to: https://members.vehiclehistory.report/members\n"
-                        },
-                        {
-                          "text": "Navigating directly to Dashboard...\n"
-                        },
-                        {
-                          "text": "Generated randomized Classic Unmapped VIN: 245GH4155334\n"
-                        },
-                        {
-                          "text": "Waiting 5 seconds for page stabilization...\n"
-                        },
-                        {
-                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/search-page\n"
-                        },
-                        {
-                          "text": "Clicked 'Get Vehicle History' button.\n"
-                        },
-                        {
-                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/generate-report\n"
-                        },
-                        {
-                          "text": "📥 Generate-Report Response: {\n  \"status\": \"error\",\n  \"type\": \"error\",\n  \"msg\": \"Whoops.. Cannot autogenerate report for this classic vin.\"\n}\n"
-                        },
-                        {
-                          "text": "Detected autogenerate error. Selecting dropdown values...\n"
-                        },
-                        {
-                          "text": "Clicked 'Get Vehicle History' button after selecting dropdown values.\n"
-                        },
-                        {
-                          "text": "Classic Unmapped VIN report generation completed successfully.\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-08-01T00:59:26.590Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "search-page.json",
-                          "contentType": "application/json",
-                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidmhyX2NyZWRpdCI6IDEwLAogICAgInByb2ZpbGUiOiB7CiAgICAgICJpZCI6ICI1MTMxOTMiLAogICAgICAidHJhY2tpbmdfaWQiOiAiVVNFUjZhNmQ0NGMyNWExYWEiLAogICAgICAicHJvZmlsZV9pbWFnZSI6ICIiLAogICAgICAiYWNjb3VudF90eXBlIjogInBlcnNvbmFsIiwKICAgICAgInVzZXJfdHlwZSI6ICJ1c2VyIiwKICAgICAgImJ1c2luZXNzX3R5cGUiOiBudWxsLAogICAgICAidG9rZW4iOiAiQkRBMkJEQTItNTQ1NC0xOUExLThGNDktQUJFNjQxRTc1QzUxIiwKICAgICAgImVtYWlsIjogInRlc3Rfc2ZrYkB0bXM5bnhyenMuY29tIiwKICAgICAgImZpcnN0IjogIiIsCiAgICAgICJsYXN0IjogIiIsCiAgICAgICJhZGRyZXNzIjogIiIsCiAgICAgICJwaG9uZSI6ICIiLAogICAgICAiY29tcGFueV9uYW1lIjogbnVsbCwKICAgICAgImNvbXBhbnlfd2Vic2l0ZSI6IG51bGwsCiAgICAgICJpbnN0YWdyYW0iOiBudWxsLAogICAgICAiZmFjZWJvb2siOiBudWxsLAogICAgICAidHdpdHRlciI6IG51bGwsCiAgICAgICJjaXR5IjogIiIsCiAgICAgICJzdGF0ZSI6ICJJc2xhbWFiYWQgKEggOS8xKSIsCiAgICAgICJjb3VudHJ5IjogIlBLIiwKICAgICAgInBpbmNvZGUiOiAiMCIsCiAgICAgICJub19vZl9lbXBsb3llZXMiOiBudWxsLAogICAgICAiY2R0IjogIjIwMjYtMDctMzEgMjA6NTg6NDIiCiAgICB9LAogICAgInZocl9jcmVkaXRfc3Vic2NyaXB0aW9uIjogMCwKICAgICJzdGlja2VyX2NyZWRpdCI6IDAsCiAgICAiYXVjdGlvbl9jcmVkaXQiOiAwCiAgfQp9"
-                        },
-                        {
-                          "name": "generate-report.json",
-                          "contentType": "application/json",
-                          "body": "ewogICJzdGF0dXMiOiAiZXJyb3IiLAogICJ0eXBlIjogImVycm9yIiwKICAibXNnIjogIldob29wcy4uIENhbm5vdCBhdXRvZ2VuZXJhdGUgcmVwb3J0IGZvciB0aGlzIGNsYXNzaWMgdmluLiIKfQ=="
-                        }
-                      ]
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "33d8e9c5e66333882a2a-fe6649124d6f5989f08f",
-              "file": "global_flow.spec.js",
-              "line": 127,
-              "column": 3
-            },
-            {
-              "title": "CS-07 — Classic unmapped (using manual input)",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 300000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "mobile-safari",
-                  "projectName": "mobile-safari",
-                  "results": [
-                    {
-                      "workerIndex": 1,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 117967,
-                      "errors": [],
-                      "stdout": [
-                        {
-                          "text": "Setting up listener for: /api-cwa/search-page\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/payment-update\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/vin-validate\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/generate-report\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/generate_uvc_report\n"
-                        },
-                        {
-                          "text": "Setting up listener for: cancel-subscription\n"
-                        },
-                        {
-                          "text": "Setting up listener for: license_plate_decode\n"
+                          "text": "Setting up listener for: generate-sticker\n"
                         },
                         {
                           "text": "API listeners attached with report attachments (one-time capture).\n"
@@ -389,41 +336,40 @@
                           "text": "📥 Intercepted and saved API Response payload for: /api-cwa/search-page\n"
                         },
                         {
-                          "text": "Generated randomized Classic Unmapped VIN (Manual): 245GH4150448\n"
+                          "text": "Starting Reverse Decode / Sticker Generate for VIN: 5SAAK4CK2E7101013\n"
                         },
                         {
-                          "text": "Waiting 5 seconds for page stabilization...\n"
+                          "text": "Clicked 'Get Window Sticker' button.\n"
                         },
                         {
-                          "text": "Clicked 'Get Vehicle History' button.\n"
+                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/vin-validate\n"
                         },
                         {
-                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/generate-report\n"
+                          "text": "📥 Intercepted and saved API Response payload for: generate-sticker\n"
                         },
                         {
-                          "text": "📥 Generate-Report Response: {\n  \"status\": \"error\",\n  \"type\": \"error\",\n  \"msg\": \"Whoops.. Cannot autogenerate report for this classic vin.\"\n}\n"
-                        },
-                        {
-                          "text": "Detected autogenerate error. Proceeding with manual entry flow.\n"
-                        },
-                        {
-                          "text": "Classic Unmapped VIN report (manual input) completed successfully.\n"
+                          "text": "Window sticker reverse decode generation completed successfully.\n"
                         }
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-08-01T01:02:37.016Z",
+                      "startTime": "2026-08-01T01:36:46.239Z",
                       "annotations": [],
                       "attachments": [
                         {
                           "name": "search-page.json",
                           "contentType": "application/json",
-                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidmhyX2NyZWRpdCI6IDksCiAgICAicHJvZmlsZSI6IHsKICAgICAgImlkIjogIjUxMzE5MyIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2ZDQ0YzI1YTFhYSIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogIiIsCiAgICAgICJhY2NvdW50X3R5cGUiOiAicGVyc29uYWwiLAogICAgICAidXNlcl90eXBlIjogInVzZXIiLAogICAgICAiYnVzaW5lc3NfdHlwZSI6IG51bGwsCiAgICAgICJ0b2tlbiI6ICJCREEyQkRBMi01NDU0LTE5QTEtOEY0OS1BQkU2NDFFNzVDNTEiLAogICAgICAiZW1haWwiOiAidGVzdF9zZmtiQHRtczlueHJ6cy5jb20iLAogICAgICAiZmlyc3QiOiAiIiwKICAgICAgImxhc3QiOiAiIiwKICAgICAgImFkZHJlc3MiOiAiIiwKICAgICAgInBob25lIjogIiIsCiAgICAgICJjb21wYW55X25hbWUiOiBudWxsLAogICAgICAiY29tcGFueV93ZWJzaXRlIjogbnVsbCwKICAgICAgImluc3RhZ3JhbSI6IG51bGwsCiAgICAgICJmYWNlYm9vayI6IG51bGwsCiAgICAgICJ0d2l0dGVyIjogbnVsbCwKICAgICAgImNpdHkiOiAiIiwKICAgICAgInN0YXRlIjogIklzbGFtYWJhZCAoSCA5LzEpIiwKICAgICAgImNvdW50cnkiOiAiUEsiLAogICAgICAicGluY29kZSI6ICIwIiwKICAgICAgIm5vX29mX2VtcGxveWVlcyI6IG51bGwsCiAgICAgICJjZHQiOiAiMjAyNi0wNy0zMSAyMDo1ODo0MiIKICAgIH0sCiAgICAidmhyX2NyZWRpdF9zdWJzY3JpcHRpb24iOiAwLAogICAgInN0aWNrZXJfY3JlZGl0IjogMCwKICAgICJhdWN0aW9uX2NyZWRpdCI6IDAKICB9Cn0="
+                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidmhyX2NyZWRpdCI6IDAsCiAgICAicHJvZmlsZSI6IHsKICAgICAgImlkIjogIjUxMzIwMCIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2ZDRkNmM5ZTk1YSIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogIiIsCiAgICAgICJhY2NvdW50X3R5cGUiOiAicGVyc29uYWwiLAogICAgICAidXNlcl90eXBlIjogInVzZXIiLAogICAgICAiYnVzaW5lc3NfdHlwZSI6IG51bGwsCiAgICAgICJ0b2tlbiI6ICJBRDlDQUQ5Qy0zOTM5LTAyMEUtMUIxNi1CM0Q4Q0ZFOTYwMjAiLAogICAgICAiZW1haWwiOiAic3RpY2tlcl85dGoxQHRtczlwOWMxaC5jb20iLAogICAgICAiZmlyc3QiOiAiIiwKICAgICAgImxhc3QiOiAiIiwKICAgICAgImFkZHJlc3MiOiAiIiwKICAgICAgInBob25lIjogIiIsCiAgICAgICJjb21wYW55X25hbWUiOiBudWxsLAogICAgICAiY29tcGFueV93ZWJzaXRlIjogbnVsbCwKICAgICAgImluc3RhZ3JhbSI6IG51bGwsCiAgICAgICJmYWNlYm9vayI6IG51bGwsCiAgICAgICJ0d2l0dGVyIjogbnVsbCwKICAgICAgImNpdHkiOiAiIiwKICAgICAgInN0YXRlIjogIklzbGFtYWJhZCAoSCA5LzEpIiwKICAgICAgImNvdW50cnkiOiAiUEsiLAogICAgICAicGluY29kZSI6ICIwIiwKICAgICAgIm5vX29mX2VtcGxveWVlcyI6IG51bGwsCiAgICAgICJjZHQiOiAiMjAyNi0wNy0zMSAyMTozNTo0MSIKICAgIH0sCiAgICAidmhyX2NyZWRpdF9zdWJzY3JpcHRpb24iOiAwLAogICAgInN0aWNrZXJfY3JlZGl0IjogMTAsCiAgICAiYXVjdGlvbl9jcmVkaXQiOiAwCiAgfQp9"
                         },
                         {
-                          "name": "generate-report.json",
+                          "name": "vin-validate.json",
                           "contentType": "application/json",
-                          "body": "ewogICJzdGF0dXMiOiAiZXJyb3IiLAogICJ0eXBlIjogImVycm9yIiwKICAibXNnIjogIldob29wcy4uIENhbm5vdCBhdXRvZ2VuZXJhdGUgcmVwb3J0IGZvciB0aGlzIGNsYXNzaWMgdmluLiIKfQ=="
+                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAiaW5kaWdvIjogZmFsc2UsCiAgICAidmluZGVjaXBoZXIiOiB0cnVlLAogICAgInZwaWMiOiBmYWxzZSwKICAgICJldXJvcGUiOiBmYWxzZSwKICAgICJkZWVwbWluZCI6IGZhbHNlCiAgfQp9"
+                        },
+                        {
+                          "name": "generate-sticker.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgInJlZGlyZWN0IjogIm15X3JlcG9ydHMiCn0="
                         }
                       ]
                     }
@@ -431,9 +377,9 @@
                   "status": "expected"
                 }
               ],
-              "id": "33d8e9c5e66333882a2a-b721649eeaf322779427",
-              "file": "global_flow.spec.js",
-              "line": 153,
+              "id": "a956471b4d38c23c3243-fc1e6ae0a1dfbf359dcb",
+              "file": "sticker_flow.spec.js",
+              "line": 8,
               "column": 3
             }
           ]
@@ -443,9 +389,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-08-01T00:58:34.107Z",
-    "duration": 361156.11,
-    "expected": 3,
+    "startTime": "2026-08-01T01:35:34.024Z",
+    "duration": 128546.78099999999,
+    "expected": 2,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

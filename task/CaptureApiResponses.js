@@ -9,7 +9,9 @@ class CaptureApiResponses {
       '/api-cwa/generate-report',
       '/api-cwa/generate_uvc_report',
       'cancel-subscription',
-      'license_plate_decode'
+      'license_plate_decode',
+      'generate_sticker',
+      'generate-sticker'
     ];
   }
 

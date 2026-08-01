@@ -1,0 +1,173 @@
+{
+  "cookies": [
+    {
+      "name": "cwa_ip",
+      "value": "182.189.64.167",
+      "domain": "members.vehiclehistory.report",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "_clck",
+      "value": "afnmea%5E2%5Eg88%5E0%5E2404",
+      "domain": ".vehiclehistory.report",
+      "path": "/",
+      "expires": 1817084141,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "None"
+    },
+    {
+      "name": "PHPSESSID",
+      "value": "ls1p1ohebht6jo0c3uarhnp1as",
+      "domain": "members.vehiclehistory.report",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "None"
+    },
+    {
+      "name": "_ga",
+      "value": "GA1.1.664278910.1785548142",
+      "domain": ".vehiclehistory.report",
+      "path": "/",
+      "expires": 1848620147,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "None"
+    },
+    {
+      "name": "_un_usId_",
+      "value": "id-s7akgv6v1k-1785548178457",
+      "domain": "members.vehiclehistory.report",
+      "path": "/",
+      "expires": 2101167378,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "None"
+    },
+    {
+      "name": "_clsk",
+      "value": "1qiviqk%5E1785548193350%5E5%5E1%5Eg.clarity.ms%2Fcollect",
+      "domain": ".vehiclehistory.report",
+      "path": "/",
+      "expires": 1785634593,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "None"
+    },
+    {
+      "name": "_ga_5WFMXHNWQ5",
+      "value": "GS2.1.s1785548141$o1$g1$t1785548193$j8$l0$h0",
+      "domain": ".vehiclehistory.report",
+      "path": "/",
+      "expires": 1848620193,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "None"
+    },
+    {
+      "name": "__stripe_mid",
+      "value": "debc4e76-0ac3-4cc0-963b-d11c7ebc676347563d",
+      "domain": ".members.vehiclehistory.report",
+      "path": "/",
+      "expires": 1817084194,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "__stripe_sid",
+      "value": "a6896198-91bb-4ee5-967b-bfc66c0ededac6dbca",
+      "domain": ".members.vehiclehistory.report",
+      "path": "/",
+      "expires": 1785549994,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "token",
+      "value": "AD9CAD9C-3939-020E-1B16-B3D8CFE96020",
+      "domain": "members.vehiclehistory.report",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "None"
+    },
+    {
+      "name": "id",
+      "value": "513200",
+      "domain": "members.vehiclehistory.report",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "None"
+    },
+    {
+      "name": "email",
+      "value": "sticker_9tj1%40tms9p9c1h.com",
+      "domain": "members.vehiclehistory.report",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "None"
+    },
+    {
+      "name": "tracking_id",
+      "value": "USER6a6d4d6c9e95a",
+      "domain": "members.vehiclehistory.report",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "None"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://members.vehiclehistory.report",
+      "localStorage": [
+        {
+          "name": "user",
+          "value": "{\"user\":{\"id\":\"513200\",\"tracking_id\":\"USER6a6d4d6c9e95a\",\"profile_image\":null,\"account_type\":\"personal\",\"user_type\":\"user\",\"business_type\":null,\"token\":\"AD9CAD9C-3939-020E-1B16-B3D8CFE96020\",\"email\":\"sticker_9tj1@tms9p9c1h.com\",\"first\":\"\",\"last\":\"\",\"address\":\"\",\"phone\":\"\",\"company_name\":null,\"company_website\":null,\"instagram\":null,\"facebook\":null,\"twitter\":null,\"city\":\"\",\"state\":\"Islamabad (H 9/1)\",\"country\":\"PK\",\"pincode\":\"0\",\"no_of_employees\":null,\"cdt\":\"2026-07-31 21:35:41\"}}"
+        },
+        {
+          "name": "config",
+          "value": "\"eyJzYW1wbGVSZXBvcnQiOiJodHRwczovL3ZlaGljbGVoaXN0b3J5LnJlcG9ydC9yZXBvcnQvdmluLzFIR0ZBMTU1NDdMMTE2ODgwIiwic2FtcGxlU3RpY2tlciI6Imh0dHBzOi8vdmVoaWNsZWhpc3RvcnkucmVwb3J0L3N0aWNrZXIvdmluLzFHTkFMRkVLMURaMTM0MDgxLTAyREIwMkRCLUM0QzQtODE4Mi05RTQxLTczNEEzQjRFMDQyMiJ9\""
+        },
+        {
+          "name": "site_settings",
+          "value": "{\"id\":\"16\",\"security\":\"disabled\",\"clarity\":\"ICAgIChmdW5jdGlvbihjLGwsYSxyLGksdCx5KXsKICAgICAgICBjW2FdPWNbYV18fGZ1bmN0aW9uKCl7KGNbYV0ucT1jW2FdLnF8fFtdKS5wdXNoKGFyZ3VtZW50cyl9OwogICAgICAgIHQ9bC5jcmVhdGVFbGVtZW50KHIpO3QuYXN5bmM9MTt0LnNyYz0iaHR0cHM6Ly93d3cuY2xhcml0eS5tcy90YWcvIitpOwogICAgICAgIHk9bC5nZXRFbGVtZW50c0J5VGFnTmFtZShyKVswXTt5LnBhcmVudE5vZGUuaW5zZXJ0QmVmb3JlKHQseSk7CiAgICB9KSh3aW5kb3csIGRvY3VtZW50LCAiY2xhcml0eSIsICJzY3JpcHQiLCAiYTI0NWs1bXExeSIpOwo=\",\"cwa_memberarea_pixel\":\"\",\"domain\":\"vehiclehistory.report\",\"sname\":\"VHR\",\"site_name\":\"VHR\",\"member_area\":\"member1_new\",\"member_area_preview\":\"cwampv_proxy\",\"phone_number\":\"(800) 674-9846\",\"url\":\"https://vehiclehistory.report/\",\"logo\":\"https://vehiclehistory.report/public/images/logo/image126.png\",\"secondary_logo\":\"https://vehiclehistory.report/public/images/logo/\",\"currency\":\"USD\",\"subscription_gateway\":\"allgateway\",\"payment_gateway\":\"allgateway\",\"report_coupon_start\":\"1\",\"report_coupon_end\":\"60\",\"sticker_coupon_start\":\"10\",\"sticker_coupon_end\":\"60\",\"primary_color\":\"#07419e\",\"secondary_color\":\"#7a2133\",\"teritary_color\":\"#061F5C\",\"language\":\"english\",\"firebase_login\":\"disabled\",\"paypal_email\":\"sb-ttwb4726772661@business.example.com\",\"site_email\":\"support@carmax.com\",\"signup_option\":\"1\",\"google_analytics\":\"G-5WFMXHNWQ5\",\"google_analytics_api\":\"\",\"google_tag\":\"GTM-N9P7R8W\",\"default_plan\":{\"id\":\"94\",\"name\":\"Basic\",\"code\":\"VHR1\",\"price\":\"25\",\"nos\":\"1\",\"gumroad\":\"VHR1\",\"total\":\"25\",\"type\":\"report\",\"currency_sign\":\"$\",\"currency_code\":\"USD\",\"c_id\":\"16\"},\"default_ws_plan\":{\"id\":\"563\",\"name\":\"Basic\",\"code\":\"VHRST1\",\"price\":\"25\",\"nos\":\"1\",\"gumroad\":\"VHRBL\",\"total\":\"25\",\"type\":\"sticker\",\"currency_sign\":\"$\",\"currency_code\":\"USD\",\"c_id\":\"16\"},\"theme\":\"v26\",\"classic_report_theme\":\"v10\",\"preview_page\":\"preview28_B\",\"checkout_flow\":\"non_streaming\",\"license_preview_page\":\"preview27_license\",\"ws_preview_page\":\"preview27\",\"credit_type\":\"restricted\",\"sample_report\":\"https://vehiclehistory.report/report/vin/2T1BURHE0FC320645\",\"sample_sticker\":\"https://vehiclehistory.report/sticker/vin/1GNALFEK1DZ134081-76267626-4848-F07A-DC46-290273643B8F\",\"address\":\"\",\"sticker_preview_page_checkbox_type\":\"single_sticker\",\"sticker_preview_page_checkbox_text\":\"Add Sticker to your purchase for just \",\"sticker_preview_page_checkbox_price\":\"10\",\"report_preview_page_checkbox_type\":\"single_report\",\"report_preview_page_checkbox_text\":\"Get history report \",\"report_preview_page_checkbox_price\":\"15\"}"
+        },
+        {
+          "name": "__secu_id",
+          "value": "true"
+        },
+        {
+          "name": "logged_in",
+          "value": "true"
+        },
+        {
+          "name": "credits",
+          "value": "{\"global\":0,\"vhr\":0,\"sticker\":10}"
+        },
+        {
+          "name": "user_settings",
+          "value": "{\"user\":{\"id\":\"513200\",\"tracking_id\":\"USER6a6d4d6c9e95a\",\"profile_image\":null,\"account_type\":\"personal\",\"user_type\":\"user\",\"business_type\":null,\"token\":\"AD9CAD9C-3939-020E-1B16-B3D8CFE96020\",\"email\":\"sticker_9tj1@tms9p9c1h.com\",\"first\":\"\",\"last\":\"\",\"address\":\"\",\"phone\":\"\",\"company_name\":null,\"company_website\":null,\"instagram\":null,\"facebook\":null,\"twitter\":null,\"city\":\"\",\"state\":\"Islamabad (H 9/1)\",\"country\":\"PK\",\"pincode\":\"0\",\"no_of_employees\":null,\"cdt\":\"2026-07-31 21:35:41\"},\"page\":\"sticker\",\"vin\":\"CREDIT\",\"vhr_credit\":null,\"vhr_credit_subscription\":0,\"sticker_credit\":10,\"auction_credit\":0}"
+        },
+        {
+          "name": "subscriptions",
+          "value": "{\"vhr\":false,\"sticker\":false,\"vhr_credit_subscription\":0,\"uvc_credit\":null}"
+        }
+      ]
+    }
+  ]
+}

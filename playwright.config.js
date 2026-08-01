@@ -30,5 +30,21 @@ module.exports = defineConfig({
       },
       dependencies: ['setup'], // Wait for setup to finish
     },
+    // 3. Sticker Setup Project (runs sticker_flow.setup.js to generate sticker_state.json)
+    {
+      name: 'sticker-setup',
+      testMatch: /sticker_flow\.setup\.js/,
+      use: { ...devices['iPhone 13'] },
+    },
+    // 4. Sticker Main Project (runs sticker_flow.spec.js in parallel loading sticker_state.json)
+    {
+      name: 'sticker-mobile-safari',
+      testMatch: /sticker_flow\.spec\.js/,
+      use: {
+        ...devices['iPhone 13'],
+        storageState: 'sticker_state.json',
+      },
+      dependencies: ['sticker-setup'],
+    },
   ],
 });
