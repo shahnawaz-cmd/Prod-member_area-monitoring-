@@ -11,7 +11,9 @@ class CaptureApiResponses {
       'cancel-subscription',
       'license_plate_decode',
       'generate_sticker',
-      'generate-sticker'
+      'generate-sticker',
+      'classicmapping',
+      'generate_classic_sticker'
     ];
   }
 

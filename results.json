@@ -4,7 +4,6 @@
       "C:\\Program Files\\nodejs\\node.exe",
       "C:\\Users\\Shahnawaz\\Desktop\\PROD STABILITY MONITOR\\Member area monitoring\\node_modules\\@playwright\\test\\cli.js",
       "test",
-      "--project=sticker-setup",
       "--project=sticker-mobile-safari",
       "--headed"
     ],
@@ -113,7 +112,7 @@
     "updateSnapshots": "missing",
     "updateSourceMethod": "patch",
     "version": "1.62.0",
-    "workers": 1,
+    "workers": 4,
     "webServer": null
   },
   "suites": [
@@ -139,7 +138,7 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 68190,
+                  "duration": 66852,
                   "errors": [],
                   "stdout": [
                     {
@@ -170,16 +169,22 @@
                       "text": "Setting up listener for: generate-sticker\n"
                     },
                     {
+                      "text": "Setting up listener for: classicmapping\n"
+                    },
+                    {
+                      "text": "Setting up listener for: generate_classic_sticker\n"
+                    },
+                    {
                       "text": "API listeners attached with report attachments (one-time capture).\n"
                     },
                     {
                       "text": "Base URL configured to: https://members.vehiclehistory.report/members\n"
                     },
                     {
-                      "text": "Generated unique email: sticker_9tj1@tms9p9c1h.com\n"
+                      "text": "Generated unique email: sticker_r0q0@tms9r2ljr.com\n"
                     },
                     {
-                      "text": "Generated unique password: Pass_9tj1ms9p9c1h!\n"
+                      "text": "Generated unique password: Pass_r0q0ms9r2ljr!\n"
                     },
                     {
                       "text": "Navigating to Signup URL: https://members.vehiclehistory.report/members/signup (Timeout: 60000ms)\n"
@@ -238,18 +243,18 @@
                   ],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-01T01:35:36.028Z",
+                  "startTime": "2026-08-01T02:26:21.329Z",
                   "annotations": [],
                   "attachments": [
                     {
                       "name": "search-page.json",
                       "contentType": "application/json",
-                      "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidmhyX2NyZWRpdCI6IDAsCiAgICAicHJvZmlsZSI6IHsKICAgICAgImlkIjogIjUxMzIwMCIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2ZDRkNmM5ZTk1YSIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogIiIsCiAgICAgICJhY2NvdW50X3R5cGUiOiAicGVyc29uYWwiLAogICAgICAidXNlcl90eXBlIjogInVzZXIiLAogICAgICAiYnVzaW5lc3NfdHlwZSI6IG51bGwsCiAgICAgICJ0b2tlbiI6ICJBRDlDQUQ5Qy0zOTM5LTAyMEUtMUIxNi1CM0Q4Q0ZFOTYwMjAiLAogICAgICAiZW1haWwiOiAic3RpY2tlcl85dGoxQHRtczlwOWMxaC5jb20iLAogICAgICAiZmlyc3QiOiAiIiwKICAgICAgImxhc3QiOiAiIiwKICAgICAgImFkZHJlc3MiOiAiIiwKICAgICAgInBob25lIjogIiIsCiAgICAgICJjb21wYW55X25hbWUiOiBudWxsLAogICAgICAiY29tcGFueV93ZWJzaXRlIjogbnVsbCwKICAgICAgImluc3RhZ3JhbSI6IG51bGwsCiAgICAgICJmYWNlYm9vayI6IG51bGwsCiAgICAgICJ0d2l0dGVyIjogbnVsbCwKICAgICAgImNpdHkiOiAiIiwKICAgICAgInN0YXRlIjogIklzbGFtYWJhZCAoSCA5LzEpIiwKICAgICAgImNvdW50cnkiOiAiUEsiLAogICAgICAicGluY29kZSI6ICIwIiwKICAgICAgIm5vX29mX2VtcGxveWVlcyI6IG51bGwsCiAgICAgICJjZHQiOiAiMjAyNi0wNy0zMSAyMTozNTo0MSIKICAgIH0sCiAgICAidmhyX2NyZWRpdF9zdWJzY3JpcHRpb24iOiAwLAogICAgInN0aWNrZXJfY3JlZGl0IjogMCwKICAgICJhdWN0aW9uX2NyZWRpdCI6IDAKICB9Cn0="
+                      "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidmhyX2NyZWRpdCI6IDAsCiAgICAicHJvZmlsZSI6IHsKICAgICAgImlkIjogIjUxMzI1MSIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2ZDU5NTNhYWVhNyIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogIiIsCiAgICAgICJhY2NvdW50X3R5cGUiOiAicGVyc29uYWwiLAogICAgICAidXNlcl90eXBlIjogInVzZXIiLAogICAgICAiYnVzaW5lc3NfdHlwZSI6IG51bGwsCiAgICAgICJ0b2tlbiI6ICJGN0I4RjdCOC0xNjE2LTkxREItMTFEMS0xQTJBQzE0MkE2QzMiLAogICAgICAiZW1haWwiOiAic3RpY2tlcl9yMHEwQHRtczlyMmxqci5jb20iLAogICAgICAiZmlyc3QiOiAiIiwKICAgICAgImxhc3QiOiAiIiwKICAgICAgImFkZHJlc3MiOiAiIiwKICAgICAgInBob25lIjogIiIsCiAgICAgICJjb21wYW55X25hbWUiOiBudWxsLAogICAgICAiY29tcGFueV93ZWJzaXRlIjogbnVsbCwKICAgICAgImluc3RhZ3JhbSI6IG51bGwsCiAgICAgICJmYWNlYm9vayI6IG51bGwsCiAgICAgICJ0d2l0dGVyIjogbnVsbCwKICAgICAgImNpdHkiOiAiIiwKICAgICAgInN0YXRlIjogIklzbGFtYWJhZCAoSCA5LzEpIiwKICAgICAgImNvdW50cnkiOiAiUEsiLAogICAgICAicGluY29kZSI6ICIwIiwKICAgICAgIm5vX29mX2VtcGxveWVlcyI6IG51bGwsCiAgICAgICJjZHQiOiAiMjAyNi0wNy0zMSAyMjoyNjoyOCIKICAgIH0sCiAgICAidmhyX2NyZWRpdF9zdWJzY3JpcHRpb24iOiAwLAogICAgInN0aWNrZXJfY3JlZGl0IjogMCwKICAgICJhdWN0aW9uX2NyZWRpdCI6IDAKICB9Cn0="
                     },
                     {
                       "name": "payment-update.json",
                       "contentType": "application/json",
-                      "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidXNlciI6IHsKICAgICAgImlkIjogIjUxMzIwMCIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2ZDRkNmM5ZTk1YSIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogbnVsbCwKICAgICAgImFjY291bnRfdHlwZSI6ICJwZXJzb25hbCIsCiAgICAgICJ1c2VyX3R5cGUiOiAidXNlciIsCiAgICAgICJidXNpbmVzc190eXBlIjogbnVsbCwKICAgICAgInRva2VuIjogIkFEOUNBRDlDLTM5MzktMDIwRS0xQjE2LUIzRDhDRkU5NjAyMCIsCiAgICAgICJlbWFpbCI6ICJzdGlja2VyXzl0ajFAdG1zOXA5YzFoLmNvbSIsCiAgICAgICJmaXJzdCI6ICIiLAogICAgICAibGFzdCI6ICIiLAogICAgICAiYWRkcmVzcyI6ICIiLAogICAgICAicGhvbmUiOiAiIiwKICAgICAgImNvbXBhbnlfbmFtZSI6IG51bGwsCiAgICAgICJjb21wYW55X3dlYnNpdGUiOiBudWxsLAogICAgICAiaW5zdGFncmFtIjogbnVsbCwKICAgICAgImZhY2Vib29rIjogbnVsbCwKICAgICAgInR3aXR0ZXIiOiBudWxsLAogICAgICAiY2l0eSI6ICIiLAogICAgICAic3RhdGUiOiAiSXNsYW1hYmFkIChIIDkvMSkiLAogICAgICAiY291bnRyeSI6ICJQSyIsCiAgICAgICJwaW5jb2RlIjogIjAiLAogICAgICAibm9fb2ZfZW1wbG95ZWVzIjogbnVsbCwKICAgICAgImNkdCI6ICIyMDI2LTA3LTMxIDIxOjM1OjQxIgogICAgfSwKICAgICJwYWdlIjogInN0aWNrZXIiLAogICAgInZpbiI6ICJDUkVESVQiLAogICAgInZocl9jcmVkaXQiOiBudWxsLAogICAgInZocl9jcmVkaXRfc3Vic2NyaXB0aW9uIjogMCwKICAgICJzdGlja2VyX2NyZWRpdCI6IDEwLAogICAgImF1Y3Rpb25fY3JlZGl0IjogMAogIH0KfQ=="
+                      "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidXNlciI6IHsKICAgICAgImlkIjogIjUxMzI1MSIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2ZDU5NTNhYWVhNyIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogbnVsbCwKICAgICAgImFjY291bnRfdHlwZSI6ICJwZXJzb25hbCIsCiAgICAgICJ1c2VyX3R5cGUiOiAidXNlciIsCiAgICAgICJidXNpbmVzc190eXBlIjogbnVsbCwKICAgICAgInRva2VuIjogIkY3QjhGN0I4LTE2MTYtOTFEQi0xMUQxLTFBMkFDMTQyQTZDMyIsCiAgICAgICJlbWFpbCI6ICJzdGlja2VyX3IwcTBAdG1zOXIybGpyLmNvbSIsCiAgICAgICJmaXJzdCI6ICIiLAogICAgICAibGFzdCI6ICIiLAogICAgICAiYWRkcmVzcyI6ICIiLAogICAgICAicGhvbmUiOiAiIiwKICAgICAgImNvbXBhbnlfbmFtZSI6IG51bGwsCiAgICAgICJjb21wYW55X3dlYnNpdGUiOiBudWxsLAogICAgICAiaW5zdGFncmFtIjogbnVsbCwKICAgICAgImZhY2Vib29rIjogbnVsbCwKICAgICAgInR3aXR0ZXIiOiBudWxsLAogICAgICAiY2l0eSI6ICIiLAogICAgICAic3RhdGUiOiAiSXNsYW1hYmFkIChIIDkvMSkiLAogICAgICAiY291bnRyeSI6ICJQSyIsCiAgICAgICJwaW5jb2RlIjogIjAiLAogICAgICAibm9fb2ZfZW1wbG95ZWVzIjogbnVsbCwKICAgICAgImNkdCI6ICIyMDI2LTA3LTMxIDIyOjI2OjI4IgogICAgfSwKICAgICJwYWdlIjogInN0aWNrZXIiLAogICAgInZpbiI6ICJDUkVESVQiLAogICAgInZocl9jcmVkaXQiOiBudWxsLAogICAgInZocl9jcmVkaXRfc3Vic2NyaXB0aW9uIjogMCwKICAgICJzdGlja2VyX2NyZWRpdCI6IDEwLAogICAgImF1Y3Rpb25fY3JlZGl0IjogMAogIH0KfQ=="
                     }
                   ]
                 }
@@ -293,7 +298,7 @@
                       "workerIndex": 1,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 55813,
+                      "duration": 19125,
                       "errors": [],
                       "stdout": [
                         {
@@ -324,6 +329,12 @@
                           "text": "Setting up listener for: generate-sticker\n"
                         },
                         {
+                          "text": "Setting up listener for: classicmapping\n"
+                        },
+                        {
+                          "text": "Setting up listener for: generate_classic_sticker\n"
+                        },
+                        {
                           "text": "API listeners attached with report attachments (one-time capture).\n"
                         },
                         {
@@ -336,7 +347,10 @@
                           "text": "📥 Intercepted and saved API Response payload for: /api-cwa/search-page\n"
                         },
                         {
-                          "text": "Starting Reverse Decode / Sticker Generate for VIN: 5SAAK4CK2E7101013\n"
+                          "text": "Switching to Window Sticker Tab...\n"
+                        },
+                        {
+                          "text": "Starting Reverse Decode / Sticker Generate for VIN: JKAKLEE17FDA80765\n"
                         },
                         {
                           "text": "Clicked 'Get Window Sticker' button.\n"
@@ -353,13 +367,13 @@
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-08-01T01:36:46.239Z",
+                      "startTime": "2026-08-01T02:27:29.763Z",
                       "annotations": [],
                       "attachments": [
                         {
                           "name": "search-page.json",
                           "contentType": "application/json",
-                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidmhyX2NyZWRpdCI6IDAsCiAgICAicHJvZmlsZSI6IHsKICAgICAgImlkIjogIjUxMzIwMCIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2ZDRkNmM5ZTk1YSIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogIiIsCiAgICAgICJhY2NvdW50X3R5cGUiOiAicGVyc29uYWwiLAogICAgICAidXNlcl90eXBlIjogInVzZXIiLAogICAgICAiYnVzaW5lc3NfdHlwZSI6IG51bGwsCiAgICAgICJ0b2tlbiI6ICJBRDlDQUQ5Qy0zOTM5LTAyMEUtMUIxNi1CM0Q4Q0ZFOTYwMjAiLAogICAgICAiZW1haWwiOiAic3RpY2tlcl85dGoxQHRtczlwOWMxaC5jb20iLAogICAgICAiZmlyc3QiOiAiIiwKICAgICAgImxhc3QiOiAiIiwKICAgICAgImFkZHJlc3MiOiAiIiwKICAgICAgInBob25lIjogIiIsCiAgICAgICJjb21wYW55X25hbWUiOiBudWxsLAogICAgICAiY29tcGFueV93ZWJzaXRlIjogbnVsbCwKICAgICAgImluc3RhZ3JhbSI6IG51bGwsCiAgICAgICJmYWNlYm9vayI6IG51bGwsCiAgICAgICJ0d2l0dGVyIjogbnVsbCwKICAgICAgImNpdHkiOiAiIiwKICAgICAgInN0YXRlIjogIklzbGFtYWJhZCAoSCA5LzEpIiwKICAgICAgImNvdW50cnkiOiAiUEsiLAogICAgICAicGluY29kZSI6ICIwIiwKICAgICAgIm5vX29mX2VtcGxveWVlcyI6IG51bGwsCiAgICAgICJjZHQiOiAiMjAyNi0wNy0zMSAyMTozNTo0MSIKICAgIH0sCiAgICAidmhyX2NyZWRpdF9zdWJzY3JpcHRpb24iOiAwLAogICAgInN0aWNrZXJfY3JlZGl0IjogMTAsCiAgICAiYXVjdGlvbl9jcmVkaXQiOiAwCiAgfQp9"
+                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidmhyX2NyZWRpdCI6IDAsCiAgICAicHJvZmlsZSI6IHsKICAgICAgImlkIjogIjUxMzI1MSIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2ZDU5NTNhYWVhNyIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogIiIsCiAgICAgICJhY2NvdW50X3R5cGUiOiAicGVyc29uYWwiLAogICAgICAidXNlcl90eXBlIjogInVzZXIiLAogICAgICAiYnVzaW5lc3NfdHlwZSI6IG51bGwsCiAgICAgICJ0b2tlbiI6ICJGN0I4RjdCOC0xNjE2LTkxREItMTFEMS0xQTJBQzE0MkE2QzMiLAogICAgICAiZW1haWwiOiAic3RpY2tlcl9yMHEwQHRtczlyMmxqci5jb20iLAogICAgICAiZmlyc3QiOiAiIiwKICAgICAgImxhc3QiOiAiIiwKICAgICAgImFkZHJlc3MiOiAiIiwKICAgICAgInBob25lIjogIiIsCiAgICAgICJjb21wYW55X25hbWUiOiBudWxsLAogICAgICAiY29tcGFueV93ZWJzaXRlIjogbnVsbCwKICAgICAgImluc3RhZ3JhbSI6IG51bGwsCiAgICAgICJmYWNlYm9vayI6IG51bGwsCiAgICAgICJ0d2l0dGVyIjogbnVsbCwKICAgICAgImNpdHkiOiAiIiwKICAgICAgInN0YXRlIjogIklzbGFtYWJhZCAoSCA5LzEpIiwKICAgICAgImNvdW50cnkiOiAiUEsiLAogICAgICAicGluY29kZSI6ICIwIiwKICAgICAgIm5vX29mX2VtcGxveWVlcyI6IG51bGwsCiAgICAgICJjZHQiOiAiMjAyNi0wNy0zMSAyMjoyNjoyOCIKICAgIH0sCiAgICAidmhyX2NyZWRpdF9zdWJzY3JpcHRpb24iOiAwLAogICAgInN0aWNrZXJfY3JlZGl0IjogMTAsCiAgICAiYXVjdGlvbl9jcmVkaXQiOiAwCiAgfQp9"
                         },
                         {
                           "name": "vin-validate.json",
@@ -381,6 +395,261 @@
               "file": "sticker_flow.spec.js",
               "line": 8,
               "column": 3
+            },
+            {
+              "title": "CS-02 — Classic Mapped VIN Sticker Generation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "sticker-mobile-safari",
+                  "projectName": "sticker-mobile-safari",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 9128,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Setting up listener for: /api-cwa/search-page\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/payment-update\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/vin-validate\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/generate-report\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/generate_uvc_report\n"
+                        },
+                        {
+                          "text": "Setting up listener for: cancel-subscription\n"
+                        },
+                        {
+                          "text": "Setting up listener for: license_plate_decode\n"
+                        },
+                        {
+                          "text": "Setting up listener for: generate_sticker\n"
+                        },
+                        {
+                          "text": "Setting up listener for: generate-sticker\n"
+                        },
+                        {
+                          "text": "Setting up listener for: classicmapping\n"
+                        },
+                        {
+                          "text": "Setting up listener for: generate_classic_sticker\n"
+                        },
+                        {
+                          "text": "API listeners attached with report attachments (one-time capture).\n"
+                        },
+                        {
+                          "text": "Base URL configured to: https://members.vehiclehistory.report/members\n"
+                        },
+                        {
+                          "text": "Navigating directly to Dashboard...\n"
+                        },
+                        {
+                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/search-page\n"
+                        },
+                        {
+                          "text": "Switching to Window Sticker Tab...\n"
+                        },
+                        {
+                          "text": "Starting Classic Mapped VIN Sticker Generate for VIN: 228871N111628\n"
+                        },
+                        {
+                          "text": "Clicked 'Get Window Sticker' button.\n"
+                        },
+                        {
+                          "text": "Awaiting classic mapping API resolution...\n"
+                        },
+                        {
+                          "text": "📥 ClassicMapping API Response Captured.\n"
+                        },
+                        {
+                          "text": "Awaiting generate classic sticker API resolution...\n"
+                        },
+                        {
+                          "text": "📥 Intercepted and saved API Response payload for: classicmapping\n"
+                        },
+                        {
+                          "text": "📥 Intercepted and saved API Response payload for: generate_classic_sticker\n"
+                        },
+                        {
+                          "text": "📥 GenerateClassicSticker API Response Status: success\n"
+                        },
+                        {
+                          "text": "Classic Mapped VIN Window Sticker generation completed successfully.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-08-01T02:27:49.073Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "search-page.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidmhyX2NyZWRpdCI6IDAsCiAgICAicHJvZmlsZSI6IHsKICAgICAgImlkIjogIjUxMzI1MSIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2ZDU5NTNhYWVhNyIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogIiIsCiAgICAgICJhY2NvdW50X3R5cGUiOiAicGVyc29uYWwiLAogICAgICAidXNlcl90eXBlIjogInVzZXIiLAogICAgICAiYnVzaW5lc3NfdHlwZSI6IG51bGwsCiAgICAgICJ0b2tlbiI6ICJGN0I4RjdCOC0xNjE2LTkxREItMTFEMS0xQTJBQzE0MkE2QzMiLAogICAgICAiZW1haWwiOiAic3RpY2tlcl9yMHEwQHRtczlyMmxqci5jb20iLAogICAgICAiZmlyc3QiOiAiIiwKICAgICAgImxhc3QiOiAiIiwKICAgICAgImFkZHJlc3MiOiAiIiwKICAgICAgInBob25lIjogIiIsCiAgICAgICJjb21wYW55X25hbWUiOiBudWxsLAogICAgICAiY29tcGFueV93ZWJzaXRlIjogbnVsbCwKICAgICAgImluc3RhZ3JhbSI6IG51bGwsCiAgICAgICJmYWNlYm9vayI6IG51bGwsCiAgICAgICJ0d2l0dGVyIjogbnVsbCwKICAgICAgImNpdHkiOiAiIiwKICAgICAgInN0YXRlIjogIklzbGFtYWJhZCAoSCA5LzEpIiwKICAgICAgImNvdW50cnkiOiAiUEsiLAogICAgICAicGluY29kZSI6ICIwIiwKICAgICAgIm5vX29mX2VtcGxveWVlcyI6IG51bGwsCiAgICAgICJjZHQiOiAiMjAyNi0wNy0zMSAyMjoyNjoyOCIKICAgIH0sCiAgICAidmhyX2NyZWRpdF9zdWJzY3JpcHRpb24iOiAwLAogICAgInN0aWNrZXJfY3JlZGl0IjogOSwKICAgICJhdWN0aW9uX2NyZWRpdCI6IDAKICB9Cn0="
+                        },
+                        {
+                          "name": "classicmapping.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAiMXN0IjogIjIuNTQgdG8gMSAoYXV0b21hdGljKSIsCiAgICAiMm5kIjogIjEuNSB0byAxIChhdXRvbWF0aWMpIiwKICAgICIzcmQiOiAiMSB0byAxIChhdXRvbWF0aWMpIiwKICAgICI0dGgiOiAiKGF1dG9tYXRpYykiLAogICAgIjV0aCI6ICIiLAogICAgIkFkZGl0aW9uYWwgSW5mb3JtYXRpb24iOiAiLCAiLAogICAgIkF4bGUgVHlwZSI6ICJTZW1pZmxvYXRpbmciLAogICAgIkJhdHRlcnkiOiAiMTIgdm9sdCBzdG9yYWdlIGJhdHRlcnkiLAogICAgIkJsb2NrIE1hdGVyaWFsIjogIkNhc3QgSXJvbiIsCiAgICAiQm9keSI6ICIiLAogICAgIkJvZHkgTWFrZXIiOiAiUG9udGlhYyIsCiAgICAiQm9yZSAmIFN0cm9rZSI6ICIzLjg3NSB4IDMuMzYgaW5jaGVzIiwKICAgICJCcmFrZSBIb3JzZXBvd2VyIjogIjI1MCBocCBAIDQ0MDAgcnBtIiwKICAgICJCcmFrZXMiOiAiIiwKICAgICJCdXllcidzIERpZ2VzdCBvZiBOZXcgQ2FyIEZhY3RzIGZvciAxOTY0IjogIkRldHJvaXQgUHVibGljIExpYnJhcnkgKE5hdCdsIEF1dG8uIEhpc3QuIENvbGxjdG4pNTIwMSBXb29kd2FyZERldHJvaXQgTUkgIDQ4MjAyKDMxMykgODMzLTE0NTZ3d3cuZGV0cm9pdC5saWIubWkudXMvbmFoYy9pbmRleC5odG0iLAogICAgIkNhcGFjaXRpZXMiOiAiIiwKICAgICJDYXJidXJldG9yIjogIlJvY2hlc3RlciBRdWFkcmFqZXQiLAogICAgIkNsYXNzaWMgUmF0aW5nIjogIk5vdCBSYXRlZCIsCiAgICAiQ2x1dGNoIFNpemUiOiAiOS4xMjUgaW5jaGVzIChtYW51YWwpIiwKICAgICJDbHV0Y2ggVHlwZSI6ICJTaW5nbGUgcGxhdGUgZHJ5IGRpc2MgKG1hbnVhbCkiLAogICAgIkNvbG9ycyI6ICJTdGFybGlnaHQgQmxhY2ssIEx1Y2VybmUgQmx1ZSBNZXRhbGxpYywgQ2FyZGluYWwgUmVkLCBSb3Nld29vZCBNZXRhbGxpYywgQ2FtZW8gV2hpdGUsIE5vcmRpYyBTaWx2ZXIgTWV0YWxsaWMsIEJsdWVzdG9uZSBHcmF5IE1ldGFsbGljLCBBZHJpYXRpYyBCbHVlIE1ldGFsbGljLCBSZWdlbmN5IEJsdWUgTWV0YWxsaWMsIEFxdWFyaXVzIEdyZWVuIE1ldGFsbGljLCBMaW1la2lzdCBHcmVlbiBNZXRhbGxpYywgVHJvcGljYWwgTGltZSBNZXRhbGxpYywgTGF1cmVudGlhbiBHcmVlbiBNZXRhbGxpYywgQmFqYSBHb2xkIE1ldGFsbGljIiwKICAgICJDb21wcmVzc2lvbiBSYXRpby1PcHQiOiAiIiwKICAgICJDb21wcmVzc2lvbiBSYXRpby1TdGQiOiAiOC4wIHRvIDEiLAogICAgIkNvb2xpbmcgU3lzdGVtIjogIldhdGVyIHB1bXAiLAogICAgIkN5bGluZGVycyI6ICI4IiwKICAgICJEaWZmZXJlbnRpYWwiOiAiSHlwb2lkIiwKICAgICJEaWZmZXJlbnRpYWwgUmF0aW8iOiAiMy40MjoxIChzdGFuZGFyZCkiLAogICAgIkRpbWVuc2lvbiI6ICIiLAogICAgIkRpc3BsYWNlbWVudCI6ICIzNTAgY3UuIGluLiIsCiAgICAiRW1lcmdlbmN5IjogIlJlYXIgc2VydmljZSBicmFrZXMiLAogICAgIkVuZ2luZSBOby4gTG9jYXRpb24iOiAiIiwKICAgICJFbmdpbmUgTnVtYmVycyI6ICJMYXN0IGxldHRlciBpbiBzZXJpYWwgbm8uIiwKICAgICJFeGhhdXN0IFN5c3RlbSI6ICJEdWFsIiwKICAgICJFeHRlcmlvciBDb2xvcnMiOiAiU3RhcmxpZ2h0IEJsYWNrLCBMdWNlcm5lIEJsdWUgTWV0YWxsaWMsIENhcmRpbmFsIFJlZCwgUm9zZXdvb2QgTWV0YWxsaWMsIENhbWVvIFdoaXRlLCBOb3JkaWMgU2lsdmVyIE1ldGFsbGljLCBCbHVlc3RvbmUgR3JheSBNZXRhbGxpYywgQWRyaWF0aWMgQmx1ZSBNZXRhbGxpYywgUmVnZW5jeSBCbHVlIE1ldGFsbGljLCBBcXVhcml1cyBHcmVlbiBNZXRhbGxpYywgTGltZWtpc3QgR3JlZW4gTWV0YWxsaWMsIFRyb3BpY2FsIExpbWUgTWV0YWxsaWMsIExhdXJlbnRpYW4gR3JlZW4gTWV0YWxsaWMsIEJhamEgR29sZCBNZXRhbGxpYyIsCiAgICAiRnJvbnQiOiAiSW5kZXBlbmRlbnQgYmFsbCBqb2ludCB3aXRoIGNvaWwgc3ByaW5ncyIsCiAgICAiRnJvbnQgRGlmZmVyZW50aWFsIjogIk5vdCBhcHBsaWNhYmxlIiwKICAgICJGcm9udCBTaXplIjogIjExIGluY2hlcyIsCiAgICAiRnJvbnQgVHJlYWQiOiAiNjEgaW5jaGVzIiwKICAgICJGdWVsIjogIjIwIEdhbGxvbnMiLAogICAgIkdlYXIgUmF0aW9zIjogIiIsCiAgICAiSGVpZ2h0IjogIjUwLjQgaW5jaGVzIiwKICAgICJJZ25pdGlvbiBTeXN0ZW0iOiAiRGlzdHJpYnV0b3IgYW5kIGNvaWwiLAogICAgIkxlbmd0aCI6ICIxOTEuNiBpbmNoZXMiLAogICAgIkx1YnJpY2F0aW9uIjogIlByZXNzdXJlIHRvIGFsbCBiZWFyaW5ncyBleGNsdWRpbmcgd3Jpc3QgcGluIiwKICAgICJNU1JQIjogIiQzLDY4OC4wMCIsCiAgICAiTWFpbiBCZWFyaW5ncyI6ICI1IiwKICAgICJNYWtlIjogIk93biIsCiAgICAiTWlsZWFnZSI6ICIxNS0yMCBtcGciLAogICAgIk1vZGVsIE51bWJlciI6ICIyNDg3IiwKICAgICJNb3RvcidzIEF1dG8gUmVwYWlyIE1hbnVhbCAyOHRoIEVkaXRpb24iOiAiTG9zIEFuZ2VsZXMgUHVibGljIExpYnJhcnk2MzAgV2VzdCBGaWZ0aCBTdHJlZXRMb3MgQW5nZWxlcyBDQTkwMDcxKDIxMykgMjI4LTcwMDB3d3cubGFwbC5vcmciLAogICAgIk5vLiBPZiBHZWFycyI6ICIzIChhdXRvbWF0aWMpLCA0IChtYW51YWwpIiwKICAgICJOby4gUHJvZHVjZWQiOiAiMjAsMTg1IiwKICAgICJPaWwiOiAiNSBRdWFydHMiLAogICAgIk90aGVyIFN5c3RlbXMgU3BlY2lmaWNhdGlvbnMiOiAiIiwKICAgICJQYWludCBUeXBlIjogIiIsCiAgICAiUGFzc2VuZ2VycyI6ICI0IiwKICAgICJSYWRpYXRvciI6ICJUdWJlIGFuZCBjZW50ZXIiLAogICAgIlJhdGVkIEhvcnNlcG93ZXIiOiAiMjUwIGhwIiwKICAgICJSZWFyIjogIkNvaWwgbGluayIsCiAgICAiUmVhciBEaWZmZXJlbnRpYWwiOiAiNC4yNSBQaW50cyIsCiAgICAiUmVhciBTaXplIjogIjkuNSBpbmNoZXMiLAogICAgIlJlYXIgVHJlYWQiOiAiNjAgaW5jaGVzIiwKICAgICJSZWZlcmVuY2VzIjogIiIsCiAgICAiUmV2ZXJzZSI6ICIyLjYzIHRvIDEgKGF1dG9tYXRpYykiLAogICAgIlNlcmlhbCBOby4gQm9vayBmb3IgVVMgQ2FycyAxOTAwLTE5NzUgRy4gQnJpZ2hhbSI6ICJIb3JzZWxlc3MgQ2FycmlhZ2UgRm91bmRhdGlvbjgxODYgQ2VudGVyIFN0LiBTdWl0ZSBGICBQLk8uIEJveCA0MTE5TGEgTWVzYSBDQSAgOTE5NDQtNDExOSg2MTkpIDQ2NC0wMzAxd3d3LmhjZmkub3JnIiwKICAgICJTZXJ2aWNlIjogIkZyb250IGRpc2MsIHJlYXIgc2VsZi1hZGp1c3RpbmcgZHJ1bSIsCiAgICAiU2l6ZSI6ICIxMSBpbmNoZXMiLAogICAgIlNwYXJlIExvY2F0aW9uIjogIlRydW5rIiwKICAgICJTdGFuZGFyZC9PcHRpb25hbCBFcXVpcG1lbnQiOiAiVHVyYm8gSHlkcmFtYXRpYyBhdXRvbWF0aWMgdHJhbnNtaXNzaW9uLCBQb3dlciB3aW5kb3dzLCBBaXIgY29uZGl0aW9uaW5nLCBQb3dlciBzdGVlcmluZywgUmFkaW8sIEZyb250IGRpc2MgcmVhciBkcnVtIGJyYWtlcywgUG93ZXIgc2VhdHMsIEhlYXZ5IGR1dHkgNC1zcGVlZCBtYW51YWwgdHJhbnNtaXNzaW9uLCAzLXNwZWVkIGhlYXZ5IGR1dHkgbWFudWFsIHRyYW5zbWlzc2lvbiwgT3B0aW9uYWwgQXhsZSBSYXRpb3MiLAogICAgIlN0ZWVyaW5nIEdlYXIiOiAiUmVjaXJjdWxhdGluZyBiYWxsIiwKICAgICJTdXNwZW5zaW9uIjogIiIsCiAgICAiVGlyZSBTaXplIjogIkU3OCB4IDE0IiwKICAgICJUaXJlIFR5cGUiOiAiQmlhcy1wbHkiLAogICAgIlRvcnF1ZSI6ICIzNDBAMjQwMCIsCiAgICAiVHJhbnNmZXIgQ2FzZSI6ICJOb3QgYXBwbGljYWJsZSIsCiAgICAiVHlwZSI6ICJWOCwgT0hWLCBEdWFsIGRvd25kcmFmdCIsCiAgICAiVklOIERlc2NyaXB0aW9uIjogIlRvdGFsIERpZ2l0czogMTEsIERpZ2l0cyAxOiBNb2RlbCB5ZWFyLCBEaWdpdHMgMjogQXNzZW1ibHkgcGxhbnQsIERpZ2l0cyAzLTQ6IEJvZHkgc3R5bGUsIERpZ2l0cyA1OiBFbmdpbmUsIERpZ2l0cyA2LTExOiBQcm9kdWN0aW9uIG51bWJlciIsCiAgICAiVklOL0lEIjogIiIsCiAgICAiVklOL1NlcmlhbCBuby4iOiAiMjI4ODcxTjExMTYyOCIsCiAgICAiVmFsdmUgTGlmdGVycyI6ICJIeWRyYXVsaWMiLAogICAgIldlaWdodCI6ICIzNDM1IGxicyIsCiAgICAiV2hlZWwgTWZyIjogIlBvbnRpYWMiLAogICAgIldoZWVsIFNpemUiOiAiMTQgeCA2IGluY2hlcyIsCiAgICAiV2hlZWwgVHlwZSI6ICJTdGVlbCIsCiAgICAiV2hlZWxiYXNlIjogIjEwOCBpbmNoZXMiLAogICAgIldoZWVscywgUmltcyAmIFRpcmVzIjogIiIsCiAgICAiV2lkdGgiOiAiNzMuNCBpbmNoZXMiLAogICAgImRvb3JzIjogIjIiLAogICAgImRyaXZlIjogIlJlYXIgd2hlZWwgZHJpdmUiLAogICAgImVuZ2luZSI6ICJWOCwgT0hWLCBEdWFsIGRvd25kcmFmdCIsCiAgICAiZnVlbCI6ICJSZWd1bGFyIiwKICAgICJtYWtlIjogIlBvbnRpYWMiLAogICAgIm1vZGVsIjogIkNhdGFsaW5hIiwKICAgICJtb2RlbF9pZCI6ICI0NDUiLAogICAgInNlcmllcyI6ICJCcm91Z2hhbSBTZWRhbiIsCiAgICAic2VyaWVzX2F0dHIiOiAiRmlyZWJpcmQgRXNwcml0IFNlcmllcyAyMjQwMCAoTC0zMCksIFY4LCBPSFYsIDM1MGNpZCwgMTA4aW4uIHdoZWVsYmFzZSIsCiAgICAidGl0bGUiOiAiMTk3MSBQb250aWFjIEJyb3VnaGFtIFNlZGFuIiwKICAgICJ0cmFuc21pc3Npb24iOiAiMy1zcGVlZCBUdXJibyBIeWRyYW1hdGljIGF1dG9tYXRpYyAoc3RhbmRhcmQpLCA0LXNwZWVkIG1hbnVhbCAob3B0aW9uYWwpIiwKICAgICJ5ZWFyIjogIjE5NzEiLAogICAgImltYWdlcyI6IFsKICAgICAgImh0dHBzOi8vdmhyLm55YzMuY2RuLmRpZ2l0YWxvY2VhbnNwYWNlcy5jb20vdmVoaWNsZW1lZGlhL2NsYXNzaWMvMTk3MS9wb250aWFjL2ZpcmViaXJkLWVzcHJpdC1zZXJpZXMtMjI0MDAtKGwtMzApL2hhcmR0b3AvMTU2MDE4OC5qcGciLAogICAgICAiaHR0cHM6Ly92aHIubnljMy5jZG4uZGlnaXRhbG9jZWFuc3BhY2VzLmNvbS92ZWhpY2xlbWVkaWEvY2xhc3NpYy8xOTcxL3BvbnRpYWMvZmlyZWJpcmQtZXNwcml0LXNlcmllcy0yMjQwMC0obC0zMCkvaGFyZHRvcC80ODU0Nzc5LmpwZyIsCiAgICAgICJodHRwczovL3Zoci5ueWMzLmNkbi5kaWdpdGFsb2NlYW5zcGFjZXMuY29tL3ZlaGljbGVtZWRpYS9jbGFzc2ljLzE5NzEvcG9udGlhYy9maXJlYmlyZC1lc3ByaXQtc2VyaWVzLTIyNDAwLShsLTMwKS9oYXJkdG9wLzU1MzkzNjQuanBnIiwKICAgICAgImh0dHBzOi8vdmhyLm55YzMuY2RuLmRpZ2l0YWxvY2VhbnNwYWNlcy5jb20vdmVoaWNsZW1lZGlhL2NsYXNzaWMvMTk3MS9wb250aWFjL2ZpcmViaXJkLWVzcHJpdC1zZXJpZXMtMjI0MDAtKGwtMzApL2hhcmR0b3AvODI0MDg2MC5qcGciLAogICAgICAiaHR0cHM6Ly92aHIubnljMy5jZG4uZGlnaXRhbG9jZWFuc3BhY2VzLmNvbS92ZWhpY2xlbWVkaWEvY2xhc3NpYy8xOTcxL3BvbnRpYWMvZmlyZWJpcmQtZXNwcml0LXNlcmllcy0yMjQwMC0obC0zMCkvaGFyZHRvcC85NTU0MTg2LmpwZyIsCiAgICAgICJodHRwczovL3Zoci5ueWMzLmNkbi5kaWdpdGFsb2NlYW5zcGFjZXMuY29tL3ZlaGljbGVtZWRpYS9jbGFzc2ljLzE5NzEvcG9udGlhYy9maXJlYmlyZC1lc3ByaXQtc2VyaWVzLTIyNDAwLShsLTMwKS9oYXJkdG9wLzc2MTg3NTkuanBnIiwKICAgICAgImh0dHBzOi8vdmhyLm55YzMuY2RuLmRpZ2l0YWxvY2VhbnNwYWNlcy5jb20vdmVoaWNsZW1lZGlhL2NsYXNzaWMvMTk3MS9wb250aWFjL2ZpcmViaXJkLWVzcHJpdC1zZXJpZXMtMjI0MDAtKGwtMzApL2hhcmR0b3AvMzQxODYyNS5qcGciLAogICAgICAiaHR0cHM6Ly92aHIubnljMy5jZG4uZGlnaXRhbG9jZWFuc3BhY2VzLmNvbS92ZWhpY2xlbWVkaWEvY2xhc3NpYy8xOTcxL3BvbnRpYWMvZmlyZWJpcmQtZXNwcml0LXNlcmllcy0yMjQwMC0obC0zMCkvaGFyZHRvcC82OTc0MDY3LmpwZyIsCiAgICAgICJodHRwczovL3Zoci5ueWMzLmNkbi5kaWdpdGFsb2NlYW5zcGFjZXMuY29tL3ZlaGljbGVtZWRpYS9jbGFzc2ljLzE5NzEvcG9udGlhYy9maXJlYmlyZC1lc3ByaXQtc2VyaWVzLTIyNDAwLShsLTMwKS9oYXJkdG9wLzcxNjc2ODguanBnIiwKICAgICAgImh0dHBzOi8vdmhyLm55YzMuY2RuLmRpZ2l0YWxvY2VhbnNwYWNlcy5jb20vdmVoaWNsZW1lZGlhL2NsYXNzaWMvMTk3MS9wb250aWFjL2ZpcmViaXJkLWVzcHJpdC1zZXJpZXMtMjI0MDAtKGwtMzApL2hhcmR0b3AvNjE1NjQ1OC5qcGciLAogICAgICAiaHR0cHM6Ly92aHIubnljMy5jZG4uZGlnaXRhbG9jZWFuc3BhY2VzLmNvbS92ZWhpY2xlbWVkaWEvY2xhc3NpYy8xOTcxL3BvbnRpYWMvZmlyZWJpcmQtZXNwcml0LXNlcmllcy0yMjQwMC0obC0zMCkvaGFyZHRvcC83MTMxOTI5LmpwZyIsCiAgICAgICJodHRwczovL3Zoci5ueWMzLmNkbi5kaWdpdGFsb2NlYW5zcGFjZXMuY29tL3ZlaGljbGVtZWRpYS9jbGFzc2ljLzE5NzEvcG9udGlhYy9maXJlYmlyZC1lc3ByaXQtc2VyaWVzLTIyNDAwLShsLTMwKS9oYXJkdG9wLzUxNTQ4NTEuanBnIiwKICAgICAgImh0dHBzOi8vdmhyLm55YzMuY2RuLmRpZ2l0YWxvY2VhbnNwYWNlcy5jb20vdmVoaWNsZW1lZGlhL2NsYXNzaWMvMTk3MS9wb250aWFjL2ZpcmViaXJkLWVzcHJpdC1zZXJpZXMtMjI0MDAtKGwtMzApL2hhcmR0b3AvNTU4NTk5LmpwZyIsCiAgICAgICJodHRwczovL3Zoci5ueWMzLmNkbi5kaWdpdGFsb2NlYW5zcGFjZXMuY29tL3ZlaGljbGVtZWRpYS9jbGFzc2ljLzE5NzEvcG9udGlhYy9maXJlYmlyZC1lc3ByaXQtc2VyaWVzLTIyNDAwLShsLTMwKS9oYXJkdG9wLzcxMDI1NzEuanBnIiwKICAgICAgImh0dHBzOi8vdmhyLm55YzMuY2RuLmRpZ2l0YWxvY2VhbnNwYWNlcy5jb20vdmVoaWNsZW1lZGlhL2NsYXNzaWMvMTk3MS9wb250aWFjL2ZpcmViaXJkLWVzcHJpdC1zZXJpZXMtMjI0MDAtKGwtMzApL2hhcmR0b3AvNDMxMzY2OC5qcGciCiAgICBdLAogICAgIkxlbmd0aCBXaGVlbGJhc2UgUmF0aW8iOiAiMS43OCIsCiAgICAiR3JvdW5kIENsZWFyYW5jZSI6ICI1LjUgaW5jaGVzIiwKICAgICJUdXJucyBMb2NrIFRvIExvY2siOiAiMy41IiwKICAgICJBc3BpcmF0aW9uIjogIk5hdHVyYWxseSBBc3BpcmF0ZWQiLAogICAgIkNvbXByZXNzb3IiOiAiIiwKICAgICJJbnRlcmNvb2xlciI6ICIiLAogICAgIkNhdGFseXRpYyBDb252ZXJ0ZXIiOiAiIiwKICAgICJDcmFua3NoYWZ0IEJlYXJpbmdzIjogIjUiLAogICAgIkNvb2xhbnQiOiAiQ29udmVudGlvbmFsIiwKICAgICJBY2NlbGVyYXRpb24gMHRoIDUwdGggTXBoIjogIjcuNSBzZWNvbmRzIiwKICAgICJBY2NlbGVyYXRpb24gMHRoIDYwdGggTXBoIjogIjguNSBzZWNvbmRzIiwKICAgICJBY2NlbGVyYXRpb24gU3RhbmRpbmcgUXVhcnRlciBNaWxlIjogIjE2LjUgc2Vjb25kcyBAIDg1IG1waCIsCiAgICAiQWNjZWxlcmF0aW9uIFRvcCBTcGVlZCI6ICIxMjAgbXBoIiwKICAgICJQb3dlciBUbyBXZWlnaHQgUmF0aW8iOiAiMC4wNzMgaHAvbGIiLAogICAgIldlaWdodCBUbyBQb3dlciBSYXRpbyI6ICIxMy43IGxiL2hwIiwKICAgICJtYXJrZXRfdmFsdWUiOiBbCiAgICAgIHsKICAgICAgICAiQ29uZGl0aW9uIjogIk91dHN0YW5kaW5nIiwKICAgICAgICAiRGVhbGVyIFJldGFpbCI6ICIkNDIsMTAwIgogICAgICB9LAogICAgICB7CiAgICAgICAgIkNvbmRpdGlvbiI6ICJDbGVhbiIsCiAgICAgICAgIkRlYWxlciBSZXRhaWwiOiAiJDMxLDgwMCIKICAgICAgfSwKICAgICAgewogICAgICAgICJDb25kaXRpb24iOiAiQXZlcmFnZSIsCiAgICAgICAgIkRlYWxlciBSZXRhaWwiOiAiJDE4LDMwMCoiCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiQ29uZGl0aW9uIjogIlJvdWdoIiwKICAgICAgICAiRGVhbGVyIFJldGFpbCI6ICIkOSw1MDAiCiAgICAgIH0KICAgIF0sCiAgICAiTW9kZWwgWWVhciI6ICIxOTcxIgogIH0KfQ=="
+                        },
+                        {
+                          "name": "generate_classic_sticker.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIKfQ=="
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a956471b4d38c23c3243-19cd3dc85c6b752c15cb",
+              "file": "sticker_flow.spec.js",
+              "line": 41,
+              "column": 3
+            },
+            {
+              "title": "CS-03 — Classic Unmapped VIN Sticker Generation (Dropdown Flow)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "sticker-mobile-safari",
+                  "projectName": "sticker-mobile-safari",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 40312,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "Setting up listener for: /api-cwa/search-page\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/payment-update\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/vin-validate\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/generate-report\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/generate_uvc_report\n"
+                        },
+                        {
+                          "text": "Setting up listener for: cancel-subscription\n"
+                        },
+                        {
+                          "text": "Setting up listener for: license_plate_decode\n"
+                        },
+                        {
+                          "text": "Setting up listener for: generate_sticker\n"
+                        },
+                        {
+                          "text": "Setting up listener for: generate-sticker\n"
+                        },
+                        {
+                          "text": "Setting up listener for: classicmapping\n"
+                        },
+                        {
+                          "text": "Setting up listener for: generate_classic_sticker\n"
+                        },
+                        {
+                          "text": "API listeners attached with report attachments (one-time capture).\n"
+                        },
+                        {
+                          "text": "Base URL configured to: https://members.vehiclehistory.report/members\n"
+                        },
+                        {
+                          "text": "Navigating directly to Dashboard...\n"
+                        },
+                        {
+                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/search-page\n"
+                        },
+                        {
+                          "text": "Switching to Window Sticker Tab...\n"
+                        },
+                        {
+                          "text": "Generated randomized Classic Unmapped VIN for sticker: 245GH4152769\n"
+                        },
+                        {
+                          "text": "Waiting 5 seconds for page stabilization...\n"
+                        },
+                        {
+                          "text": "Clicked 'Get Window Sticker' button.\n"
+                        },
+                        {
+                          "text": "📥 Intercepted and saved API Response payload for: classicmapping\n"
+                        },
+                        {
+                          "text": "📥 ClassicMapping API Response Status: error\n"
+                        },
+                        {
+                          "text": "Classic unmapped VIN error confirmed. Selecting Ford Model K values...\n"
+                        },
+                        {
+                          "text": "Submitting overridden selections...\n"
+                        },
+                        {
+                          "text": "Clicked 'Get Window Sticker' after dropdown selection.\n"
+                        },
+                        {
+                          "text": "📥 Intercepted and saved API Response payload for: generate_classic_sticker\n"
+                        },
+                        {
+                          "text": "Classic Unmapped VIN Window Sticker generation completed successfully.\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-08-01T02:27:58.249Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "search-page.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidmhyX2NyZWRpdCI6IDAsCiAgICAicHJvZmlsZSI6IHsKICAgICAgImlkIjogIjUxMzI1MSIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2ZDU5NTNhYWVhNyIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogIiIsCiAgICAgICJhY2NvdW50X3R5cGUiOiAicGVyc29uYWwiLAogICAgICAidXNlcl90eXBlIjogInVzZXIiLAogICAgICAiYnVzaW5lc3NfdHlwZSI6IG51bGwsCiAgICAgICJ0b2tlbiI6ICJGN0I4RjdCOC0xNjE2LTkxREItMTFEMS0xQTJBQzE0MkE2QzMiLAogICAgICAiZW1haWwiOiAic3RpY2tlcl9yMHEwQHRtczlyMmxqci5jb20iLAogICAgICAiZmlyc3QiOiAiIiwKICAgICAgImxhc3QiOiAiIiwKICAgICAgImFkZHJlc3MiOiAiIiwKICAgICAgInBob25lIjogIiIsCiAgICAgICJjb21wYW55X25hbWUiOiBudWxsLAogICAgICAiY29tcGFueV93ZWJzaXRlIjogbnVsbCwKICAgICAgImluc3RhZ3JhbSI6IG51bGwsCiAgICAgICJmYWNlYm9vayI6IG51bGwsCiAgICAgICJ0d2l0dGVyIjogbnVsbCwKICAgICAgImNpdHkiOiAiIiwKICAgICAgInN0YXRlIjogIklzbGFtYWJhZCAoSCA5LzEpIiwKICAgICAgImNvdW50cnkiOiAiUEsiLAogICAgICAicGluY29kZSI6ICIwIiwKICAgICAgIm5vX29mX2VtcGxveWVlcyI6IG51bGwsCiAgICAgICJjZHQiOiAiMjAyNi0wNy0zMSAyMjoyNjoyOCIKICAgIH0sCiAgICAidmhyX2NyZWRpdF9zdWJzY3JpcHRpb24iOiAwLAogICAgInN0aWNrZXJfY3JlZGl0IjogOCwKICAgICJhdWN0aW9uX2NyZWRpdCI6IDAKICB9Cn0="
+                        },
+                        {
+                          "name": "classicmapping.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJzdGF0dXMiOiAiZXJyb3IiLAogICJkYXRhIjogW10KfQ=="
+                        },
+                        {
+                          "name": "generate_classic_sticker.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIKfQ=="
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a956471b4d38c23c3243-c2f9d59a38579bd6edfa",
+              "file": "sticker_flow.spec.js",
+              "line": 74,
+              "column": 3
             }
           ]
         }
@@ -389,9 +658,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-08-01T01:35:34.024Z",
-    "duration": 128546.78099999999,
-    "expected": 2,
+    "startTime": "2026-08-01T02:26:20.084Z",
+    "duration": 138629.718,
+    "expected": 4,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

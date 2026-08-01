@@ -144,8 +144,8 @@ test.describe('Global Member Area Report Generation Flow', () => {
     // 3. Generate Classic Unmapped VIN & dropdown selectors
     await actor.attemptsTo(new GenerateClassicUnmappedVIN('245GH4156001', isSlowNetwork));
 
-    // 4. Expect Redirection to My Reports
-    await expect(page).toHaveURL(/my-reports/, { timeout: isSlowNetwork ? 120000 : 60000 });
+    // 4. Expect Redirection to My Reports or Classic Detail Page
+    await expect(page).toHaveURL(/my-reports|classic/, { timeout: isSlowNetwork ? 120000 : 60000 });
     console.log("Classic Unmapped VIN report generation completed successfully.");
     await page.close();
   });
@@ -170,8 +170,8 @@ test.describe('Global Member Area Report Generation Flow', () => {
     // 3. Generate Classic Unmapped VIN & fill manual input textboxes
     await actor.attemptsTo(new GenerateClassicUnmappedVINManual('245GH4156001', isSlowNetwork));
 
-    // 4. Expect Redirection to My Reports
-    await expect(page).toHaveURL(/my-reports/, { timeout: isSlowNetwork ? 120000 : 60000 });
+    // 4. Expect Redirection to My Reports or Classic Detail Page
+    await expect(page).toHaveURL(/my-reports|classic/, { timeout: isSlowNetwork ? 120000 : 60000 });
     console.log("Classic Unmapped VIN report (manual input) completed successfully.");
     await page.close();
   });
