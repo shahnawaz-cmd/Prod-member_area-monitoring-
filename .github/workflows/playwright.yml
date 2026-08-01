@@ -7,6 +7,8 @@ permissions:
   pages: write
 
 on:
+  push:
+    branches: [ main, master ]
   schedule:
     - cron: '0 0,8,16 * * *'
   pull_request:
@@ -17,6 +19,11 @@ jobs:
   test:
     timeout-minutes: 120
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shardIndex: [1, 2, 3]
+        shardTotal: [3]
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
@@ -31,16 +38,15 @@ jobs:
         MONGO_URI: ${{ secrets.MONGO_URI }}
         MONGO_DB_NAME: ${{ secrets.MONGO_DB_NAME }}
         MONGO_COLL_NAME: ${{ secrets.MONGO_COLL_NAME }}
-      run: npx playwright test
+      run: npx playwright test --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }} --reporter=blob
       
-    - uses: actions/upload-artifact@v4
+    - name: Upload blob report
+      uses: actions/upload-artifact@v4
       if: always()
       with:
-        name: playwright-report
-        path: |
-          playwright-report/
-          results.json
-        retention-days: 30
+        name: all-blob-reports-${{ matrix.shardIndex }}
+        path: blob-report
+        retention-days: 1
 
   report:
     needs: test
@@ -51,14 +57,19 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
-      - name: Download results
+      - name: Install dependencies
+        run: npm ci
+      - name: Download blob reports
         uses: actions/download-artifact@v4
         with:
-          name: playwright-report
-          path: .
+          path: all-blob-reports
+          pattern: all-blob-reports-*
+          merge-multiple: true
           
-      - name: Install dependencies for report
-        run: npm install axios
+      - name: Merge HTML and JSON Reports
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_NAME: results.json
+        run: npx playwright merge-reports --reporter=html,json ./all-blob-reports
 
       - name: Deploy report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
