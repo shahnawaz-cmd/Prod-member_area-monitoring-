@@ -58,41 +58,42 @@ try {
   allSpecs.forEach(spec => {
     if (!spec.tests || spec.tests.length === 0) return;
     
-    // Count retries across all attempts of this test
+    // Process every test instance (project/browser run) of this spec
     for (const testInstance of spec.tests) {
-      if (testInstance.results) {
-        totalRetries += Math.max(0, testInstance.results.length - 1);
+      const attempts = testInstance.results || [];
+      if (attempts.length === 0) continue;
+      
+      // Count retries across all attempts of this test configuration
+      totalRetries += Math.max(0, attempts.length - 1);
+
+      const hasFailures = attempts.some(r => r.status === 'failed' || r.status === 'timedOut');
+      const hasPass = attempts.some(r => r.status === 'passed');
+      const isSkipped = attempts.every(r => r.status === 'skipped');
+
+      if (isSkipped) continue; // Skip skipped tests
+      
+      let isFlaky = false;
+      let finalStatus = 'unknown';
+      
+      if (hasPass) {
+        finalStatus = 'passed';
+      } else if (hasFailures) {
+        finalStatus = 'failed';
+      } else {
+        finalStatus = attempts[0]?.status || 'unknown';
       }
-    }
 
-    const attempts = spec.tests[0].results || [];
-    const hasFailures = attempts.some(r => r.status === 'failed' || r.status === 'timedOut');
-    const hasPass = attempts.some(r => r.status === 'passed');
-    
-    let isFlaky = false;
-    let finalStatus = 'unknown';
-    
-    if (hasFailures && hasPass) {
-      isFlaky = true;
-      finalStatus = 'flaky';
-    } else if (hasPass) {
-      finalStatus = 'passed';
-    } else if (hasFailures) {
-      finalStatus = 'failed';
-    } else {
-      finalStatus = attempts[0]?.status || 'unknown';
-    }
+      const browser = testInstance.projectName || 'unknown';
 
-    const browser = spec.tests[0].projectName || 'unknown';
-
-    if (isFlaky) {
-      flakyCount++;
-      flakySpecs.push({ title: spec.title, browser });
-    } else if (finalStatus === 'passed') {
-      passedCount++;
-    } else {
-      failedCount++;
-      failedSpecs.push({ title: spec.title, browser });
+      if (isFlaky) {
+        flakyCount++;
+        flakySpecs.push({ title: spec.title, browser });
+      } else if (finalStatus === 'passed') {
+        passedCount++;
+      } else if (finalStatus === 'failed') {
+        failedCount++;
+        failedSpecs.push({ title: spec.title, browser });
+      }
     }
   });
 
@@ -183,24 +184,6 @@ if (SLACK_WEBHOOK_URL) {
   axios.post(SLACK_WEBHOOK_URL, payload)
     .then(() => {
       console.log('Slack main channel notification sent successfully.');
-      
-      // 2. If failed, send direct personal notifications to the member IDs
-      if (!isSuccess) {
-        console.log('Test failed. Distributing personal notifications...');
-        const personalIds = ['U03UR6FFQKB', 'U09UE83AWGP'];
-        
-        for (const memberId of personalIds) {
-          const personalPayload = {
-            ...payload,
-            channel: `@${memberId}`, // Target the user directly
-            text: `⚠️ [DIRECT ALERT] Prod Member area monitoring failed!\n${mentions}`
-          };
-          
-          axios.post(SLACK_WEBHOOK_URL, personalPayload)
-            .then(() => console.log(`Direct notification sent successfully to Slack Member: ${memberId}`))
-            .catch(err => console.error(`Failed to send direct notification to ${memberId}: ${err.message}`));
-        }
-      }
     })
     .catch(err => console.error('Error sending Slack notification:', err));
 } else {
