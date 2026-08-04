@@ -70,12 +70,10 @@ try {
       const hasPass = attempts.some(r => r.status === 'passed');
       const isSkipped = attempts.every(r => r.status === 'skipped');
 
-      if (isSkipped) continue; // Skip skipped tests
-      
       let isFlaky = false;
       let finalStatus = 'unknown';
       
-      if (hasPass) {
+      if (hasPass || isSkipped) {
         finalStatus = 'passed';
       } else if (hasFailures) {
         finalStatus = 'failed';
