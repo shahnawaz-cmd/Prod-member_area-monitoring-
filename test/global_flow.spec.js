@@ -28,7 +28,7 @@ test.describe('Global Member Area Report Generation Flow', () => {
 
     // 2. Direct Navigation to Dashboard (using cached session)
     console.log("Navigating directly to Dashboard...");
-    await page.goto(`${actor.baseUrl}/dashboard`, { waitUntil: 'domcontentloaded' });
+    await page.goto(actor.dashboardUrl, { waitUntil: 'domcontentloaded' });
     await page.waitForURL('**/dashboard**', { timeout: 60000 });
 
     // 3. Generate Dynamic US VIN
@@ -37,7 +37,7 @@ test.describe('Global Member Area Report Generation Flow', () => {
     // 4. Generate US VIN Report
     await actor.attemptsTo(new GenerateVinReport(null, isSlowNetwork));
 
-    await expect(page).toHaveURL(/my-reports/, { timeout: isSlowNetwork ? 120000 : 60000 });
+    await expect(page).toHaveURL(/my-reports?|my-report/, { timeout: isSlowNetwork ? 120000 : 60000 });
     console.log("US VIN report generation completed successfully.");
     await page.close();
   });
@@ -56,7 +56,7 @@ test.describe('Global Member Area Report Generation Flow', () => {
 
     // 2. Direct Navigation to Dashboard
     console.log("Navigating directly to Dashboard...");
-    await page.goto(`${actor.baseUrl}/dashboard`, { waitUntil: 'domcontentloaded' });
+    await page.goto(actor.dashboardUrl, { waitUntil: 'domcontentloaded' });
     await page.waitForURL('**/dashboard**', { timeout: 60000 });
 
     // 3. Generate Classic Mapped VIN
@@ -65,7 +65,7 @@ test.describe('Global Member Area Report Generation Flow', () => {
     // 4. Generate Classic VIN Report
     await actor.attemptsTo(new GenerateVinReport(null, isSlowNetwork));
 
-    await expect(page).toHaveURL(/my-reports/, { timeout: isSlowNetwork ? 120000 : 60000 });
+    await expect(page).toHaveURL(/my-reports?|my-report/, { timeout: isSlowNetwork ? 120000 : 60000 });
     console.log("Classic VIN report generation completed successfully.");
     await page.close();
   });
@@ -84,7 +84,7 @@ test.describe('Global Member Area Report Generation Flow', () => {
 
     // 2. Direct Navigation to Dashboard
     console.log("Navigating directly to Dashboard...");
-    await page.goto(`${actor.baseUrl}/dashboard`, { waitUntil: 'domcontentloaded' });
+    await page.goto(actor.dashboardUrl, { waitUntil: 'domcontentloaded' });
     await page.waitForURL('**/dashboard**', { timeout: 60000 });
 
     // 3. Generate EU Mapped VIN
@@ -93,7 +93,7 @@ test.describe('Global Member Area Report Generation Flow', () => {
     // 4. Generate EU VIN Report
     await actor.attemptsTo(new GenerateEUReport(null, isSlowNetwork));
 
-    await expect(page).toHaveURL(/my-reports/, { timeout: isSlowNetwork ? 120000 : 60000 });
+    await expect(page).toHaveURL(/my-reports?|my-report/, { timeout: isSlowNetwork ? 120000 : 60000 });
     console.log("EU VIN report generation completed successfully.");
     await page.close();
   });
@@ -112,14 +112,14 @@ test.describe('Global Member Area Report Generation Flow', () => {
 
     // 2. Direct Navigation to Dashboard (using cached session)
     console.log("Navigating directly to Dashboard...");
-    await page.goto(`${actor.baseUrl}/dashboard`, { waitUntil: 'domcontentloaded' });
+    await page.goto(actor.dashboardUrl, { waitUntil: 'domcontentloaded' });
     await page.waitForURL('**/dashboard**', { timeout: 60000 });
 
     // 3. Generate License Plate Report
     await actor.attemptsTo(new GenerateLPReport('HBL1216', 'Texas', isSlowNetwork));
 
     // 4. Expect Redirection to My Reports
-    await expect(page).toHaveURL(/my-reports/, { timeout: isSlowNetwork ? 120000 : 60000 });
+    await expect(page).toHaveURL(/my-reports?|my-report/, { timeout: isSlowNetwork ? 120000 : 60000 });
     console.log("License Plate report generation completed successfully.");
     await page.close();
   });
@@ -138,14 +138,14 @@ test.describe('Global Member Area Report Generation Flow', () => {
 
     // 2. Direct Navigation to Dashboard (using cached session)
     console.log("Navigating directly to Dashboard...");
-    await page.goto(`${actor.baseUrl}/dashboard`, { waitUntil: 'domcontentloaded' });
+    await page.goto(actor.dashboardUrl, { waitUntil: 'domcontentloaded' });
     await page.waitForURL('**/dashboard**', { timeout: 60000 });
 
     // 3. Generate Classic Unmapped VIN & dropdown selectors
     await actor.attemptsTo(new GenerateClassicUnmappedVIN('245GH4156001', isSlowNetwork));
 
     // 4. Expect Redirection to My Reports or Classic Detail Page
-    await expect(page).toHaveURL(/my-reports|classic/, { timeout: isSlowNetwork ? 120000 : 60000 });
+    await expect(page).toHaveURL(/my-reports?|my-report|classic/, { timeout: isSlowNetwork ? 120000 : 60000 });
     console.log("Classic Unmapped VIN report generation completed successfully.");
     await page.close();
   });
@@ -164,14 +164,14 @@ test.describe('Global Member Area Report Generation Flow', () => {
 
     // 2. Direct Navigation to Dashboard (using cached session)
     console.log("Navigating directly to Dashboard...");
-    await page.goto(`${actor.baseUrl}/dashboard`, { waitUntil: 'domcontentloaded' });
+    await page.goto(actor.dashboardUrl, { waitUntil: 'domcontentloaded' });
     await page.waitForURL('**/dashboard**', { timeout: 60000 });
 
     // 3. Generate Classic Unmapped VIN & fill manual input textboxes
     await actor.attemptsTo(new GenerateClassicUnmappedVINManual('245GH4156001', isSlowNetwork));
 
     // 4. Expect Redirection to My Reports or Classic Detail Page
-    await expect(page).toHaveURL(/my-reports|classic/, { timeout: isSlowNetwork ? 120000 : 60000 });
+    await expect(page).toHaveURL(/my-reports?|my-report|classic/, { timeout: isSlowNetwork ? 120000 : 60000 });
     console.log("Classic Unmapped VIN report (manual input) completed successfully.");
     await page.close();
   });
@@ -213,9 +213,9 @@ test.describe('Independent UVC Subscription Operations', () => {
 
     // 8. Static Redirection
     console.log("Navigating statically to My Reports...");
-    await page.goto(`${actor.baseUrl}/my-reports`, { waitUntil: 'domcontentloaded' });
+    await page.goto(actor.myReportsUrl, { waitUntil: 'domcontentloaded' });
 
-    await expect(page).toHaveURL(/my-reports/, { timeout: isSlowNetwork ? 120000 : 60000 });
+    await expect(page).toHaveURL(/my-reports?|my-report/, { timeout: isSlowNetwork ? 120000 : 60000 });
     console.log("UVC report purchase and generation completed successfully.");
     await page.close();
   });

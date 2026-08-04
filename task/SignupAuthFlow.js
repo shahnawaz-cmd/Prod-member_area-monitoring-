@@ -9,7 +9,7 @@ class SignupAuthFlow {
     const page = actor.page;
     // const baseUrl = actor.baseUrl || "https://members.vehiclehistory.report";
     const baseUrl = actor.baseUrl;
-    const signupUrl = `${baseUrl}/signup`;
+    const signupUrl = baseUrl.includes('members.vehiclehistory.report') ? `${baseUrl}/members/signup` : `${baseUrl}/signup`;
     
     // Condition-based timeout
     const timeout = this.isSlowNetwork ? 120000 : 60000;

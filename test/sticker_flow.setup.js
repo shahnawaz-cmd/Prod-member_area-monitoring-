@@ -33,10 +33,10 @@ test('Setup Session — Window Sticker Signup and Purchase Flow', async ({ page 
   await actor.attemptsTo(new PurchaseFlow({}, isSlowNetwork));
 
   // 6. Dashboard Redirection
-  await actor.attemptsTo(new DashboardRedirectionCheck(isSlowNetwork ? 120000 : 60000));
+  await actor.attemptsTo(new DashboardRedirectionCheck(120000));
 
   // Verification
-  await expect(page).toHaveURL(/dashboard/, { timeout: 60000 });
+  await expect(page).toHaveURL(/.*dashboard.*/, { timeout: 60000 });
   console.log("Sticker setup flow completed successfully. Saving session state...");
   
   // Save session state to sticker_state.json

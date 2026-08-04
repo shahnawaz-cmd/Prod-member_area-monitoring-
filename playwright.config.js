@@ -12,6 +12,7 @@ module.exports = defineConfig({
   ],
   use: {
     headless: process.env.CI ? true : false,
+    trace: 'on',
   },
   projects: [
     // --- SETUPS ---
@@ -46,6 +47,22 @@ module.exports = defineConfig({
         storageState: 'sticker_state.json',
       },
       dependencies: ['sticker-setup'],
+    },
+
+    // --- DESKTOP CHROMIUM PROJECTS ---
+    {
+      name: 'desktop-setup',
+      testMatch: /sticker_flow\.setup\.js/,
+      use: { ...devices['Desktop Chrome'] },
+    },
+    {
+      name: 'sticker-desktop-chrome',
+      testMatch: /sticker_flow\.spec\.js/,
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: 'sticker_state.json',
+      },
+      dependencies: ['desktop-setup'],
     },
   ],
 });

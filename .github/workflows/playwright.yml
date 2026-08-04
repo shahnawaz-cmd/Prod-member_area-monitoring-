@@ -19,6 +19,10 @@ jobs:
   test:
     timeout-minutes: 120
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project: [mobile-safari, sticker-desktop-chrome, sticker-mobile-safari]
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
@@ -53,17 +57,16 @@ jobs:
         MONGO_URI: ${{ secrets.MONGO_URI }}
         MONGO_DB_NAME: ${{ secrets.MONGO_DB_NAME }}
         MONGO_COLL_NAME: ${{ secrets.MONGO_COLL_NAME }}
-      run: npx playwright test
+        BASE_URL: ${{ secrets.BASE_URL || 'https://members.vehiclehistory.report' }}
+      run: npx playwright test --project=${{ matrix.project }} --reporter=blob
       
-    - name: Upload Playwright Report
+    - name: Upload Playwright Blob Report
       uses: actions/upload-artifact@v4
       if: always()
       with:
-        name: playwright-report
-        path: |
-          playwright-report/
-          results.json
-        retention-days: 30
+        name: blob-report-${{ matrix.project }}
+        path: blob-report
+        retention-days: 7
 
   report:
     needs: test
@@ -75,14 +78,20 @@ jobs:
         with:
           node-version: lts/*
           
-      - name: Download results
+      - name: Install dependencies for report
+        run: npm ci
+          
+      - name: Download all blob reports
         uses: actions/download-artifact@v4
         with:
-          name: playwright-report
-          path: .
+          path: all-blobs
+          pattern: blob-report-*
+          merge-multiple: true
           
-      - name: Install dependencies for report
-        run: npm install axios
+      - name: Merge Playwright Reports into HTML & JSON
+        run: npx playwright merge-reports --reporter=html,json ./all-blobs
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_NAME: results.json
 
       - name: Deploy report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

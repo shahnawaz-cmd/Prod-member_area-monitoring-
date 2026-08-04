@@ -4,7 +4,9 @@
       "C:\\Program Files\\nodejs\\node.exe",
       "C:\\Users\\Shahnawaz\\Desktop\\PROD STABILITY MONITOR\\Member area monitoring\\node_modules\\@playwright\\test\\cli.js",
       "test",
-      "--project=desktop-chrome",
+      "-g",
+      "CS-05|CS-06",
+      "--project=sticker-desktop-chrome",
       "--headed"
     ],
     "configFile": "C:\\Users\\Shahnawaz\\Desktop\\PROD STABILITY MONITOR\\Member area monitoring\\playwright.config.js",
@@ -78,86 +80,6 @@
         "metadata": {
           "actualWorkers": 1
         },
-        "id": "mobile-chrome",
-        "name": "mobile-chrome",
-        "testDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test",
-        "testIgnore": [],
-        "testMatch": [
-          "/global_flow\\.spec\\.js/"
-        ],
-        "timeout": 5400000
-      },
-      {
-        "outputDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test-results",
-        "repeatEach": 1,
-        "retries": 0,
-        "metadata": {
-          "actualWorkers": 1
-        },
-        "id": "mobile-edge",
-        "name": "mobile-edge",
-        "testDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test",
-        "testIgnore": [],
-        "testMatch": [
-          "/global_flow\\.spec\\.js/"
-        ],
-        "timeout": 5400000
-      },
-      {
-        "outputDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test-results",
-        "repeatEach": 1,
-        "retries": 0,
-        "metadata": {
-          "actualWorkers": 1
-        },
-        "id": "samsung-internet",
-        "name": "samsung-internet",
-        "testDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test",
-        "testIgnore": [],
-        "testMatch": [
-          "/global_flow\\.spec\\.js/"
-        ],
-        "timeout": 5400000
-      },
-      {
-        "outputDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test-results",
-        "repeatEach": 1,
-        "retries": 0,
-        "metadata": {
-          "actualWorkers": 1
-        },
-        "id": "mobile-firefox",
-        "name": "mobile-firefox",
-        "testDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test",
-        "testIgnore": [],
-        "testMatch": [
-          "/global_flow\\.spec\\.js/"
-        ],
-        "timeout": 5400000
-      },
-      {
-        "outputDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test-results",
-        "repeatEach": 1,
-        "retries": 0,
-        "metadata": {
-          "actualWorkers": 1
-        },
-        "id": "desktop-chrome",
-        "name": "desktop-chrome",
-        "testDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test",
-        "testIgnore": [],
-        "testMatch": [
-          "/global_flow\\.spec\\.js/"
-        ],
-        "timeout": 5400000
-      },
-      {
-        "outputDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test-results",
-        "repeatEach": 1,
-        "retries": 0,
-        "metadata": {
-          "actualWorkers": 1
-        },
         "id": "sticker-mobile-safari",
         "name": "sticker-mobile-safari",
         "testDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test",
@@ -174,60 +96,12 @@
         "metadata": {
           "actualWorkers": 1
         },
-        "id": "sticker-mobile-chrome",
-        "name": "sticker-mobile-chrome",
+        "id": "desktop-setup",
+        "name": "desktop-setup",
         "testDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test",
         "testIgnore": [],
         "testMatch": [
-          "/sticker_flow\\.spec\\.js/"
-        ],
-        "timeout": 5400000
-      },
-      {
-        "outputDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test-results",
-        "repeatEach": 1,
-        "retries": 0,
-        "metadata": {
-          "actualWorkers": 1
-        },
-        "id": "sticker-mobile-edge",
-        "name": "sticker-mobile-edge",
-        "testDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test",
-        "testIgnore": [],
-        "testMatch": [
-          "/sticker_flow\\.spec\\.js/"
-        ],
-        "timeout": 5400000
-      },
-      {
-        "outputDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test-results",
-        "repeatEach": 1,
-        "retries": 0,
-        "metadata": {
-          "actualWorkers": 1
-        },
-        "id": "sticker-samsung-internet",
-        "name": "sticker-samsung-internet",
-        "testDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test",
-        "testIgnore": [],
-        "testMatch": [
-          "/sticker_flow\\.spec\\.js/"
-        ],
-        "timeout": 5400000
-      },
-      {
-        "outputDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test-results",
-        "repeatEach": 1,
-        "retries": 0,
-        "metadata": {
-          "actualWorkers": 1
-        },
-        "id": "sticker-mobile-firefox",
-        "name": "sticker-mobile-firefox",
-        "testDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test",
-        "testIgnore": [],
-        "testMatch": [
-          "/sticker_flow\\.spec\\.js/"
+          "/sticker_flow\\.setup\\.js/"
         ],
         "timeout": 5400000
       },
@@ -277,13 +151,13 @@
   },
   "suites": [
     {
-      "title": "global_flow.setup.js",
-      "file": "global_flow.setup.js",
+      "title": "sticker_flow.setup.js",
+      "file": "sticker_flow.setup.js",
       "column": 0,
       "line": 0,
       "specs": [
         {
-          "title": "Setup Session — Full Signup, Plan Selection, and Purchase Flow",
+          "title": "Setup Session — Window Sticker Signup and Purchase Flow",
           "ok": true,
           "tags": [],
           "tests": [
@@ -291,16 +165,19 @@
               "timeout": 300000,
               "annotations": [],
               "expectedStatus": "passed",
-              "projectId": "setup",
-              "projectName": "setup",
+              "projectId": "desktop-setup",
+              "projectName": "desktop-setup",
               "results": [
                 {
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 44653,
+                  "duration": 82050,
                   "errors": [],
                   "stdout": [
+                    {
+                      "text": "Blocked non-essential resources (images, fonts, trackers) for speed optimization.\n"
+                    },
                     {
                       "text": "Setting up listener for: /api-cwa/search-page\n"
                     },
@@ -315,6 +192,15 @@
                     },
                     {
                       "text": "Setting up listener for: /api-cwa/generate_uvc_report\n"
+                    },
+                    {
+                      "text": "Setting up listener for: /api-cwa/autoloading-stickerdata\n"
+                    },
+                    {
+                      "text": "Setting up listener for: /api-cwa/get-vymmtautoblog-forumData\n"
+                    },
+                    {
+                      "text": "Setting up listener for: /api-cwa/confirm-sticker\n"
                     },
                     {
                       "text": "Setting up listener for: cancel-subscription\n"
@@ -338,37 +224,46 @@
                       "text": "API listeners attached with report attachments (one-time capture).\n"
                     },
                     {
-                      "text": "Base URL configured to: https://members.vehiclehistory.report/members\n"
+                      "text": "Base URL configured to: https://members.vehiclehistory.report\n"
                     },
                     {
-                      "text": "Generated unique email: test_kjge@tms9rw1sc.com\n"
+                      "text": "Generated unique email: sticker_motr@tmsf8h0gi.com\n"
                     },
                     {
-                      "text": "Generated unique password: Pass_kjgems9rw1sc!\n"
+                      "text": "Generated unique password: Pass_motrmsf8h0gi!\n"
                     },
                     {
                       "text": "Navigating to Signup URL: https://members.vehiclehistory.report/members/signup (Timeout: 60000ms)\n"
                     },
                     {
-                      "text": "📥 Intercepted and saved API Response payload for: /api-cwa/search-page\n"
-                    },
-                    {
                       "text": "Signup successful.\n"
                     },
                     {
-                      "text": "Mobile view detected, opening side navigation...\n"
+                      "text": "📥 Intercepted and saved API Response payload for: /api-cwa/search-page\n"
                     },
                     {
-                      "text": "Locating the highest report package option available on the page...\n"
+                      "text": "Clicked 'Window Sticker' tab. (Timeout: 30000ms)\n"
                     },
                     {
-                      "text": "Found and selecting plan matching pattern: /10\\s*Reports/i\n"
+                      "text": "Locating the highest sticker package option available on the page...\n"
+                    },
+                    {
+                      "text": "Waiting for plan cards to render...\n"
+                    },
+                    {
+                      "text": "⚠️ Timeout waiting for '25 Stickers' card to render. Proceeding to scan remaining plans...\n"
+                    },
+                    {
+                      "text": "Found and selecting plan matching pattern: /10\\s*Stickers/i\n"
                     },
                     {
                       "text": "Clicked 'Proceed' button.\n"
                     },
                     {
                       "text": "Determining checkout page layout/strategy dynamically...\n"
+                    },
+                    {
+                      "text": "Selected Card tab option.\n"
                     },
                     {
                       "text": "Active Stripe Layout Status -> SingleFrame: true, MultiFrame: true\n"
@@ -386,29 +281,24 @@
                       "text": "📥 Intercepted and saved API Response payload for: /api-cwa/payment-update\n"
                     },
                     {
-                      "text": "Successfully redirected to: https://members.vehiclehistory.report/members/dashboard#vehicle-history-report\n"
+                      "text": "Successfully redirected to: https://members.vehiclehistory.report/members/dashboard#window-sticker\n"
                     },
                     {
-                      "text": "Global setup flow completed successfully. Saving session state...\n"
+                      "text": "Sticker setup flow completed successfully. Saving session state...\n"
                     },
                     {
-                      "text": "Session state saved to state.json.\n"
+                      "text": "Session state saved to sticker_state.json.\n"
                     }
                   ],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-01T02:49:15.452Z",
+                  "startTime": "2026-08-04T22:32:17.331Z",
                   "annotations": [],
                   "attachments": [
                     {
-                      "name": "search-page.json",
-                      "contentType": "application/json",
-                      "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidmhyX2NyZWRpdCI6IDAsCiAgICAicHJvZmlsZSI6IHsKICAgICAgImlkIjogIjUxMzI2MCIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2ZDVlYjFkN2M2YSIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogIiIsCiAgICAgICJhY2NvdW50X3R5cGUiOiAicGVyc29uYWwiLAogICAgICAidXNlcl90eXBlIjogInVzZXIiLAogICAgICAiYnVzaW5lc3NfdHlwZSI6IG51bGwsCiAgICAgICJ0b2tlbiI6ICJCQkNFQkJDRS00RTRFLTA1QUEtNTkzMi0yQUJBN0UxQ0M1MTUiLAogICAgICAiZW1haWwiOiAidGVzdF9ramdlQHRtczlydzFzYy5jb20iLAogICAgICAiZmlyc3QiOiAiIiwKICAgICAgImxhc3QiOiAiIiwKICAgICAgImFkZHJlc3MiOiAiIiwKICAgICAgInBob25lIjogIiIsCiAgICAgICJjb21wYW55X25hbWUiOiBudWxsLAogICAgICAiY29tcGFueV93ZWJzaXRlIjogbnVsbCwKICAgICAgImluc3RhZ3JhbSI6IG51bGwsCiAgICAgICJmYWNlYm9vayI6IG51bGwsCiAgICAgICJ0d2l0dGVyIjogbnVsbCwKICAgICAgImNpdHkiOiAiIiwKICAgICAgInN0YXRlIjogIklzbGFtYWJhZCAoSCA5LzEpIiwKICAgICAgImNvdW50cnkiOiAiUEsiLAogICAgICAicGluY29kZSI6ICIwIiwKICAgICAgIm5vX29mX2VtcGxveWVlcyI6IG51bGwsCiAgICAgICJjZHQiOiAiMjAyNi0wNy0zMSAyMjo0OToyMiIKICAgIH0sCiAgICAidmhyX2NyZWRpdF9zdWJzY3JpcHRpb24iOiAwLAogICAgInN0aWNrZXJfY3JlZGl0IjogMCwKICAgICJhdWN0aW9uX2NyZWRpdCI6IDAKICB9Cn0="
-                    },
-                    {
-                      "name": "payment-update.json",
-                      "contentType": "application/json",
-                      "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidXNlciI6IHsKICAgICAgImlkIjogIjUxMzI2MCIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2ZDVlYjFkN2M2YSIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogbnVsbCwKICAgICAgImFjY291bnRfdHlwZSI6ICJwZXJzb25hbCIsCiAgICAgICJ1c2VyX3R5cGUiOiAidXNlciIsCiAgICAgICJidXNpbmVzc190eXBlIjogbnVsbCwKICAgICAgInRva2VuIjogIkJCQ0VCQkNFLTRFNEUtMDVBQS01OTMyLTJBQkE3RTFDQzUxNSIsCiAgICAgICJlbWFpbCI6ICJ0ZXN0X2tqZ2VAdG1zOXJ3MXNjLmNvbSIsCiAgICAgICJmaXJzdCI6ICIiLAogICAgICAibGFzdCI6ICIiLAogICAgICAiYWRkcmVzcyI6ICIiLAogICAgICAicGhvbmUiOiAiIiwKICAgICAgImNvbXBhbnlfbmFtZSI6IG51bGwsCiAgICAgICJjb21wYW55X3dlYnNpdGUiOiBudWxsLAogICAgICAiaW5zdGFncmFtIjogbnVsbCwKICAgICAgImZhY2Vib29rIjogbnVsbCwKICAgICAgInR3aXR0ZXIiOiBudWxsLAogICAgICAiY2l0eSI6ICIiLAogICAgICAic3RhdGUiOiAiSXNsYW1hYmFkIChIIDkvMSkiLAogICAgICAiY291bnRyeSI6ICJQSyIsCiAgICAgICJwaW5jb2RlIjogIjAiLAogICAgICAibm9fb2ZfZW1wbG95ZWVzIjogbnVsbCwKICAgICAgImNkdCI6ICIyMDI2LTA3LTMxIDIyOjQ5OjIyIgogICAgfSwKICAgICJwYWdlIjogInNlYXJjaCIsCiAgICAidmluIjogIkNSRURJVCIsCiAgICAidmhyX2NyZWRpdCI6IDEwLAogICAgInZocl9jcmVkaXRfc3Vic2NyaXB0aW9uIjogMCwKICAgICJzdGlja2VyX2NyZWRpdCI6IDAsCiAgICAiYXVjdGlvbl9jcmVkaXQiOiAwCiAgfQp9"
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\Shahnawaz\\Desktop\\PROD STABILITY MONITOR\\Member area monitoring\\test-results\\sticker_flow.setup.js-Setu-25409-er-Signup-and-Purchase-Flow-desktop-setup\\trace.zip"
                     }
                   ]
                 }
@@ -416,28 +306,28 @@
               "status": "expected"
             }
           ],
-          "id": "7b25eb415c3688f67989-eac2dec3b5888af0b7f7",
-          "file": "global_flow.setup.js",
+          "id": "003ff80f0b75e7e6c584-73ed4fc3f269828ac3f7",
+          "file": "sticker_flow.setup.js",
           "line": 11,
           "column": 1
         }
       ]
     },
     {
-      "title": "global_flow.spec.js",
-      "file": "global_flow.spec.js",
+      "title": "sticker_flow.spec.js",
+      "file": "sticker_flow.spec.js",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "Global Member Area Report Generation Flow",
-          "file": "global_flow.spec.js",
-          "line": 16,
+          "title": "Global Window Sticker Generation Flow",
+          "file": "sticker_flow.spec.js",
+          "line": 8,
           "column": 6,
           "specs": [
             {
-              "title": "CS-02 — 17 Character VIN (US) report generate",
+              "title": "CS-05 — Dynamic Window Sticker Generation (Multi-Trim Flow)",
               "ok": true,
               "tags": [],
               "tests": [
@@ -445,16 +335,19 @@
                   "timeout": 300000,
                   "annotations": [],
                   "expectedStatus": "passed",
-                  "projectId": "desktop-chrome",
-                  "projectName": "desktop-chrome",
+                  "projectId": "sticker-desktop-chrome",
+                  "projectName": "sticker-desktop-chrome",
                   "results": [
                     {
                       "workerIndex": 1,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 58607,
+                      "duration": 87306,
                       "errors": [],
                       "stdout": [
+                        {
+                          "text": "Blocked non-essential resources (images, fonts, trackers) for speed optimization.\n"
+                        },
                         {
                           "text": "Setting up listener for: /api-cwa/search-page\n"
                         },
@@ -469,6 +362,15 @@
                         },
                         {
                           "text": "Setting up listener for: /api-cwa/generate_uvc_report\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/autoloading-stickerdata\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/get-vymmtautoblog-forumData\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/confirm-sticker\n"
                         },
                         {
                           "text": "Setting up listener for: cancel-subscription\n"
@@ -492,61 +394,84 @@
                           "text": "API listeners attached with report attachments (one-time capture).\n"
                         },
                         {
-                          "text": "Base URL configured to: https://members.vehiclehistory.report/members\n"
+                          "text": "Base URL configured to: https://members.vehiclehistory.report\n"
                         },
                         {
                           "text": "Navigating directly to Dashboard...\n"
                         },
                         {
+                          "text": "Switching to Window Sticker Tab...\n"
+                        },
+                        {
                           "text": "📥 Intercepted and saved API Response payload for: /api-cwa/search-page\n"
                         },
                         {
-                          "text": "US VIN generated and set on actor: 1C4RJFBGXJC406546\n"
+                          "text": "Generating initial Window Sticker...\n"
                         },
                         {
-                          "text": "Generating report for VIN: 1C4RJFBGXJC406546\n"
+                          "text": "Starting GenerateSticker for VIN: 1FTBF2B66HEE83884\n"
                         },
                         {
-                          "text": "Clicked 'Get vehicle History' button.\n"
+                          "text": "Clicked 'Get Window Sticker' button.\n"
+                        },
+                        {
+                          "text": "Awaiting vin-validate API response...\n"
+                        },
+                        {
+                          "text": "Awaiting generate_sticker API response...\n"
                         },
                         {
                           "text": "📥 Intercepted and saved API Response payload for: /api-cwa/vin-validate\n"
                         },
                         {
-                          "text": "Generate-Report API call completed successfully.\n"
+                          "text": "Awaiting autoloading-stickerdata API response...\n"
                         },
                         {
-                          "text": "Navigating to /my-reports...\n"
+                          "text": "📥 Intercepted and saved API Response payload for: generate-sticker\n"
                         },
                         {
-                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/generate-report\n"
+                          "text": "Starting simplified multi-trim flow...\n"
                         },
                         {
-                          "text": "Navigated to /my-reports\n"
+                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/autoloading-stickerdata\n"
                         },
                         {
-                          "text": "US VIN report generation completed successfully.\n"
+                          "text": "Trim modal dialog detected.\n"
+                        },
+                        {
+                          "text": "Found 1 dynamic trim options.\n"
+                        },
+                        {
+                          "text": "Skipping alternative trim selection (only 1 options found).\n"
+                        },
+                        {
+                          "text": "Waiting for Confirm button to become visible...\n"
+                        },
+                        {
+                          "text": "Clicking Confirm button...\n"
+                        },
+                        {
+                          "text": "Waiting for api-cwa/confirm-sticker response...\n"
+                        },
+                        {
+                          "text": "api-cwa/confirm-sticker API resolved.\n"
+                        },
+                        {
+                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/confirm-sticker\n"
+                        },
+                        {
+                          "text": "Dynamic Window Sticker generation completed successfully.\n"
                         }
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-08-01T02:50:02.540Z",
+                      "startTime": "2026-08-04T22:33:46.660Z",
                       "annotations": [],
                       "attachments": [
                         {
-                          "name": "search-page.json",
-                          "contentType": "application/json",
-                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidmhyX2NyZWRpdCI6IDEwLAogICAgInByb2ZpbGUiOiB7CiAgICAgICJpZCI6ICI1MTMyNjAiLAogICAgICAidHJhY2tpbmdfaWQiOiAiVVNFUjZhNmQ1ZWIxZDdjNmEiLAogICAgICAicHJvZmlsZV9pbWFnZSI6ICIiLAogICAgICAiYWNjb3VudF90eXBlIjogInBlcnNvbmFsIiwKICAgICAgInVzZXJfdHlwZSI6ICJ1c2VyIiwKICAgICAgImJ1c2luZXNzX3R5cGUiOiBudWxsLAogICAgICAidG9rZW4iOiAiQkJDRUJCQ0UtNEU0RS0wNUFBLTU5MzItMkFCQTdFMUNDNTE1IiwKICAgICAgImVtYWlsIjogInRlc3Rfa2pnZUB0bXM5cncxc2MuY29tIiwKICAgICAgImZpcnN0IjogIiIsCiAgICAgICJsYXN0IjogIiIsCiAgICAgICJhZGRyZXNzIjogIiIsCiAgICAgICJwaG9uZSI6ICIiLAogICAgICAiY29tcGFueV9uYW1lIjogbnVsbCwKICAgICAgImNvbXBhbnlfd2Vic2l0ZSI6IG51bGwsCiAgICAgICJpbnN0YWdyYW0iOiBudWxsLAogICAgICAiZmFjZWJvb2siOiBudWxsLAogICAgICAidHdpdHRlciI6IG51bGwsCiAgICAgICJjaXR5IjogIiIsCiAgICAgICJzdGF0ZSI6ICJJc2xhbWFiYWQgKEggOS8xKSIsCiAgICAgICJjb3VudHJ5IjogIlBLIiwKICAgICAgInBpbmNvZGUiOiAiMCIsCiAgICAgICJub19vZl9lbXBsb3llZXMiOiBudWxsLAogICAgICAiY2R0IjogIjIwMjYtMDctMzEgMjI6NDk6MjIiCiAgICB9LAogICAgInZocl9jcmVkaXRfc3Vic2NyaXB0aW9uIjogMCwKICAgICJzdGlja2VyX2NyZWRpdCI6IDAsCiAgICAiYXVjdGlvbl9jcmVkaXQiOiAwCiAgfQp9"
-                        },
-                        {
-                          "name": "vin-validate.json",
-                          "contentType": "application/json",
-                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAiaW5kaWdvIjogZmFsc2UsCiAgICAidmluZGVjaXBoZXIiOiB0cnVlLAogICAgInZwaWMiOiBmYWxzZSwKICAgICJldXJvcGUiOiBmYWxzZSwKICAgICJkZWVwbWluZCI6IGZhbHNlCiAgfQp9"
-                        },
-                        {
-                          "name": "generate-report.json",
-                          "contentType": "application/json",
-                          "body": "ewogICJzdGF0dXMiOiAiZXJyb3IiLAogICJ0eXBlIjogImludmFsaWQiLAogICJtc2ciOiAiV3JvbmcgdmluIG51bWJlciIsCiAgImNvdW50IjogbnVsbAp9"
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\Shahnawaz\\Desktop\\PROD STABILITY MONITOR\\Member area monitoring\\test-results\\sticker_flow-Global-Window-3f0e9-Generation-Multi-Trim-Flow--sticker-desktop-chrome\\trace.zip"
                         }
                       ]
                     }
@@ -554,13 +479,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "33d8e9c5e66333882a2a-18ab8baa23898dc0f572",
-              "file": "global_flow.spec.js",
-              "line": 17,
+              "id": "a956471b4d38c23c3243-8638fed163916a9c5536",
+              "file": "sticker_flow.spec.js",
+              "line": 145,
               "column": 3
             },
             {
-              "title": "CS-03 — Classic Mapped VIN report generate",
+              "title": "CS-06 — Window Sticker Regeneration Flow",
               "ok": true,
               "tags": [],
               "tests": [
@@ -568,16 +493,19 @@
                   "timeout": 300000,
                   "annotations": [],
                   "expectedStatus": "passed",
-                  "projectId": "desktop-chrome",
-                  "projectName": "desktop-chrome",
+                  "projectId": "sticker-desktop-chrome",
+                  "projectName": "sticker-desktop-chrome",
                   "results": [
                     {
                       "workerIndex": 1,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 11669,
+                      "duration": 97591,
                       "errors": [],
                       "stdout": [
+                        {
+                          "text": "Blocked non-essential resources (images, fonts, trackers) for speed optimization.\n"
+                        },
                         {
                           "text": "Setting up listener for: /api-cwa/search-page\n"
                         },
@@ -592,6 +520,15 @@
                         },
                         {
                           "text": "Setting up listener for: /api-cwa/generate_uvc_report\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/autoloading-stickerdata\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/get-vymmtautoblog-forumData\n"
+                        },
+                        {
+                          "text": "Setting up listener for: /api-cwa/confirm-sticker\n"
                         },
                         {
                           "text": "Setting up listener for: cancel-subscription\n"
@@ -615,191 +552,96 @@
                           "text": "API listeners attached with report attachments (one-time capture).\n"
                         },
                         {
-                          "text": "Base URL configured to: https://members.vehiclehistory.report/members\n"
+                          "text": "Base URL configured to: https://members.vehiclehistory.report\n"
                         },
                         {
                           "text": "Navigating directly to Dashboard...\n"
                         },
                         {
-                          "text": "Using base Classic Mapped VIN directly (Condition-based timeout check: 5000ms)...\n"
+                          "text": "Navigating to My Reports page...\n"
                         },
                         {
-                          "text": "Classic VIN set to base value: 228871N111628\n"
-                        },
-                        {
-                          "text": "Generating report for VIN: 228871N111628\n"
+                          "text": "Starting Regenerate Sticker Flow...\n"
                         },
                         {
                           "text": "📥 Intercepted and saved API Response payload for: /api-cwa/search-page\n"
                         },
                         {
-                          "text": "Clicked 'Get vehicle History' button.\n"
-                        },
-                        {
-                          "text": "Generate-Report API call completed successfully.\n"
-                        },
-                        {
-                          "text": "Navigating to /my-reports...\n"
-                        },
-                        {
-                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/generate-report\n"
-                        },
-                        {
-                          "text": "Navigated to /my-reports\n"
-                        },
-                        {
-                          "text": "Classic VIN report generation completed successfully.\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-08-01T02:51:03.307Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "search-page.json",
-                          "contentType": "application/json",
-                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidmhyX2NyZWRpdCI6IDEwLAogICAgInByb2ZpbGUiOiB7CiAgICAgICJpZCI6ICI1MTMyNjAiLAogICAgICAidHJhY2tpbmdfaWQiOiAiVVNFUjZhNmQ1ZWIxZDdjNmEiLAogICAgICAicHJvZmlsZV9pbWFnZSI6ICIiLAogICAgICAiYWNjb3VudF90eXBlIjogInBlcnNvbmFsIiwKICAgICAgInVzZXJfdHlwZSI6ICJ1c2VyIiwKICAgICAgImJ1c2luZXNzX3R5cGUiOiBudWxsLAogICAgICAidG9rZW4iOiAiQkJDRUJCQ0UtNEU0RS0wNUFBLTU5MzItMkFCQTdFMUNDNTE1IiwKICAgICAgImVtYWlsIjogInRlc3Rfa2pnZUB0bXM5cncxc2MuY29tIiwKICAgICAgImZpcnN0IjogIiIsCiAgICAgICJsYXN0IjogIiIsCiAgICAgICJhZGRyZXNzIjogIiIsCiAgICAgICJwaG9uZSI6ICIiLAogICAgICAiY29tcGFueV9uYW1lIjogbnVsbCwKICAgICAgImNvbXBhbnlfd2Vic2l0ZSI6IG51bGwsCiAgICAgICJpbnN0YWdyYW0iOiBudWxsLAogICAgICAiZmFjZWJvb2siOiBudWxsLAogICAgICAidHdpdHRlciI6IG51bGwsCiAgICAgICJjaXR5IjogIiIsCiAgICAgICJzdGF0ZSI6ICJJc2xhbWFiYWQgKEggOS8xKSIsCiAgICAgICJjb3VudHJ5IjogIlBLIiwKICAgICAgInBpbmNvZGUiOiAiMCIsCiAgICAgICJub19vZl9lbXBsb3llZXMiOiBudWxsLAogICAgICAiY2R0IjogIjIwMjYtMDctMzEgMjI6NDk6MjIiCiAgICB9LAogICAgInZocl9jcmVkaXRfc3Vic2NyaXB0aW9uIjogMCwKICAgICJzdGlja2VyX2NyZWRpdCI6IDEsCiAgICAiYXVjdGlvbl9jcmVkaXQiOiAwCiAgfQp9"
-                        },
-                        {
-                          "name": "generate-report.json",
-                          "contentType": "application/json",
-                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgIm1zZyI6ICJUaGFuayB5b3UgZm9yIG9yZGVyaW5nIHdpdGggVkhSLiBZb3VyIG9yZGVyIGlzIHByb2Nlc3NpbmcgYW5kIHRoZSByZXBvcnQgaXMgZ2VuZXJhdGluZy4gWW91IHdpbGwgYmUgcmVkaXJlY3RlZCB0byB0aGUgUmVwb3J0Igp9"
-                        }
-                      ]
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "33d8e9c5e66333882a2a-7398df61d5f1aadf435a",
-              "file": "global_flow.spec.js",
-              "line": 45,
-              "column": 3
-            },
-            {
-              "title": "CS-04 — EU Mapped VIN report generate",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 300000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "desktop-chrome",
-                  "projectName": "desktop-chrome",
-                  "results": [
-                    {
-                      "workerIndex": 1,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 28255,
-                      "errors": [],
-                      "stdout": [
-                        {
-                          "text": "Setting up listener for: /api-cwa/search-page\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/payment-update\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/vin-validate\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/generate-report\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/generate_uvc_report\n"
-                        },
-                        {
-                          "text": "Setting up listener for: cancel-subscription\n"
-                        },
-                        {
-                          "text": "Setting up listener for: license_plate_decode\n"
-                        },
-                        {
-                          "text": "Setting up listener for: generate_sticker\n"
-                        },
-                        {
-                          "text": "Setting up listener for: generate-sticker\n"
-                        },
-                        {
-                          "text": "Setting up listener for: classicmapping\n"
-                        },
-                        {
-                          "text": "Setting up listener for: generate_classic_sticker\n"
-                        },
-                        {
-                          "text": "API listeners attached with report attachments (one-time capture).\n"
-                        },
-                        {
-                          "text": "Base URL configured to: https://members.vehiclehistory.report/members\n"
-                        },
-                        {
-                          "text": "Navigating directly to Dashboard...\n"
-                        },
-                        {
-                          "text": "Generating EU VIN from list (Condition-based timeout check: 5000ms)...\n"
-                        },
-                        {
-                          "text": "Selected and randomized EU VIN: WAUZZZ8P6CA083443\n"
-                        },
-                        {
-                          "text": "Generating EU report for VIN: WAUZZZ8P6CA083443\n"
-                        },
-                        {
-                          "text": "Clicked 'Get vehicle History' button.\n"
-                        },
-                        {
-                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/search-page\n"
-                        },
-                        {
-                          "text": "Vin-Validate API call resolved.\n"
-                        },
-                        {
-                          "text": "Waiting for EU confirmation popup...\n"
+                          "text": "Clicked Regenerate Sticker. Awaiting vin-validate, generate-sticker, and autoloading APIs to complete...\n"
                         },
                         {
                           "text": "📥 Intercepted and saved API Response payload for: /api-cwa/vin-validate\n"
                         },
                         {
-                          "text": "✅ Clicked Yes confirmation button.\n"
+                          "text": "📥 Intercepted and saved API Response payload for: generate-sticker\n"
                         },
                         {
-                          "text": "Generate-Report API call completed successfully.\n"
+                          "text": "Regeneration loading APIs resolved. Checking for tour popup...\n"
                         },
                         {
-                          "text": "Navigating to /my-reports...\n"
+                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/autoloading-stickerdata\n"
                         },
                         {
-                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/generate-report\n"
+                          "text": "Tour popup closed.\n"
                         },
                         {
-                          "text": "Navigated to /my-reports\n"
+                          "text": "Trim clicked. Waiting for getYMMT forumData API response to resolve...\n"
                         },
                         {
-                          "text": "EU VIN report generation completed successfully.\n"
+                          "text": "getYMMT forumData API call resolved. Trim clicked successfully.\n"
+                        },
+                        {
+                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/get-vymmtautoblog-forumData\n"
+                        },
+                        {
+                          "text": "Next button clicked.\n"
+                        },
+                        {
+                          "text": "Tour popup on color selection page closed.\n"
+                        },
+                        {
+                          "text": "Exterior color Blue Jeans Metallic selected.\n"
+                        },
+                        {
+                          "text": "Interior color selected.\n"
+                        },
+                        {
+                          "text": "Second Next button clicked.\n"
+                        },
+                        {
+                          "text": "Options page tour closed.\n"
+                        },
+                        {
+                          "text": "Axle Ratio dropdown expanded.\n"
+                        },
+                        {
+                          "text": "Axle ratio option selected.\n"
+                        },
+                        {
+                          "text": "Option added successfully.\n"
+                        },
+                        {
+                          "text": "Clicked final Confirm button. Waiting for update responses...\n"
+                        },
+                        {
+                          "text": "Regeneration complete and confirmed.\n"
+                        },
+                        {
+                          "text": "Window Sticker regeneration completed successfully.\n"
+                        },
+                        {
+                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/confirm-sticker\n"
                         }
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-08-01T02:51:15.025Z",
+                      "startTime": "2026-08-04T22:35:17.346Z",
                       "annotations": [],
                       "attachments": [
                         {
-                          "name": "search-page.json",
-                          "contentType": "application/json",
-                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidmhyX2NyZWRpdCI6IDksCiAgICAicHJvZmlsZSI6IHsKICAgICAgImlkIjogIjUxMzI2MCIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2ZDVlYjFkN2M2YSIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogIiIsCiAgICAgICJhY2NvdW50X3R5cGUiOiAicGVyc29uYWwiLAogICAgICAidXNlcl90eXBlIjogInVzZXIiLAogICAgICAiYnVzaW5lc3NfdHlwZSI6IG51bGwsCiAgICAgICJ0b2tlbiI6ICJCQkNFQkJDRS00RTRFLTA1QUEtNTkzMi0yQUJBN0UxQ0M1MTUiLAogICAgICAiZW1haWwiOiAidGVzdF9ramdlQHRtczlydzFzYy5jb20iLAogICAgICAiZmlyc3QiOiAiIiwKICAgICAgImxhc3QiOiAiIiwKICAgICAgImFkZHJlc3MiOiAiIiwKICAgICAgInBob25lIjogIiIsCiAgICAgICJjb21wYW55X25hbWUiOiBudWxsLAogICAgICAiY29tcGFueV93ZWJzaXRlIjogbnVsbCwKICAgICAgImluc3RhZ3JhbSI6IG51bGwsCiAgICAgICJmYWNlYm9vayI6IG51bGwsCiAgICAgICJ0d2l0dGVyIjogbnVsbCwKICAgICAgImNpdHkiOiAiIiwKICAgICAgInN0YXRlIjogIklzbGFtYWJhZCAoSCA5LzEpIiwKICAgICAgImNvdW50cnkiOiAiUEsiLAogICAgICAicGluY29kZSI6ICIwIiwKICAgICAgIm5vX29mX2VtcGxveWVlcyI6IG51bGwsCiAgICAgICJjZHQiOiAiMjAyNi0wNy0zMSAyMjo0OToyMiIKICAgIH0sCiAgICAidmhyX2NyZWRpdF9zdWJzY3JpcHRpb24iOiAwLAogICAgInN0aWNrZXJfY3JlZGl0IjogMSwKICAgICJhdWN0aW9uX2NyZWRpdCI6IDAKICB9Cn0="
-                        },
-                        {
-                          "name": "vin-validate.json",
-                          "contentType": "application/json",
-                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAiaW5kaWdvIjogZmFsc2UsCiAgICAidmluZGVjaXBoZXIiOiBmYWxzZSwKICAgICJ2cGljIjogZmFsc2UsCiAgICAiZXVyb3BlIjogdHJ1ZSwKICAgICJkZWVwbWluZCI6IGZhbHNlCiAgfQp9"
-                        },
-                        {
-                          "name": "generate-report.json",
-                          "contentType": "application/json",
-                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgIm1zZyI6ICJUaGFuayB5b3UgZm9yIG9yZGVyaW5nIHdpdGggVkhSLiBZb3VyIG9yZGVyIGlzIHByb2Nlc3NpbmcgYW5kIHRoZSByZXBvcnQgaXMgZ2VuZXJhdGluZy4gWW91IHdpbGwgYmUgcmVkaXJlY3RlZCB0byB0aGUgUmVwb3J0Igp9"
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\Shahnawaz\\Desktop\\PROD STABILITY MONITOR\\Member area monitoring\\test-results\\sticker_flow-Global-Window-33533-w-Sticker-Regeneration-Flow-sticker-desktop-chrome\\trace.zip"
                         }
                       ]
                     }
@@ -807,544 +649,9 @@
                   "status": "expected"
                 }
               ],
-              "id": "33d8e9c5e66333882a2a-a29111652a8e2b92318e",
-              "file": "global_flow.spec.js",
-              "line": 73,
-              "column": 3
-            },
-            {
-              "title": "CS-05 — License Plate (LP) report generate",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 300000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "desktop-chrome",
-                  "projectName": "desktop-chrome",
-                  "results": [
-                    {
-                      "workerIndex": 1,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 11355,
-                      "errors": [],
-                      "stdout": [
-                        {
-                          "text": "Setting up listener for: /api-cwa/search-page\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/payment-update\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/vin-validate\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/generate-report\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/generate_uvc_report\n"
-                        },
-                        {
-                          "text": "Setting up listener for: cancel-subscription\n"
-                        },
-                        {
-                          "text": "Setting up listener for: license_plate_decode\n"
-                        },
-                        {
-                          "text": "Setting up listener for: generate_sticker\n"
-                        },
-                        {
-                          "text": "Setting up listener for: generate-sticker\n"
-                        },
-                        {
-                          "text": "Setting up listener for: classicmapping\n"
-                        },
-                        {
-                          "text": "Setting up listener for: generate_classic_sticker\n"
-                        },
-                        {
-                          "text": "API listeners attached with report attachments (one-time capture).\n"
-                        },
-                        {
-                          "text": "Base URL configured to: https://members.vehiclehistory.report/members\n"
-                        },
-                        {
-                          "text": "Navigating directly to Dashboard...\n"
-                        },
-                        {
-                          "text": "Generating LP report for Plate: HBL1216, State: Texas\n"
-                        },
-                        {
-                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/search-page\n"
-                        },
-                        {
-                          "text": "Clicked 'Get Vehicle History' button.\n"
-                        },
-                        {
-                          "text": "Awaiting License Plate decode API response...\n"
-                        },
-                        {
-                          "text": "Awaiting Report generation API response...\n"
-                        },
-                        {
-                          "text": "📥 Intercepted and saved API Response payload for: license_plate_decode\n"
-                        },
-                        {
-                          "text": "License Plate Report generation APIs resolved successfully.\n"
-                        },
-                        {
-                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/generate-report\n"
-                        },
-                        {
-                          "text": "License Plate report generation completed successfully.\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-08-01T02:51:43.327Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "search-page.json",
-                          "contentType": "application/json",
-                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidmhyX2NyZWRpdCI6IDgsCiAgICAicHJvZmlsZSI6IHsKICAgICAgImlkIjogIjUxMzI2MCIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2ZDVlYjFkN2M2YSIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogIiIsCiAgICAgICJhY2NvdW50X3R5cGUiOiAicGVyc29uYWwiLAogICAgICAidXNlcl90eXBlIjogInVzZXIiLAogICAgICAiYnVzaW5lc3NfdHlwZSI6IG51bGwsCiAgICAgICJ0b2tlbiI6ICJCQkNFQkJDRS00RTRFLTA1QUEtNTkzMi0yQUJBN0UxQ0M1MTUiLAogICAgICAiZW1haWwiOiAidGVzdF9ramdlQHRtczlydzFzYy5jb20iLAogICAgICAiZmlyc3QiOiAiIiwKICAgICAgImxhc3QiOiAiIiwKICAgICAgImFkZHJlc3MiOiAiIiwKICAgICAgInBob25lIjogIiIsCiAgICAgICJjb21wYW55X25hbWUiOiBudWxsLAogICAgICAiY29tcGFueV93ZWJzaXRlIjogbnVsbCwKICAgICAgImluc3RhZ3JhbSI6IG51bGwsCiAgICAgICJmYWNlYm9vayI6IG51bGwsCiAgICAgICJ0d2l0dGVyIjogbnVsbCwKICAgICAgImNpdHkiOiAiIiwKICAgICAgInN0YXRlIjogIklzbGFtYWJhZCAoSCA5LzEpIiwKICAgICAgImNvdW50cnkiOiAiUEsiLAogICAgICAicGluY29kZSI6ICIwIiwKICAgICAgIm5vX29mX2VtcGxveWVlcyI6IG51bGwsCiAgICAgICJjZHQiOiAiMjAyNi0wNy0zMSAyMjo0OToyMiIKICAgIH0sCiAgICAidmhyX2NyZWRpdF9zdWJzY3JpcHRpb24iOiAwLAogICAgInN0aWNrZXJfY3JlZGl0IjogMSwKICAgICJhdWN0aW9uX2NyZWRpdCI6IDAKICB9Cn0="
-                        },
-                        {
-                          "name": "license_plate_decode.json",
-                          "contentType": "application/json",
-                          "body": "ewogICJsaWNlbnNlIjogIkhCTDEyMTYiLAogICJzdGF0ZSI6ICJUWCIsCiAgInZpbiI6ICIySEdFUzE2MzI1SDUwNjcwMiIsCiAgImRhdGEiOiB7CiAgICAieWVhciI6ICIyMDA1IiwKICAgICJtYWtlIjogIkhPTkRBIiwKICAgICJtb2RlbCI6ICJDSVZJQyIsCiAgICAidmluIjogIjJIR0VTMTYzMjVINTA2NzAyIiwKICAgICJpbWFnZVVybCI6IG51bGwsCiAgICAic2VsZWN0ZWRUcmltIjogewogICAgICAidmlmbnVtIjogbnVsbCwKICAgICAgIm5hbWUiOiBudWxsLAogICAgICAiaWQiOiBudWxsCiAgICB9LAogICAgImF2YWlsYWJsZVRyaW1zIjogW10sCiAgICAic2VsZWN0ZWRDb2xvciI6IG51bGwsCiAgICAib3B0aW9ucyI6IFtdLAogICAgImNvbmRpdGlvbiI6IHsKICAgICAgIm92ZXJhbGxDb25kaXRpb24iOiBudWxsLAogICAgICAibWlsZWFnZSI6IG51bGwsCiAgICAgICJ3YXJuaW5nTGlnaHRzIjogbnVsbCwKICAgICAgImFjY2lkZW50cyI6IG51bGwsCiAgICAgICJzbW9rZWRJbiI6IG51bGwsCiAgICAgICJhY3RpdmVMb2FucyI6IG51bGwsCiAgICAgICJhY3RpdmVGaW5hbmNlIjogbnVsbCwKICAgICAgIm51bUtleXMiOiBudWxsCiAgICB9LAogICAgImFsdGVybmF0aXZlcyI6IFtdLAogICAgImRyaXZhYmxlIjogbnVsbCwKICAgICJoYXNBZnRlck1hcmtldE1vZGlmaWNhdGlvbnMiOiBudWxsCiAgfSwKICAiZXhlY3V0aW9uIHRpbWUiOiAwLjI5NjkyNjczNjgzMTY2NTA0LAogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgInNvdXJjZSI6ICJNb2JlcnJ5IiwKICAiZW5jcnlwdGVkX3ZpbiI6ICJkR3RsYm13MllWSlpORU5SVEUwNGNVdExZMXBQYWtka2EzUkhPR2h0VEd4RlpraE9XVGRxVEU4NE9EMD0iCn0="
-                        },
-                        {
-                          "name": "generate-report.json",
-                          "contentType": "application/json",
-                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgIm1zZyI6ICJUaGFuayB5b3UgZm9yIG9yZGVyaW5nIHdpdGggVkhSLiBZb3VyIG9yZGVyIGlzIHByb2Nlc3NpbmcgYW5kIHRoZSByZXBvcnQgaXMgZ2VuZXJhdGluZy4gWW91IHdpbGwgYmUgcmVkaXJlY3RlZCB0byB0aGUgUmVwb3J0Igp9"
-                        }
-                      ]
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "33d8e9c5e66333882a2a-220ea583e7f4ce841a9f",
-              "file": "global_flow.spec.js",
-              "line": 101,
-              "column": 3
-            },
-            {
-              "title": "CS-06 — Classic Unmapped VIN Report Generation",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 300000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "desktop-chrome",
-                  "projectName": "desktop-chrome",
-                  "results": [
-                    {
-                      "workerIndex": 1,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 167616,
-                      "errors": [],
-                      "stdout": [
-                        {
-                          "text": "Setting up listener for: /api-cwa/search-page\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/payment-update\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/vin-validate\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/generate-report\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/generate_uvc_report\n"
-                        },
-                        {
-                          "text": "Setting up listener for: cancel-subscription\n"
-                        },
-                        {
-                          "text": "Setting up listener for: license_plate_decode\n"
-                        },
-                        {
-                          "text": "Setting up listener for: generate_sticker\n"
-                        },
-                        {
-                          "text": "Setting up listener for: generate-sticker\n"
-                        },
-                        {
-                          "text": "Setting up listener for: classicmapping\n"
-                        },
-                        {
-                          "text": "Setting up listener for: generate_classic_sticker\n"
-                        },
-                        {
-                          "text": "API listeners attached with report attachments (one-time capture).\n"
-                        },
-                        {
-                          "text": "Base URL configured to: https://members.vehiclehistory.report/members\n"
-                        },
-                        {
-                          "text": "Navigating directly to Dashboard...\n"
-                        },
-                        {
-                          "text": "Generated randomized Classic Unmapped VIN: 245GH4156006\n"
-                        },
-                        {
-                          "text": "Waiting 5 seconds for page stabilization...\n"
-                        },
-                        {
-                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/search-page\n"
-                        },
-                        {
-                          "text": "Clicked 'Get Vehicle History' button.\n"
-                        },
-                        {
-                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/generate-report\n"
-                        },
-                        {
-                          "text": "📥 Generate-Report Response: {\n  \"status\": \"error\",\n  \"type\": \"error\",\n  \"msg\": \"Whoops.. Cannot autogenerate report for this classic vin.\"\n}\n"
-                        },
-                        {
-                          "text": "Detected autogenerate error. Selecting dropdown values...\n"
-                        },
-                        {
-                          "text": "📥 Intercepted and saved API Response payload for: classicmapping\n"
-                        },
-                        {
-                          "text": "Clicked 'Get Vehicle History' button after selecting dropdown values.\n"
-                        },
-                        {
-                          "text": "Classic Unmapped VIN report generation completed successfully.\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-08-01T02:51:54.728Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "search-page.json",
-                          "contentType": "application/json",
-                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidmhyX2NyZWRpdCI6IDcsCiAgICAicHJvZmlsZSI6IHsKICAgICAgImlkIjogIjUxMzI2MCIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2ZDVlYjFkN2M2YSIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogIiIsCiAgICAgICJhY2NvdW50X3R5cGUiOiAicGVyc29uYWwiLAogICAgICAidXNlcl90eXBlIjogInVzZXIiLAogICAgICAiYnVzaW5lc3NfdHlwZSI6IG51bGwsCiAgICAgICJ0b2tlbiI6ICJCQkNFQkJDRS00RTRFLTA1QUEtNTkzMi0yQUJBN0UxQ0M1MTUiLAogICAgICAiZW1haWwiOiAidGVzdF9ramdlQHRtczlydzFzYy5jb20iLAogICAgICAiZmlyc3QiOiAiIiwKICAgICAgImxhc3QiOiAiIiwKICAgICAgImFkZHJlc3MiOiAiIiwKICAgICAgInBob25lIjogIiIsCiAgICAgICJjb21wYW55X25hbWUiOiBudWxsLAogICAgICAiY29tcGFueV93ZWJzaXRlIjogbnVsbCwKICAgICAgImluc3RhZ3JhbSI6IG51bGwsCiAgICAgICJmYWNlYm9vayI6IG51bGwsCiAgICAgICJ0d2l0dGVyIjogbnVsbCwKICAgICAgImNpdHkiOiAiIiwKICAgICAgInN0YXRlIjogIklzbGFtYWJhZCAoSCA5LzEpIiwKICAgICAgImNvdW50cnkiOiAiUEsiLAogICAgICAicGluY29kZSI6ICIwIiwKICAgICAgIm5vX29mX2VtcGxveWVlcyI6IG51bGwsCiAgICAgICJjZHQiOiAiMjAyNi0wNy0zMSAyMjo0OToyMiIKICAgIH0sCiAgICAidmhyX2NyZWRpdF9zdWJzY3JpcHRpb24iOiAwLAogICAgInN0aWNrZXJfY3JlZGl0IjogMSwKICAgICJhdWN0aW9uX2NyZWRpdCI6IDAKICB9Cn0="
-                        },
-                        {
-                          "name": "generate-report.json",
-                          "contentType": "application/json",
-                          "body": "ewogICJzdGF0dXMiOiAiZXJyb3IiLAogICJ0eXBlIjogImVycm9yIiwKICAibXNnIjogIldob29wcy4uIENhbm5vdCBhdXRvZ2VuZXJhdGUgcmVwb3J0IGZvciB0aGlzIGNsYXNzaWMgdmluLiIKfQ=="
-                        },
-                        {
-                          "name": "classicmapping.json",
-                          "contentType": "application/json",
-                          "body": "ewogICJzdGF0dXMiOiAiZXJyb3IiLAogICJkYXRhIjogW10KfQ=="
-                        }
-                      ]
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "33d8e9c5e66333882a2a-7a144c5b8a60a9fe8dd1",
-              "file": "global_flow.spec.js",
-              "line": 127,
-              "column": 3
-            },
-            {
-              "title": "CS-07 — Classic unmapped (using manual input)",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 300000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "desktop-chrome",
-                  "projectName": "desktop-chrome",
-                  "results": [
-                    {
-                      "workerIndex": 1,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 99521,
-                      "errors": [],
-                      "stdout": [
-                        {
-                          "text": "Setting up listener for: /api-cwa/search-page\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/payment-update\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/vin-validate\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/generate-report\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/generate_uvc_report\n"
-                        },
-                        {
-                          "text": "Setting up listener for: cancel-subscription\n"
-                        },
-                        {
-                          "text": "Setting up listener for: license_plate_decode\n"
-                        },
-                        {
-                          "text": "Setting up listener for: generate_sticker\n"
-                        },
-                        {
-                          "text": "Setting up listener for: generate-sticker\n"
-                        },
-                        {
-                          "text": "Setting up listener for: classicmapping\n"
-                        },
-                        {
-                          "text": "Setting up listener for: generate_classic_sticker\n"
-                        },
-                        {
-                          "text": "API listeners attached with report attachments (one-time capture).\n"
-                        },
-                        {
-                          "text": "Base URL configured to: https://members.vehiclehistory.report/members\n"
-                        },
-                        {
-                          "text": "Navigating directly to Dashboard...\n"
-                        },
-                        {
-                          "text": "Generated randomized Classic Unmapped VIN (Manual): 245GH4150682\n"
-                        },
-                        {
-                          "text": "Waiting 5 seconds for page stabilization...\n"
-                        },
-                        {
-                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/search-page\n"
-                        },
-                        {
-                          "text": "Clicked 'Get Vehicle History' button.\n"
-                        },
-                        {
-                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/generate-report\n"
-                        },
-                        {
-                          "text": "📥 Generate-Report Response: {\n  \"status\": \"error\",\n  \"type\": \"error\",\n  \"msg\": \"Whoops.. Cannot autogenerate report for this classic vin.\"\n}\n"
-                        },
-                        {
-                          "text": "Detected autogenerate error. Proceeding with manual entry flow.\n"
-                        },
-                        {
-                          "text": "📥 Intercepted and saved API Response payload for: classicmapping\n"
-                        },
-                        {
-                          "text": "Classic Unmapped VIN report (manual input) completed successfully.\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-08-01T02:54:42.380Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "search-page.json",
-                          "contentType": "application/json",
-                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidmhyX2NyZWRpdCI6IDcsCiAgICAicHJvZmlsZSI6IHsKICAgICAgImlkIjogIjUxMzI2MCIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2ZDVlYjFkN2M2YSIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogIiIsCiAgICAgICJhY2NvdW50X3R5cGUiOiAicGVyc29uYWwiLAogICAgICAidXNlcl90eXBlIjogInVzZXIiLAogICAgICAiYnVzaW5lc3NfdHlwZSI6IG51bGwsCiAgICAgICJ0b2tlbiI6ICJCQkNFQkJDRS00RTRFLTA1QUEtNTkzMi0yQUJBN0UxQ0M1MTUiLAogICAgICAiZW1haWwiOiAidGVzdF9ramdlQHRtczlydzFzYy5jb20iLAogICAgICAiZmlyc3QiOiAiIiwKICAgICAgImxhc3QiOiAiIiwKICAgICAgImFkZHJlc3MiOiAiIiwKICAgICAgInBob25lIjogIiIsCiAgICAgICJjb21wYW55X25hbWUiOiBudWxsLAogICAgICAiY29tcGFueV93ZWJzaXRlIjogbnVsbCwKICAgICAgImluc3RhZ3JhbSI6IG51bGwsCiAgICAgICJmYWNlYm9vayI6IG51bGwsCiAgICAgICJ0d2l0dGVyIjogbnVsbCwKICAgICAgImNpdHkiOiAiIiwKICAgICAgInN0YXRlIjogIklzbGFtYWJhZCAoSCA5LzEpIiwKICAgICAgImNvdW50cnkiOiAiUEsiLAogICAgICAicGluY29kZSI6ICIwIiwKICAgICAgIm5vX29mX2VtcGxveWVlcyI6IG51bGwsCiAgICAgICJjZHQiOiAiMjAyNi0wNy0zMSAyMjo0OToyMiIKICAgIH0sCiAgICAidmhyX2NyZWRpdF9zdWJzY3JpcHRpb24iOiAwLAogICAgInN0aWNrZXJfY3JlZGl0IjogMSwKICAgICJhdWN0aW9uX2NyZWRpdCI6IDAKICB9Cn0="
-                        },
-                        {
-                          "name": "generate-report.json",
-                          "contentType": "application/json",
-                          "body": "ewogICJzdGF0dXMiOiAiZXJyb3IiLAogICJ0eXBlIjogImVycm9yIiwKICAibXNnIjogIldob29wcy4uIENhbm5vdCBhdXRvZ2VuZXJhdGUgcmVwb3J0IGZvciB0aGlzIGNsYXNzaWMgdmluLiIKfQ=="
-                        },
-                        {
-                          "name": "classicmapping.json",
-                          "contentType": "application/json",
-                          "body": "ewogICJzdGF0dXMiOiAiZXJyb3IiLAogICJkYXRhIjogW10KfQ=="
-                        }
-                      ]
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "33d8e9c5e66333882a2a-7f2c30ee79118cdf2bfe",
-              "file": "global_flow.spec.js",
-              "line": 153,
-              "column": 3
-            }
-          ]
-        },
-        {
-          "title": "Independent UVC Subscription Operations",
-          "file": "global_flow.spec.js",
-          "line": 181,
-          "column": 6,
-          "specs": [
-            {
-              "title": "CS-08 — UVC Report purchase and generate",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 300000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "desktop-chrome",
-                  "projectName": "desktop-chrome",
-                  "results": [
-                    {
-                      "workerIndex": 1,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 101965,
-                      "errors": [],
-                      "stdout": [
-                        {
-                          "text": "Setting up listener for: /api-cwa/search-page\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/payment-update\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/vin-validate\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/generate-report\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/generate_uvc_report\n"
-                        },
-                        {
-                          "text": "Setting up listener for: cancel-subscription\n"
-                        },
-                        {
-                          "text": "Setting up listener for: license_plate_decode\n"
-                        },
-                        {
-                          "text": "Setting up listener for: generate_sticker\n"
-                        },
-                        {
-                          "text": "Setting up listener for: generate-sticker\n"
-                        },
-                        {
-                          "text": "Setting up listener for: classicmapping\n"
-                        },
-                        {
-                          "text": "Setting up listener for: generate_classic_sticker\n"
-                        },
-                        {
-                          "text": "API listeners attached with report attachments (one-time capture).\n"
-                        },
-                        {
-                          "text": "Base URL configured to: https://members.vehiclehistory.report/members\n"
-                        },
-                        {
-                          "text": "Generated unique email: test_ud1x@tms9s56l0.com\n"
-                        },
-                        {
-                          "text": "Generated unique password: Pass_ud1xms9s56l0!\n"
-                        },
-                        {
-                          "text": "Navigating to Signup URL: https://members.vehiclehistory.report/members/signup (Timeout: 60000ms)\n"
-                        },
-                        {
-                          "text": "Signup successful.\n"
-                        },
-                        {
-                          "text": "Clicked 'Vehicle Report' span. (Timeout: 30000ms)\n"
-                        },
-                        {
-                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/search-page\n"
-                        },
-                        {
-                          "text": "Selecting 'Unlimited VIN Check' plan...\n"
-                        },
-                        {
-                          "text": "Clicked 'Proceed' button for UVC.\n"
-                        },
-                        {
-                          "text": "Determining checkout page layout/strategy dynamically...\n"
-                        },
-                        {
-                          "text": "Active Stripe Layout Status -> SingleFrame: true, MultiFrame: true\n"
-                        },
-                        {
-                          "text": "Proceeding with Multi-Frame Checkout Strategy.\n"
-                        },
-                        {
-                          "text": "Purchase flow completed.\n"
-                        },
-                        {
-                          "text": "US VIN generated and set on actor: JN8AZ2NF9F9571160\n"
-                        },
-                        {
-                          "text": "Generating UVC report for VIN: JN8AZ2NF9F9571160\n"
-                        },
-                        {
-                          "text": "Waiting 5 seconds for dashboard stabilization...\n"
-                        },
-                        {
-                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/payment-update\n"
-                        },
-                        {
-                          "text": "Attempting to click 'Get vehicle History' button for UVC...\n"
-                        },
-                        {
-                          "text": "Clicked 'Get vehicle History' button.\n"
-                        },
-                        {
-                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/vin-validate\n"
-                        },
-                        {
-                          "text": "UVC Report generation API call resolved.\n"
-                        },
-                        {
-                          "text": "Navigating statically to My Reports...\n"
-                        },
-                        {
-                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/generate_uvc_report\n"
-                        },
-                        {
-                          "text": "UVC report purchase and generation completed successfully.\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-08-01T02:56:21.940Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "search-page.json",
-                          "contentType": "application/json",
-                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidmhyX2NyZWRpdCI6IDAsCiAgICAicHJvZmlsZSI6IHsKICAgICAgImlkIjogIjUxMzI2NCIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2ZDYwNWFiYmZjMCIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogIiIsCiAgICAgICJhY2NvdW50X3R5cGUiOiAicGVyc29uYWwiLAogICAgICAidXNlcl90eXBlIjogInVzZXIiLAogICAgICAiYnVzaW5lc3NfdHlwZSI6IG51bGwsCiAgICAgICJ0b2tlbiI6ICIxOTBEMTkwRC0wQjBCLTRFMEItMjIyRC1DQTQzNDk1MUUyRTYiLAogICAgICAiZW1haWwiOiAidGVzdF91ZDF4QHRtczlzNTZsMC5jb20iLAogICAgICAiZmlyc3QiOiAiIiwKICAgICAgImxhc3QiOiAiIiwKICAgICAgImFkZHJlc3MiOiAiIiwKICAgICAgInBob25lIjogIiIsCiAgICAgICJjb21wYW55X25hbWUiOiBudWxsLAogICAgICAiY29tcGFueV93ZWJzaXRlIjogbnVsbCwKICAgICAgImluc3RhZ3JhbSI6IG51bGwsCiAgICAgICJmYWNlYm9vayI6IG51bGwsCiAgICAgICJ0d2l0dGVyIjogbnVsbCwKICAgICAgImNpdHkiOiAiIiwKICAgICAgInN0YXRlIjogIklzbGFtYWJhZCAoSCA5LzEpIiwKICAgICAgImNvdW50cnkiOiAiUEsiLAogICAgICAicGluY29kZSI6ICIwIiwKICAgICAgIm5vX29mX2VtcGxveWVlcyI6IG51bGwsCiAgICAgICJjZHQiOiAiMjAyNi0wNy0zMSAyMjo1NjoyNyIKICAgIH0sCiAgICAidmhyX2NyZWRpdF9zdWJzY3JpcHRpb24iOiAwLAogICAgInN0aWNrZXJfY3JlZGl0IjogMCwKICAgICJhdWN0aW9uX2NyZWRpdCI6IDAKICB9Cn0="
-                        },
-                        {
-                          "name": "payment-update.json",
-                          "contentType": "application/json",
-                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAidXNlciI6IHsKICAgICAgImlkIjogIjUxMzI2NCIsCiAgICAgICJ0cmFja2luZ19pZCI6ICJVU0VSNmE2ZDYwNWFiYmZjMCIsCiAgICAgICJwcm9maWxlX2ltYWdlIjogbnVsbCwKICAgICAgImFjY291bnRfdHlwZSI6ICJwZXJzb25hbCIsCiAgICAgICJ1c2VyX3R5cGUiOiAidXNlciIsCiAgICAgICJidXNpbmVzc190eXBlIjogbnVsbCwKICAgICAgInRva2VuIjogIjE5MEQxOTBELTBCMEItNEUwQi0yMjJELUNBNDM0OTUxRTJFNiIsCiAgICAgICJlbWFpbCI6ICJ0ZXN0X3VkMXhAdG1zOXM1NmwwLmNvbSIsCiAgICAgICJmaXJzdCI6ICIiLAogICAgICAibGFzdCI6ICIiLAogICAgICAiYWRkcmVzcyI6ICIiLAogICAgICAicGhvbmUiOiAiIiwKICAgICAgImNvbXBhbnlfbmFtZSI6IG51bGwsCiAgICAgICJjb21wYW55X3dlYnNpdGUiOiBudWxsLAogICAgICAiaW5zdGFncmFtIjogbnVsbCwKICAgICAgImZhY2Vib29rIjogbnVsbCwKICAgICAgInR3aXR0ZXIiOiBudWxsLAogICAgICAiY2l0eSI6ICIiLAogICAgICAic3RhdGUiOiAiSXNsYW1hYmFkIChIIDkvMSkiLAogICAgICAiY291bnRyeSI6ICJQSyIsCiAgICAgICJwaW5jb2RlIjogIjAiLAogICAgICAibm9fb2ZfZW1wbG95ZWVzIjogbnVsbCwKICAgICAgImNkdCI6ICIyMDI2LTA3LTMxIDIyOjU2OjI3IgogICAgfSwKICAgICJwYWdlIjogInNlYXJjaCIsCiAgICAidmluIjogbnVsbCwKICAgICJ2aHJfY3JlZGl0IjogbnVsbCwKICAgICJ2aHJfY3JlZGl0X3N1YnNjcmlwdGlvbiI6IDAsCiAgICAic3RpY2tlcl9jcmVkaXQiOiAwLAogICAgImF1Y3Rpb25fY3JlZGl0IjogMAogIH0KfQ=="
-                        },
-                        {
-                          "name": "vin-validate.json",
-                          "contentType": "application/json",
-                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgImRhdGEiOiB7CiAgICAiaW5kaWdvIjogZmFsc2UsCiAgICAidmluZGVjaXBoZXIiOiB0cnVlLAogICAgInZwaWMiOiBmYWxzZSwKICAgICJldXJvcGUiOiBmYWxzZSwKICAgICJkZWVwbWluZCI6IGZhbHNlCiAgfQp9"
-                        },
-                        {
-                          "name": "generate_uvc_report.json",
-                          "contentType": "application/json",
-                          "body": "ewogICJzdGF0dXMiOiAic3VjY2VzcyIsCiAgIm1zZyI6ICJUaGFuayB5b3UgZm9yIG9yZGVyaW5nIHdpdGggVkhSLiBZb3VyIG9yZGVyIGlzIHByb2Nlc3NpbmcgYW5kIHRoZSByZXBvcnQgaXMgZ2VuZXJhdGluZy4gWW91IHdpbGwgYmUgcmVkaXJlY3RlZCB0byB0aGUgUmVwb3J0Igp9"
-                        }
-                      ]
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "33d8e9c5e66333882a2a-81226fd0f3d8e3ee797e",
-              "file": "global_flow.spec.js",
-              "line": 184,
+              "id": "a956471b4d38c23c3243-1ac96cf1e6ad38f92dcc",
+              "file": "sticker_flow.spec.js",
+              "line": 183,
               "column": 3
             }
           ]
@@ -1354,9 +661,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-08-01T02:49:13.774Z",
-    "duration": 530645.594,
-    "expected": 8,
+    "startTime": "2026-08-04T22:32:15.240Z",
+    "duration": 284751.131,
+    "expected": 3,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

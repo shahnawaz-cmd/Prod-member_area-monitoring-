@@ -8,6 +8,9 @@ class CaptureApiResponses {
       '/api-cwa/vin-validate',
       '/api-cwa/generate-report',
       '/api-cwa/generate_uvc_report',
+      '/api-cwa/autoloading-stickerdata',
+      '/api-cwa/get-vymmtautoblog-forumData',
+      '/api-cwa/confirm-sticker',
       'cancel-subscription',
       'license_plate_decode',
       'generate_sticker',
@@ -50,21 +53,30 @@ class CaptureApiResponses {
       console.log(`Setting up listener for: ${pattern}`);
       
       const listener = async (response) => {
+        if (page.isClosed()) return;
         if (response.url().includes(pattern) && !captured[pattern]) {
           captured[pattern] = true; // Mark as captured
           
-          const body = await response.json().catch(() => ({}));
-          console.log(`📥 Intercepted and saved API Response payload for: ${pattern}`);
+          try {
+            const body = await response.json().catch(() => ({}));
+            console.log(`📥 Intercepted and saved API Response payload for: ${pattern}`);
 
-          // Attach to Playwright test report as separate JSON file entries
-          const cleanName = pattern.replace(/^\/api-cwa\//, '').replace(/\//g, '_');
-          await test.info().attach(`${cleanName}.json`, {
-            body: JSON.stringify(body, null, 2),
-            contentType: 'application/json',
-          });
-
-          // Remove listener after capture
-          page.removeListener('response', listener);
+            // Attach to Playwright test report as separate JSON file entries
+            const cleanName = pattern.replace(/^\/api-cwa\//, '').replace(/\//g, '_');
+            
+            // Only attempt to attach if the test has not finished/failed
+            if (test.info() && test.info().status === undefined) {
+              await test.info().attach(`${cleanName}.json`, {
+                body: JSON.stringify(body, null, 2),
+                contentType: 'application/json',
+              }).catch(() => {});
+            }
+          } catch (e) {
+            console.warn(`Failed to process/attach API response for ${pattern}:`, e.message);
+          } finally {
+            // Remove listener after capture
+            page.removeListener('response', listener);
+          }
         }
       };
       

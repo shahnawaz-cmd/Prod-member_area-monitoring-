@@ -334,9 +334,160 @@ class GenerateEUSticker {
   }
 }
 
+class GenerateSticker {
+  constructor(vin = null, isSlowNetwork = false) {
+    this.vin = vin;
+    this.isSlowNetwork = isSlowNetwork;
+  }
+
+  async performAs(actor) {
+    const page = actor.page;
+    const timeout = this.isSlowNetwork ? 60000 : 30000;
+    const apiTimeout = this.isSlowNetwork ? 300000 : 180000;
+
+    // Shuffle and pick a random VIN if none is explicitly provided
+    let targetVin = this.vin;
+    if (!targetVin) {
+      const randomIndex = Math.floor(Math.random() * STICKER_VINS.length);
+      targetVin = STICKER_VINS[randomIndex];
+    }
+    console.log(`Starting GenerateSticker for VIN: ${targetVin}`);
+
+    // Fill VIN
+    const vinInput = page.getByRole('textbox', { name: 'VIN Number' });
+    await vinInput.waitFor({ state: 'visible', timeout: timeout });
+    await vinInput.click();
+    await vinInput.fill(targetVin);
+
+    // Setup responses to wait for: vin-validate, generate_sticker (or generate-sticker), and autoloading-stickerdata
+    const validatePromise = page.waitForResponse(
+      res => res.url().includes('/api-cwa/vin-validate'),
+      { timeout: apiTimeout }
+    ).catch(() => null);
+
+    const generatePromise = page.waitForResponse(
+      res => res.url().includes('generate_sticker') || res.url().includes('generate-sticker'),
+      { timeout: apiTimeout }
+    ).catch(() => null);
+
+    const autoloadPromise = page.waitForResponse(
+      res => res.url().includes('/api-cwa/autoloading-stickerdata'),
+      { timeout: apiTimeout }
+    ).catch(() => null);
+
+    // Click Get Window Sticker
+    const submitButton = page.getByRole('button', { name: 'Get Window Sticker' });
+    await submitButton.waitFor({ state: 'visible', timeout: timeout });
+    await submitButton.click();
+    console.log("Clicked 'Get Window Sticker' button.");
+
+    // Await API responses
+    console.log("Awaiting vin-validate API response...");
+    await validatePromise;
+
+    console.log("Awaiting generate_sticker API response...");
+    await generatePromise;
+
+    console.log("Awaiting autoloading-stickerdata API response...");
+    await autoloadPromise;
+
+    // Call multiTrim helper function
+    await this.multiTrim(page, timeout, apiTimeout);
+  }
+
+  async multiTrim(page, timeout, apiTimeout) {
+    console.log("Starting simplified multi-trim flow...");
+
+    // Wait for the modal or popup to become visible
+    const modalLocator = page.locator('div[class*="modal"], div[class*="dialog"], div[class*="popup"], .modal-content, [role="dialog"]').first();
+    try {
+      await modalLocator.waitFor({ state: 'visible', timeout: 15000 });
+      console.log("Trim modal dialog detected.");
+    } catch (e) {
+      console.log("Trim modal not visible, looking for items on main page...");
+    }
+
+    // Locate the trim options (usually paragraphs, buttons, listitems or clickable texts)
+    const container = (await modalLocator.isVisible().catch(() => false)) ? modalLocator : page;
+    
+    // Target paragraphs, excluding helper/footer texts
+    const trimOptions = container.getByRole('paragraph').filter({ 
+      hasNotText: /Confirm|This usually takes|Basic Account|Premium Account|Credit|Support|Terms|Privacy|Loading|Decoder/i 
+    });
+
+    try {
+      await trimOptions.first().waitFor({ state: 'visible', timeout: 10000 });
+    } catch (e) {
+      console.log("Filtered trim options not visible. Proceeding to find Confirm directly...");
+    }
+
+    const count = await trimOptions.count().catch(() => 0);
+    console.log(`Found ${count} dynamic trim options.`);
+
+    if (count > 1) {
+      // Pick a random index between 1 and count - 1 to ensure we don't pick the 1st one (index 0)
+      const randomIndex = Math.floor(Math.random() * (count - 1)) + 1;
+      const selectedOption = trimOptions.nth(randomIndex);
+      const optionText = await selectedOption.innerText().catch(() => 'Selected option');
+      console.log(`Clicking a non-default trim option (index ${randomIndex}): "${optionText}"`);
+
+      // Set up the listener for the get-vymmtautoblog-forumData API call
+      const forumDataPromise = page.waitForResponse(
+        res => res.url().includes('/api-cwa/get-vymmtautoblog-forumData'),
+        { timeout: apiTimeout }
+      ).catch(() => null);
+
+      // Perform a fallback click
+      await selectedOption.click().catch(async (err) => {
+        console.log(`Standard click failed (${err.message}). Trying force click...`);
+        await selectedOption.click({ force: true }).catch(async (err2) => {
+          console.log(`Force click failed (${err2.message}). Dispatching click event...`);
+          await selectedOption.dispatchEvent('click');
+        });
+      });
+
+      console.log("Waiting for get-vymmtautoblog-forumData API response...");
+      await forumDataPromise;
+      console.log("get-vymmtautoblog-forumData API call completed.");
+      await page.waitForTimeout(2000);
+    } else {
+      console.log(`Skipping alternative trim selection (only ${count} options found).`);
+    }
+
+    // Locate and click the Confirm button
+    // Ensure we look inside the modal first if visible, with a fallback locator if inside the dialog container fails
+    const confirmButton = container.getByRole('button', { name: 'Confirm' }).first()
+      .or(page.getByRole('button', { name: 'Confirm' }).first())
+      .or(page.locator('button:has-text("Confirm")').first());
+
+    console.log("Waiting for Confirm button to become visible...");
+    await confirmButton.waitFor({ state: 'visible', timeout: timeout });
+
+    const confirmStickerPromise = page.waitForResponse(
+      res => res.url().includes('/api-cwa/confirm-sticker'),
+      { timeout: apiTimeout }
+    ).catch(() => null);
+
+    console.log("Clicking Confirm button...");
+    await confirmButton.click().catch(async (err) => {
+      console.log(`Confirm click failed (${err.message}). Trying force click...`);
+      await confirmButton.click({ force: true }).catch(async (err2) => {
+        console.log(`Confirm force click failed (${err2.message}). Dispatching click event...`);
+        await confirmButton.dispatchEvent('click');
+      });
+    });
+
+    console.log("Waiting for api-cwa/confirm-sticker response...");
+    await confirmStickerPromise;
+    console.log("api-cwa/confirm-sticker API resolved.");
+  }
+}
+
 module.exports = {
   ReverseDecode,
   ClassicMappedSticker,
   ClassicUnmappedSticker,
-  GenerateEUSticker
+  GenerateEUSticker,
+  GenerateSticker
 };
+

@@ -99,6 +99,7 @@ class PurchaseFlow {
     const cvc = this.cardData.cvc || '123';
     const zip = this.cardData.zip || '12345';
 
+    await page.waitForTimeout(1000);
     await cardFrame.locator('[name="cardnumber"]').fill(number);
     await expiryFrame.locator('[name="exp-date"]').fill(exp);
     await cvcFrame.locator('[name="cvc"]').fill(cvc);
