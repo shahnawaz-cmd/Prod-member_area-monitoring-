@@ -29,41 +29,47 @@ class SignupAuthFlow {
       throw new Error("No password was provided or generated on the actor.");
     }
     
-    // 1. Self-Healing Email Input
+    // 1. Resilient Email Input (With React Hydration Protection)
     console.log(`Filling Email: ${emailToUse}`);
-    await fastInputWithHealing(
-      page,
-      'Email',
-      emailToUse,
-      [
-        'input[type="email"]',
-        'input[name*="email" i]',
-        'input[id*="email" i]',
-        'input[placeholder*="email" i]'
-      ],
-      { isSlowNetwork: this.isSlowNetwork }
-    );
+    const emailInput = page.getByPlaceholder(/enter your email|email/i)
+      .or(page.getByRole('textbox', { name: /email/i }))
+      .or(page.locator('input[type="email"], input[name*="email" i], input[placeholder*="email" i]'))
+      .first();
+
+    await emailInput.waitFor({ state: 'visible', timeout: timeout });
+    await emailInput.click();
+    await emailInput.fill(emailToUse);
+    await emailInput.dispatchEvent('input').catch(() => {});
+    await emailInput.dispatchEvent('change').catch(() => {});
+
+    // Guard against SPA/React hydration clearing the initial field on mount
+    await page.waitForTimeout(300);
+    const currentEmailVal = await emailInput.inputValue().catch(() => '');
+    if (currentEmailVal !== emailToUse) {
+      console.log("React hydration reset detected. Re-filling Email...");
+      await emailInput.click();
+      await emailInput.fill(emailToUse);
+      await emailInput.dispatchEvent('input').catch(() => {});
+    }
 
     // 2. Self-Healing Password Input
     console.log("Filling Password...");
-    await fastInputWithHealing(
-      page,
-      'Password',
-      passwordToUse,
-      [
-        'input[type="password"]:not([name*="confirm" i]):not([id*="confirm" i])',
-        'input[type="password"]',
-        'input[name="password"]',
-        'input[id="password"]',
-        'input[placeholder*="password" i]'
-      ],
-      { isSlowNetwork: this.isSlowNetwork }
-    );
+    const passwordInput = page.getByPlaceholder(/enter your password|password/i)
+      .or(page.getByRole('textbox', { name: /^password$/i }))
+      .or(page.locator('input[type="password"]:not([placeholder*="confirm" i]):not([name*="confirm" i])'))
+      .first();
+
+    await passwordInput.waitFor({ state: 'visible', timeout: timeout });
+    await passwordInput.click();
+    await passwordInput.fill(passwordToUse);
+    await passwordInput.dispatchEvent('input').catch(() => {});
+    await passwordInput.dispatchEvent('change').catch(() => {});
 
     // 3. Adaptive Confirm Password (Conditional - only fills if present)
     const confirmPasswordLocators = [
+      page.getByPlaceholder(/confirm your password|confirm password/i),
       page.getByRole('textbox', { name: /confirm/i }),
-      page.getByPlaceholder(/confirm password/i),
+      page.locator('input[placeholder*="confirm" i]'),
       page.locator('input[name*="confirm" i]'),
       page.locator('input[id*="confirm" i]')
     ];
@@ -73,7 +79,10 @@ class SignupAuthFlow {
         const visibleConfirm = loc.locator('visible=true').first();
         if (await visibleConfirm.isVisible({ timeout: 2000 })) {
           console.log("Found Confirm Password field, filling...");
+          await visibleConfirm.click();
           await visibleConfirm.fill(passwordToUse);
+          await visibleConfirm.dispatchEvent('input').catch(() => {});
+          await visibleConfirm.dispatchEvent('change').catch(() => {});
           break;
         }
       } catch (e) {}
@@ -91,37 +100,21 @@ class SignupAuthFlow {
       }
     } catch (e) {}
 
-    // 5. Self-Healing Submit / Create Account Click
+    // 5. Submit Form
     console.log("Submitting Signup Form...");
-    const submitButtonSelectors = [
-      'button[type="submit"]',
-      'button:has-text("Sign Up")',
-      'button:has-text("Create Account")',
-      'button:has-text("Create Free Account")',
-      'button:has-text("Continue")',
-      'button:has-text("Get Started")',
-      'input[type="submit"]'
-    ];
+    const submitBtn = page.getByRole('button', { name: /Create Account|Sign Up|Create Free Account/i })
+      .or(page.locator('button:has-text("Create Account")'))
+      .or(page.locator('button[type="submit"]'))
+      .first();
 
-    await clickWithHealing(
-      page,
-      'Sign up',
-      submitButtonSelectors,
-      { strategyTimeout: 5000 }
-    );
+    await submitBtn.waitFor({ state: 'visible', timeout: 10000 });
+    await submitBtn.click({ force: true });
+    console.log("Clicked Create Account button.");
 
-    // 6. Resilient Post-Signup Navigation
-    console.log("Waiting for post-signup navigation...");
-    try {
-      await Promise.race([
-        page.waitForURL(url => !url.pathname.includes('/signup'), { timeout: timeout }),
-        page.waitForURL(/.*(dashboard|pricing|select-plan|plan|checkout|members).*/i, { timeout: timeout }),
-        page.locator('text=Select a Plan, text=Choose Plan, text=Dashboard').first().waitFor({ state: 'visible', timeout: timeout })
-      ]);
-      console.log(`✅ Signup completed! Current URL: ${page.url()}`);
-    } catch (e) {
-      console.warn(`⚠️ Post-signup navigation warning: ${e.message}. Proceeding...`);
-    }
+    // 6. Wait for redirect to Dashboard
+    console.log("Waiting for redirection to dashboard...");
+    await page.waitForURL('**/dashboard**', { timeout: timeout });
+    console.log(`✅ Signup successful and redirected to: ${page.url()}`);
   }
 }
 

@@ -64,5 +64,12 @@ module.exports = defineConfig({
       },
       dependencies: ['desktop-setup'],
     },
+
+    // --- DEDICATED CANCELLATION FLOW ---
+    {
+      name: 'cancel-subscription',
+      testMatch: /cancel_subscription\.spec\.js/,
+      use: { ...devices['iPhone 13'] },
+    },
   ],
 });

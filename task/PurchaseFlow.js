@@ -59,25 +59,33 @@ class PurchaseFlow {
     const zip = this.cardData.zip || '10001';
     const countryCode = this.cardData.countryCode || 'US';
 
-    await frame.getByRole('textbox', { name: 'Card number' }).fill(number);
-    await frame.getByRole('textbox', { name: 'Expiration date MM / YY' }).fill(exp);
-    await frame.getByRole('textbox', { name: 'Security code' }).fill(cvc);
+    const cardInput = frame.getByRole('textbox', { name: /Card number/i }).or(frame.getByPlaceholder(/1234/i)).first();
+    await cardInput.waitFor({ state: 'visible', timeout: timeout });
+    await cardInput.fill(number);
+
+    const expInput = frame.getByRole('textbox', { name: /Expiration/i }).or(frame.getByPlaceholder(/MM\s*\/\s*YY/i)).first();
+    await expInput.waitFor({ state: 'visible', timeout: timeout });
+    await expInput.fill(exp);
+
+    const cvcInput = frame.getByRole('textbox', { name: /Security code|CVC|CVV/i }).or(frame.getByPlaceholder(/CVC/i)).first();
+    await cvcInput.waitFor({ state: 'visible', timeout: timeout });
+    await cvcInput.fill(cvc);
 
     try {
-      const countryField = frame.getByLabel('Country');
+      const countryField = frame.getByRole('combobox', { name: /Country/i }).or(frame.getByLabel(/Country/i)).first();
       if (await countryField.isVisible({ timeout: 3000 })) {
-        await countryField.selectOption(countryCode);
+        await countryField.selectOption({ label: 'United States' }).catch(() => countryField.selectOption(countryCode));
       }
     } catch (e) {}
 
     try {
-      const zipField = frame.getByRole('textbox', { name: 'ZIP code' });
+      const zipField = frame.getByRole('textbox', { name: /ZIP|Postal/i }).or(frame.getByPlaceholder(/ZIP/i)).first();
       if (await zipField.isVisible({ timeout: 3000 })) {
         await zipField.fill(zip);
       }
     } catch (e) {}
 
-    const payButton = page.getByRole('button', { name: /^Pay\b/i });
+    const payButton = page.getByRole('button', { name: /^Pay\b/i }).first();
     await payButton.waitFor({ state: 'visible', timeout: timeout });
     await payButton.click();
   }

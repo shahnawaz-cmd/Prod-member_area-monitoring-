@@ -225,37 +225,4 @@ test.describe('Independent UVC Subscription Operations', () => {
     console.log("UVC report purchase and generation completed successfully.");
     await page.close();
   });
-
-  /*
-  test('CS-09 — UVC Subscription cancel', async ({ page }) => {
-    test.setTimeout(300000);
-
-    const actor = new Actor(page);
-    const isSlowNetwork = process.env.SLOW_NETWORK === 'true';
-
-    // 0. Setup API Monitoring
-    await actor.attemptsTo(new CaptureApiResponses());
-
-    // 1. Configure Base URL
-    await actor.attemptsTo(new ConfigureBaseUrl());
-
-    // 2. Generate Email & Password
-    await actor.attemptsTo(new GenerateEmail());
-
-    // 3. Signup
-    await actor.attemptsTo(new SignupAuthFlow(null, null, isSlowNetwork));
-
-    // 4. Select UVC Subscription Plan
-    await actor.attemptsTo(new SelectPlan('UVC Subscription', isSlowNetwork));
-
-    // 5. Purchase Plan via Stripe
-    await actor.attemptsTo(new PurchaseFlow({}, isSlowNetwork));
-
-    // 6. Cancel Subscription Flow
-    await actor.attemptsTo(new CancelSubscriptionFlow(isSlowNetwork));
-
-    console.log("UVC Subscription cancellation completed successfully.");
-    await page.close();
-  });
-  */
 });

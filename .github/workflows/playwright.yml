@@ -8,6 +8,8 @@ permissions:
   id-token: write
 
 on:
+  push:
+    branches: [ main, master ]
   schedule:
     - cron: '0 */12 * * *'
   pull_request:
@@ -25,7 +27,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        project: [mobile-safari, sticker-desktop-chrome, sticker-mobile-safari]
+        project: [mobile-safari, sticker-desktop-chrome, sticker-mobile-safari, cancel-subscription]
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
