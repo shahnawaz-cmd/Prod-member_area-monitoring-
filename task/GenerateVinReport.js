@@ -30,13 +30,20 @@ class GenerateVinReport {
     await genResPromise;
     console.log("Generate-Report API call completed successfully.");
     
-    console.log("Navigating to /my-reports...");
-    if (!page.url().includes('my-reports')) {
-      await page.goto(`${baseUrl}/my-reports`, { waitUntil: 'domcontentloaded' });
-      await page.waitForURL('**/my-reports**', { timeout: timeout });
-      await page.waitForTimeout(2000); // Keep for stability
+    // Resilient Redirection Handling: Wait for site's auto-redirect, fallback to safe manual goto
+    console.log("Waiting for redirection to /my-reports...");
+    try {
+      await page.waitForURL(url => url.pathname.includes('my-report'), { timeout: 15000 });
+    } catch (e) {
+      if (!page.url().includes('my-report')) {
+        const targetReportsUrl = baseUrl.includes('members.vehiclehistory.report') 
+          ? `${baseUrl}/members/my-reports` 
+          : `${baseUrl}/my-reports`;
+        await page.goto(targetReportsUrl, { waitUntil: 'domcontentloaded' }).catch(() => {});
+        await page.waitForURL(url => url.pathname.includes('my-report'), { timeout: timeout });
+      }
     }
-    console.log("Navigated to /my-reports");
+    console.log("Successfully navigated to /my-reports");
   }
 }
 
@@ -91,13 +98,20 @@ class GenerateEUReport {
     await genResPromise;
     console.log("Generate-Report API call completed successfully.");
     
-    console.log("Navigating to /my-reports...");
-    if (!page.url().includes('my-reports')) {
-      await page.goto(`${baseUrl}/my-reports`, { waitUntil: 'domcontentloaded' });
-      await page.waitForURL('**/my-reports**', { timeout: timeout });
-      await page.waitForTimeout(2000); // Keep for stability
+    // Resilient Redirection Handling: Wait for site's auto-redirect, fallback to safe manual goto
+    console.log("Waiting for redirection to /my-reports...");
+    try {
+      await page.waitForURL(url => url.pathname.includes('my-report'), { timeout: 15000 });
+    } catch (e) {
+      if (!page.url().includes('my-report')) {
+        const targetReportsUrl = baseUrl.includes('members.vehiclehistory.report') 
+          ? `${baseUrl}/members/my-reports` 
+          : `${baseUrl}/my-reports`;
+        await page.goto(targetReportsUrl, { waitUntil: 'domcontentloaded' }).catch(() => {});
+        await page.waitForURL(url => url.pathname.includes('my-report'), { timeout: timeout });
+      }
     }
-    console.log("Navigated to /my-reports");
+    console.log("Successfully navigated to /my-reports");
   }
 }
 

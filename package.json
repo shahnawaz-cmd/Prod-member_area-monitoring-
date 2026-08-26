@@ -1,10 +1,13 @@
 {
   "name": "member-area-monitoring",
   "version": "1.0.0",
-  "description": "",
+  "description": "Member Area Monitoring Flow with Playwright Self-Healing & AI Agentic Healing",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx playwright test",
+    "heal:prod": "node scripts/agentic-healer-ci.js",
+    "heal:ci": "node scripts/agentic-healer-ci.js",
+    "manage-issues": "node scripts/manage-issues.js"
   },
   "keywords": [],
   "type": "commonjs",
@@ -13,6 +16,8 @@
     "dotenv": "^16.4.1"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.0",
+    "@octokit/rest": "^20.1.0",
     "axios": "^1.18.1",
     "mongodb": "^6.3.0"
   }

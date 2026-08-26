@@ -211,9 +211,15 @@ test.describe('Independent UVC Subscription Operations', () => {
     // 7. Generate UVC Report
     await actor.attemptsTo(new GenerateUVCReport(actor.usVin, isSlowNetwork));
 
-    // 8. Static Redirection
-    console.log("Navigating statically to My Reports...");
-    await page.goto(actor.myReportsUrl, { waitUntil: 'domcontentloaded' });
+    // 8. Wait for Redirection to My Reports
+    console.log("Waiting for redirection to My Reports...");
+    try {
+      await page.waitForURL(url => url.pathname.includes('my-report'), { timeout: 15000 });
+    } catch (e) {
+      if (!page.url().includes('my-report')) {
+        await page.goto(actor.myReportsUrl, { waitUntil: 'domcontentloaded' }).catch(() => {});
+      }
+    }
 
     await expect(page).toHaveURL(/my-reports?|my-report/, { timeout: isSlowNetwork ? 120000 : 60000 });
     console.log("UVC report purchase and generation completed successfully.");

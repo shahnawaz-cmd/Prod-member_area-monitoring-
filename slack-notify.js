@@ -9,9 +9,9 @@ const {
   GITHUB_ACTOR,
   GITHUB_REF,
   GITHUB_EVENT,
-  TEST_RESULT,
   REPORT_URL,
-  BASE_URL
+  BASE_URL,
+  MATRIX_PROJECT
 } = process.env;
 
 let testSummary = '';
@@ -19,6 +19,13 @@ let passedCount = 0;
 let failedCount = 0;
 let flakyCount = 0;
 let totalRetries = 0;
+let aiHealedInfo = null;
+
+if (fs.existsSync('.ai-healed.json')) {
+  try {
+    aiHealedInfo = JSON.parse(fs.readFileSync('.ai-healed.json', 'utf8'));
+  } catch (e) {}
+}
 
 console.log('Current working directory:', process.cwd());
 console.log('Checking for results.json...');
@@ -70,10 +77,12 @@ try {
       const hasPass = attempts.some(r => r.status === 'passed');
       const isSkipped = attempts.every(r => r.status === 'skipped');
 
-      let isFlaky = false;
+      let isFlaky = hasFailures && hasPass;
       let finalStatus = 'unknown';
       
-      if (hasPass || isSkipped) {
+      if (isFlaky) {
+        finalStatus = 'flaky';
+      } else if (hasPass || isSkipped) {
         finalStatus = 'passed';
       } else if (hasFailures) {
         finalStatus = 'failed';
@@ -83,14 +92,19 @@ try {
 
       const browser = testInstance.projectName || 'unknown';
 
-      if (isFlaky) {
+      if (finalStatus === 'flaky') {
         flakyCount++;
         flakySpecs.push({ title: spec.title, browser });
       } else if (finalStatus === 'passed') {
         passedCount++;
       } else if (finalStatus === 'failed') {
         failedCount++;
-        failedSpecs.push({ title: spec.title, browser });
+        const lastFailure = attempts.reverse().find(r => r.status === 'failed' || r.status === 'timedOut');
+        let errorMsg = 'Unknown error';
+        if (lastFailure && lastFailure.error && lastFailure.error.message) {
+          errorMsg = lastFailure.error.message.split('\n')[0].substring(0, 150);
+        }
+        failedSpecs.push({ title: spec.title, browser, error: errorMsg });
       }
     }
   });
@@ -98,13 +112,17 @@ try {
   // Build enhanced grouped summary
   let summaryParts = [];
   if (failedSpecs.length > 0) {
-    summaryParts.push(`*🔴 Failed Tests (${failedSpecs.length}):*\n` + failedSpecs.map(s => `• *${s.title}* (_${s.browser}_)`).join('\n'));
+    summaryParts.push(`*🔴 Failed Tests (${failedSpecs.length}):*\n` + failedSpecs.map(s => `• *${s.title}* (_${s.browser}_)\n    > ❌ \`${s.error}\``).join('\n'));
   }
   if (flakySpecs.length > 0) {
     summaryParts.push(`*🟡 Flaky Tests (Passed on Retry) (${flakySpecs.length}):*\n` + flakySpecs.map(s => `• *${s.title}* (_${s.browser}_)`).join('\n'));
   }
   summaryParts.push(`*🟢 Passed Tests:* \`${passedCount}\` specs completed successfully.`);
   
+  if (aiHealedInfo && aiHealedInfo.healed) {
+    summaryParts.push(`*🤖 AI Agentic Self-Healer Status:* ✨ *Auto-Repaired via Gemini AI (${aiHealedInfo.model})*\n• *Files Auto-Healed:* \`${aiHealedInfo.repairedFiles.join('`, `')}\``);
+  }
+
   testSummary = summaryParts.join('\n\n');
   console.log('Grouped test summary generated:', testSummary);
 } catch (e) {
@@ -113,18 +131,19 @@ try {
 }
 
 // Derive Site and Env
-const site = BASE_URL ? (BASE_URL.includes('vehiclehistory') ? 'VHR' : 'Other') : 'Unknown';
-const env = BASE_URL ? (BASE_URL.includes('members') ? 'Prod' : 'Dev') : 'Unknown';
+const site = BASE_URL ? (BASE_URL.includes('vehiclehistory') ? 'VHR' : 'Other') : 'VHR';
+const env = BASE_URL ? (BASE_URL.includes('members') ? 'Prod' : 'Dev') : 'Prod';
 
 const runUrl = `${GITHUB_SERVER}/${GITHUB_REPO}/actions/runs/${GITHUB_RUN}`;
 const owner = GITHUB_REPO ? GITHUB_REPO.split('/')[0] : '';
 const repoName = GITHUB_REPO ? GITHUB_REPO.split('/')[1] : '';
-const reportUrl = REPORT_URL || ((owner && repoName) ? `https://${owner}.github.io/${repoName}/` : '');
+const projectFolder = MATRIX_PROJECT ? MATRIX_PROJECT.replace(' ', '%20') + '/' : '';
+const reportUrl = REPORT_URL || ((owner && repoName) ? `https://${owner}.github.io/${repoName}/${projectFolder}` : '');
 
 // A run is successful if there are zero failed tests (flaky tests are allowed)
 const isSuccess = failedCount === 0 && (passedCount > 0 || flakyCount > 0);
 const statusEmoji = isSuccess ? '✅' : '❌';
-const statusText = isSuccess ? 'Passed' : 'Failed';
+const statusText = isSuccess ? (aiHealedInfo?.healed ? 'Passed (AI Auto-Healed 🤖)' : 'Passed') : 'Failed';
 const mentions = !isSuccess ? ' CC: <@U03UR6FFQKB> <@U09UE83AWGP>' : '';
 const barColor = isSuccess ? '#2EB67D' : '#E01E5A'; // Slack Green or Red
 
@@ -157,7 +176,7 @@ const payload = {
           text: {
             type: 'mrkdwn',
             text: `*Environment:* \`${env}\` (${site})\n` +
-                  `*Base URL:* <${BASE_URL}|${BASE_URL || 'N/A'}>\n` +
+                  `*Base URL:* <${BASE_URL || 'https://members.vehiclehistory.report'}|${BASE_URL || 'https://members.vehiclehistory.report'}>\n` +
                   `*Workflow Run:* <${runUrl}|View Workflow Run 🛠️>\n` +
                   (reportUrl ? `*HTML Report:* <${reportUrl}|View HTML Report 📊>\n` : '') +
                   `*Trigger Details:* \`${GITHUB_ACTOR || 'N/A'}\` via \`${GITHUB_EVENT || 'N/A'}\` (\`${GITHUB_REF || 'N/A'}\`)`
@@ -178,12 +197,12 @@ const payload = {
 console.log('Slack Payload:', JSON.stringify(payload, null, 2));
 
 if (SLACK_WEBHOOK_URL) {
-  // 1. Post main channel notification
-  axios.post(SLACK_WEBHOOK_URL, payload)
+  // Post main channel notification
+  axios.post(SLACK_WEBHOOK_URL, payload, { timeout: 10000 })
     .then(() => {
       console.log('Slack main channel notification sent successfully.');
     })
-    .catch(err => console.error('Error sending Slack notification:', err));
+    .catch(err => console.error('Error sending Slack notification:', err.message));
 } else {
   console.log('SLACK_WEBHOOK_URL not set, skipping notification.');
 }

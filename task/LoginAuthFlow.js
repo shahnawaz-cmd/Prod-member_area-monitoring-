@@ -1,3 +1,5 @@
+const { fastInputWithHealing, clickWithHealing } = require('../utils/selfHealingLocator');
+
 class LoginAuthFlow {
   constructor(email = null, password = null, isSlowNetwork = false) {
     this.email = email;
@@ -7,12 +9,12 @@ class LoginAuthFlow {
 
   async performAs(actor) {
     const page = actor.page;
-    const baseUrl = actor.baseUrl;
-    const loginUrl = `${baseUrl}/login`;
+    const baseUrl = actor.baseUrl || "https://members.vehiclehistory.report";
+    const loginUrl = baseUrl.includes('members.vehiclehistory.report') ? `${baseUrl}/members/login` : `${baseUrl}/login`;
     const timeout = this.isSlowNetwork ? 120000 : 60000;
 
     console.log(`Navigating to Login URL: ${loginUrl}`);
-    await page.goto(loginUrl, { waitUntil: 'networkidle', timeout: timeout });
+    await page.goto(loginUrl, { waitUntil: 'domcontentloaded', timeout: timeout });
 
     const emailToUse = this.email || actor.email;
     const passwordToUse = this.password || actor.password;
@@ -21,12 +23,30 @@ class LoginAuthFlow {
       throw new Error("No login credentials were provided or generated on the actor.");
     }
 
-    await page.getByPlaceholder(/email/i).fill(emailToUse);
-    await page.getByRole('textbox', { name: /^password$/i }).fill(passwordToUse);
+    // 1. Self-Healing Email Input
+    await fastInputWithHealing(page, 'Email', emailToUse, [
+      'input[placeholder*="email" i]',
+      'input[type="email"]',
+      'input[name*="email" i]',
+      'input[id*="email" i]'
+    ], { isSlowNetwork: this.isSlowNetwork });
 
-    const loginButton = page.getByRole('button', { name: /Access Dashboard|log in|sign in/i }).first();
-    await loginButton.waitFor({ state: 'visible', timeout: timeout / 2 });
-    await loginButton.click();
+    // 2. Self-Healing Password Input
+    await fastInputWithHealing(page, 'Password', passwordToUse, [
+      'input[placeholder*="password" i]',
+      'input[type="password"]',
+      'input[name="password"]',
+      'input[id="password"]'
+    ], { isSlowNetwork: this.isSlowNetwork });
+
+    // 3. Self-Healing Login Click
+    await clickWithHealing(page, 'Access Dashboard', [
+      'button[type="submit"]',
+      'button:has-text("Sign in")',
+      'button:has-text("Log in")',
+      'button:has-text("Access Dashboard")',
+      'input[type="submit"]'
+    ]);
 
     await page.waitForURL('**/dashboard**', { timeout: timeout });
     console.log("Login successful.");

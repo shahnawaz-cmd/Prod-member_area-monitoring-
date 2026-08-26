@@ -1,7 +1,13 @@
 node_modules/
 test-results/
 playwright-report/
+blob-report/
+all-blobs/
+all-blob-reports/
 .DS_Store
 *.log
 .env
 state.json
+sticker_state.json
+uvc_state.json
+.ai-healed.json
