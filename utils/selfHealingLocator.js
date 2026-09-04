@@ -1,3 +1,10 @@
+function normalizeFallbacks(fallbackSelectors) {
+  if (!fallbackSelectors) return [];
+  if (Array.isArray(fallbackSelectors)) return fallbackSelectors;
+  if (typeof fallbackSelectors === 'string' || typeof fallbackSelectors === 'function') return [fallbackSelectors];
+  return [];
+}
+
 /**
  * Self-healing locator helper specifically designed for Input / Textbox fields.
  * Prioritizes accessibility textboxes, labels, placeholders, and attribute selectors before CSS/XPath fallbacks.
@@ -7,13 +14,14 @@ async function locateInputWithHealing(page, labelText, fallbackSelectors = [], o
   const isSlowNetwork = options.isSlowNetwork || process.env.SLOW_NETWORK === 'true';
   const baseTimeout = options.timeout || (isSlowNetwork ? 10000 : 4000);
   const strategyTimeout = options.strategyTimeout || Math.max(1500, Math.floor(baseTimeout / 3));
+  const safeFallbacks = normalizeFallbacks(fallbackSelectors);
 
   const rawStrategies = [
     () => page.getByRole('textbox', { name: new RegExp(labelText, 'i') }),
     () => page.getByPlaceholder(new RegExp(labelText, 'i')),
     () => page.getByLabel(new RegExp(labelText, 'i')),
     () => page.getByTestId(labelText.toLowerCase().replace(/\s+/g, '-')),
-    ...fallbackSelectors.map(sel => () => (typeof sel === 'function' ? sel(page) : page.locator(sel)))
+    ...safeFallbacks.map(sel => () => (typeof sel === 'function' ? sel(page) : page.locator(sel)))
   ];
 
   // Pass 1: Look for currently VISIBLE elements first (crucial for responsive desktop/mobile DOM duplicates)
@@ -80,13 +88,14 @@ async function locateElementWithHealing(page, labelText, fallbackSelectors = [],
   const isSlowNetwork = options.isSlowNetwork || process.env.SLOW_NETWORK === 'true';
   const baseTimeout = options.timeout || (isSlowNetwork ? 10000 : 4000);
   const strategyTimeout = options.strategyTimeout || Math.max(1500, Math.floor(baseTimeout / 3));
+  const safeFallbacks = normalizeFallbacks(fallbackSelectors);
 
   const rawStrategies = [
     () => page.getByRole('tab', { name: new RegExp(labelText, 'i') }),
     () => page.getByRole('button', { name: new RegExp(labelText, 'i') }),
     () => page.locator(`text=${labelText}`),
     () => page.getByTestId(labelText.toLowerCase().replace(/\s+/g, '-')),
-    ...fallbackSelectors.map(sel => () => (typeof sel === 'function' ? sel(page) : page.locator(sel)))
+    ...safeFallbacks.map(sel => () => (typeof sel === 'function' ? sel(page) : page.locator(sel)))
   ];
 
   // Pass 1: Look for VISIBLE elements first
@@ -124,12 +133,13 @@ async function locateElementWithHealing(page, labelText, fallbackSelectors = [],
  * Helper to click an element resilience-first using self-healing strategies
  */
 async function clickWithHealing(page, buttonTextOrLabel, fallbackSelectors = [], options = {}) {
+  const safeFallbacks = normalizeFallbacks(fallbackSelectors);
   const rawStrategies = [
     () => page.getByRole('button', { name: new RegExp(buttonTextOrLabel, 'i') }),
     () => page.locator(`button:has-text("${buttonTextOrLabel}")`),
     () => page.locator(`text=${buttonTextOrLabel}`),
     () => page.getByTestId(buttonTextOrLabel.toLowerCase().replace(/\s+/g, '-')),
-    ...fallbackSelectors.map(sel => () => (typeof sel === 'function' ? sel(page) : page.locator(sel)))
+    ...safeFallbacks.map(sel => () => (typeof sel === 'function' ? sel(page) : page.locator(sel)))
   ];
 
   const strategyTimeout = options.strategyTimeout || 3000;
@@ -159,8 +169,8 @@ async function clickWithHealing(page, buttonTextOrLabel, fallbackSelectors = [],
     } catch (e) {}
   }
 
-  if (fallbackSelectors.length > 0) {
-    const sel = fallbackSelectors[0];
+  if (safeFallbacks.length > 0) {
+    const sel = safeFallbacks[0];
     const loc = typeof sel === 'function' ? sel(page).first() : page.locator(sel).first();
     await loc.click({ force: true }).catch(() => {});
     return;
