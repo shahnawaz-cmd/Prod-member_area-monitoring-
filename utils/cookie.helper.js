@@ -110,20 +110,38 @@ class CookieIpInjector {
   }
 
   async setCwaIpCookie(ipAddress) {
-    await this.context.addCookies([
+    const hostname = this.domain;
+    const parts = hostname.split('.');
+    const rootDomain = parts.length > 2 ? `.${parts.slice(-2).join('.')}` : `.${hostname}`;
+
+    const cookies = [
       {
         name: 'cwa_ip',
         value: ipAddress,
-        domain: this.domain,
+        domain: hostname,
         path: '/',
         secure: true,
         httpOnly: true,
         sameSite: 'Lax',
       },
-    ]);
+    ];
+
+    if (rootDomain !== hostname) {
+      cookies.push({
+        name: 'cwa_ip',
+        value: ipAddress,
+        domain: rootDomain,
+        path: '/',
+        secure: true,
+        httpOnly: true,
+        sameSite: 'Lax',
+      });
+    }
+
+    await this.context.addCookies(cookies);
 
     console.log('\n' + '─'.repeat(70));
-    console.log(`💉 [CWA IP INJECTOR] Injected 'cwa_ip': "${ipAddress}" (Domain: ${this.domain})`);
+    console.log(`💉 [CWA IP INJECTOR] Injected 'cwa_ip': "${ipAddress}" (Host: ${hostname}, Root: ${rootDomain})`);
     console.log('─'.repeat(70) + '\n');
 
     return this.getCwaIpCookie();

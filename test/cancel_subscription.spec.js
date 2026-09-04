@@ -42,24 +42,28 @@ test.describe('Dedicated Subscription Cancellation Suite', () => {
 
     await actor.attemptsTo(new PurchaseFlow({}, isSlowNetwork));
 
-    // 6. Wait for payment-update API success & redirection
+    // 6. Wait for payment-update API success & navigate to dashboard
     console.log("Waiting for payment-update API to resolve...");
     const paymentRes = await paymentUpdatePromise;
     if (paymentRes) {
       console.log(`📥 payment-update API resolved with status: ${paymentRes.status()}`);
     }
 
-    console.log("Waiting for automatic redirection to dashboard or success page...");
+    console.log("Navigating to Dashboard and waiting 3 seconds for session stabilization...");
     try {
       await page.waitForURL(
-        url => url.pathname.includes('dashboard') || url.pathname.includes('success-page') || url.pathname.includes('my-report'),
-        { timeout: 45000 }
+        url => url.pathname.includes('dashboard') || url.pathname.includes('success-page'),
+        { timeout: 30000 }
       );
-      console.log(`✅ Redirection completed: ${page.url()}`);
-    } catch {
-      console.log("Auto-redirect timed out; navigating directly to dashboard...");
+    } catch (e) {
+      console.log("Auto-redirect timed out; ensuring direct dashboard navigation...");
+    }
+
+    if (!page.url().includes('/dashboard')) {
       await page.goto(actor.dashboardUrl, { waitUntil: 'domcontentloaded' });
     }
+
+    console.log(`✅ Stabilized on dashboard: ${page.url()}. Waiting 3 seconds before cancel flow...`);
     await page.waitForTimeout(3000);
 
     // 7. Perform Subscription Cancellation (with Dynamic Subscription ID capture & UI verification)
