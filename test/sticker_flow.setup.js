@@ -42,6 +42,4 @@ test('Setup Session — Window Sticker Signup and Purchase Flow', async ({ page 
   // Save session state to sticker_state.json
   await page.context().storageState({ path: 'sticker_state.json' });
   console.log("Session state saved to sticker_state.json.");
-  
-  await page.close();
 });
