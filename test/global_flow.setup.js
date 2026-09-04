@@ -42,6 +42,4 @@ test('Setup Session — Full Signup, Plan Selection, and Purchase Flow', async (
   // Save session state to state.json
   await page.context().storageState({ path: 'state.json' });
   console.log("Session state saved to state.json.");
-  
-  await page.close();
 });
