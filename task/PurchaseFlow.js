@@ -11,11 +11,12 @@ class PurchaseFlow {
     console.log("Determining checkout page layout/strategy dynamically...");
 
     // Click Card payment option first if visible
-    const cardTabButton = page.getByRole('button', { name: 'Card' });
+    const cardTabButton = page.getByRole('button', { name: /^Card$/i }).or(page.locator('button:has-text("Card")')).first();
     try {
       if (await cardTabButton.isVisible({ timeout: 5000 })) {
         await cardTabButton.click();
         console.log("Selected Card tab option.");
+        await page.waitForTimeout(500);
       }
     } catch (e) {}
 
@@ -107,8 +108,9 @@ class PurchaseFlow {
     const cvc = this.cardData.cvc || '123';
     const zip = this.cardData.zip || '12345';
 
-    await page.waitForTimeout(1000);
-    await cardFrame.locator('[name="cardnumber"]').fill(number);
+    const cardInput = cardFrame.locator('[name="cardnumber"]').first();
+    await cardInput.waitFor({ state: 'visible', timeout });
+    await cardInput.fill(number);
     await expiryFrame.locator('[name="exp-date"]').fill(exp);
     await cvcFrame.locator('[name="cvc"]').fill(cvc);
     
