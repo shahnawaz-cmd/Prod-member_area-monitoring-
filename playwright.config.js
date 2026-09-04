@@ -71,5 +71,12 @@ module.exports = defineConfig({
       testMatch: /cancel_subscription\.spec\.js/,
       use: { ...devices['iPhone 13'] },
     },
+
+    // --- SESSION IP STICKINESS FLOW ---
+    {
+      name: 'session-ip-stickiness',
+      testMatch: /session_ip_stickiness\.spec\.js/,
+      use: { ...devices['Desktop Chrome'] },
+    },
   ],
 });
