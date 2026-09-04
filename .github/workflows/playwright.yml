@@ -20,6 +20,9 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  BASE_URL: ${{ secrets.BASE_URL || 'https://members.vehiclehistory.report' }}
+
 jobs:
   test:
     timeout-minutes: 120
@@ -70,7 +73,6 @@ jobs:
         MONGO_URI: ${{ secrets.MONGO_URI }}
         MONGO_DB_NAME: ${{ secrets.MONGO_DB_NAME }}
         MONGO_COLL_NAME: ${{ secrets.MONGO_COLL_NAME }}
-        BASE_URL: ${{ secrets.BASE_URL || 'https://members.vehiclehistory.report' }}
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         SLOW_NETWORK: 'false'
       run: npx playwright test --project=${{ matrix.project }} --reporter=blob
@@ -83,7 +85,6 @@ jobs:
         MONGO_URI: ${{ secrets.MONGO_URI }}
         MONGO_DB_NAME: ${{ secrets.MONGO_DB_NAME }}
         MONGO_COLL_NAME: ${{ secrets.MONGO_COLL_NAME }}
-        BASE_URL: ${{ secrets.BASE_URL || 'https://members.vehiclehistory.report' }}
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 
     # - name: Auto-Commit & Push AI Healed Locators Back to Repo
@@ -148,7 +149,6 @@ jobs:
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_REF: ${{ github.ref }}
           GITHUB_EVENT: ${{ github.event_name }}
-          BASE_URL: ${{ secrets.BASE_URL || 'https://members.vehiclehistory.report' }}
 
       - name: Deploy report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
@@ -171,5 +171,4 @@ jobs:
           GITHUB_EVENT: ${{ github.event_name }}
           TEST_RESULT: ${{ needs.test.result }}
           REPORT_URL: ${{ steps.deployment.outputs.page_url }}
-          BASE_URL: ${{ secrets.BASE_URL || 'https://members.vehiclehistory.report' }}
         run: node slack-notify.js
