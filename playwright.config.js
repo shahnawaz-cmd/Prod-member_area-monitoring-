@@ -13,6 +13,8 @@ module.exports = defineConfig({
   use: {
     headless: process.env.CI ? true : false,
     trace: 'on',
+    video: 'retain-on-failure',
+    screenshot: 'only-on-failure',
   },
   projects: [
     // --- SETUPS ---

@@ -26,9 +26,11 @@ class SelectStickerPlan {
       await page.waitForTimeout(1000);
     } else {
       // Desktop View: Click the 'Window Sticker' button/tab
-      await page.locator('span, button').filter({ hasText: 'Window Sticker' }).first().click();
+      const stickerTab = page.locator('span, button, a').filter({ hasText: /^Window Sticker$/i }).or(page.locator('button:has-text("Window Sticker")')).first();
+      await stickerTab.waitFor({ state: 'visible', timeout: timeout });
+      await stickerTab.click();
       console.log(`Clicked 'Window Sticker' tab. (Timeout: ${timeout}ms)`);
-      await page.waitForTimeout(2000);
+      await page.waitForTimeout(1000);
     }
 
     console.log("Locating the highest sticker package option available on the page...");
@@ -83,9 +85,8 @@ class SelectStickerPlan {
 
     const redirectTimeout = this.isSlowNetwork ? 120000 : 60000;
     await Promise.race([
-      page.waitForURL('**/checkout**', { timeout: redirectTimeout }).catch(() => {}),
-      page.waitForURL('**/success-page**', { timeout: redirectTimeout }).catch(() => {}),
-      page.waitForURL('**/members/checkout**', { timeout: redirectTimeout }).catch(() => {}),
+      page.waitForURL(url => url.pathname.includes('checkout') || url.hash.includes('checkout') || url.pathname.includes('success'), { timeout: redirectTimeout }).catch(() => {}),
+      page.waitForSelector('iframe[title*="payment" i], iframe[src*="componentName=cardNumber"], [role="dialog"], button:has-text("Card")', { state: 'attached', timeout: redirectTimeout }).catch(() => {}),
     ]);
   }
 }
