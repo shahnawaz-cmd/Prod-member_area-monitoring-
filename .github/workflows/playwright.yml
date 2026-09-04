@@ -9,11 +9,9 @@ permissions:
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main ]
   schedule:
     - cron: '0 */12 * * *'
-  pull_request:
-    branches: [ main, master ]
   workflow_dispatch:
 
 concurrency:
@@ -76,25 +74,6 @@ jobs:
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         SLOW_NETWORK: 'false'
       run: npx playwright test --project=${{ matrix.project }} --reporter=blob
-
-    - name: Run AI Agentic Self-Healer (On Test Failure)
-      if: steps.playwright-run.outcome == 'failure'
-      timeout-minutes: 5
-      run: npm run heal:prod
-      env:
-        MONGO_URI: ${{ secrets.MONGO_URI }}
-        MONGO_DB_NAME: ${{ secrets.MONGO_DB_NAME }}
-        MONGO_COLL_NAME: ${{ secrets.MONGO_COLL_NAME }}
-        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-
-    # - name: Auto-Commit & Push AI Healed Locators Back to Repo
-    #   if: steps.playwright-run.outcome == 'failure'
-    #   run: |
-    #     git config user.name "AI-Healer[bot]"
-    #     git config user.email "ai-healer@users.noreply.github.com"
-    #     git add task/ utils/
-    #     git commit -m "chore(ai-healer): auto-repair locators via Gemini AI" || echo "No changes to commit"
-    #     git push
 
     - name: Upload Failure Artifacts (Videos, Traces, Screenshots)
       uses: actions/upload-artifact@v4

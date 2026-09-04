@@ -9,8 +9,13 @@ class GenerateUVCReport {
     const timeout = this.isSlowNetwork ? 60000 : 30000;
     
     console.log(`Generating UVC report for VIN: ${this.vin}`);
-    console.log("Waiting 5 seconds for dashboard stabilization...");
-    await page.waitForTimeout(5000);
+    
+    // Ensure dashboard page is loaded
+    if (!page.url().includes('dashboard')) {
+      await page.waitForURL('**/dashboard**', { timeout: 30000 }).catch(async () => {
+        await page.goto(actor.dashboardUrl, { waitUntil: 'domcontentloaded' });
+      });
+    }
 
     const vinInput = page.getByPlaceholder(/enter vin/i);
     await vinInput.waitFor({ state: 'visible', timeout: timeout });

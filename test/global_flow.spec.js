@@ -10,6 +10,7 @@ const SelectPlan = require('../task/SelectPlan');
 const PurchaseFlow = require('../task/PurchaseFlow');
 const GenerateEmail = require('../task/GenerateEmail');
 const CancelSubscriptionFlow = require('../task/CancelSubscriptionFlow');
+const DashboardRedirectionCheck = require('../task/DashboardRedirectionCheck');
 const GenerateLPReport = require('../task/GenerateLPReport');
 const { GenerateClassicUnmappedVIN, GenerateClassicUnmappedVINManual } = require('../task/GenerateClassicUnmappedVIN');
 
@@ -204,6 +205,9 @@ test.describe('Independent UVC Subscription Operations', () => {
 
     // 5. Purchase Plan via Stripe
     await actor.attemptsTo(new PurchaseFlow({}, isSlowNetwork));
+
+    // 5.1 Redirection to Dashboard
+    await actor.attemptsTo(new DashboardRedirectionCheck(60000));
 
     // 6. Generate US VIN from Mongo
     await actor.attemptsTo(new GenerateUSVIN('mongo'));
