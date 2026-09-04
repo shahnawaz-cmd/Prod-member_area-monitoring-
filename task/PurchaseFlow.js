@@ -86,9 +86,14 @@ class PurchaseFlow {
       }
     } catch (e) {}
 
-    const payButton = page.getByRole('button', { name: /^Pay\b/i }).first();
+    const payButton = page.locator('button[type="submit"]')
+      .or(page.getByRole('button', { name: /Pay\s*(&|and)?\s*Subscribe|^Pay\s+\$|Subscribe Now|^Pay\b(?!\s*pal)/i }))
+      .or(page.locator('button:has-text("Pay & Subscribe"), button:has-text("Pay and Subscribe"), button:has-text("Pay Now"), button:has-text("Subscribe")'))
+      .filter({ hasNotText: /paypal/i })
+      .first();
+
     await payButton.waitFor({ state: 'visible', timeout: timeout });
-    await payButton.click();
+    await payButton.click({ force: true });
   }
 
   async performMultiFrameCheckout(page, timeout) {
@@ -103,16 +108,25 @@ class PurchaseFlow {
     const expiryFrame = page.frameLocator('iframe[src*="componentName=cardExpiry"], iframe[title*="Secure expiration date input frame" i]').first();
     const cvcFrame = page.frameLocator('iframe[src*="componentName=cardCvc"], iframe[title*="Secure CVC input frame" i]').first();
 
-    const number = this.cardData.cardNum || '5454545454545454';
-    const exp = this.cardData.expiry || '0232';
+    const number = this.cardData.cardNum || '4242424242424242';
+    const exp = (this.cardData.expiry || '12/28').replace('/', '');
     const cvc = this.cardData.cvc || '123';
-    const zip = this.cardData.zip || '12345';
+    const zip = this.cardData.zip || '10001';
 
     const cardInput = cardFrame.locator('[name="cardnumber"]').first();
     await cardInput.waitFor({ state: 'visible', timeout });
-    await cardInput.fill(number);
-    await expiryFrame.locator('[name="exp-date"]').fill(exp);
-    await cvcFrame.locator('[name="cvc"]').fill(cvc);
+    await cardInput.click();
+    await cardInput.pressSequentially(number, { delay: 30 });
+
+    const expInput = expiryFrame.locator('[name="exp-date"]').first();
+    await expInput.waitFor({ state: 'visible', timeout });
+    await expInput.click();
+    await expInput.pressSequentially(exp, { delay: 30 });
+
+    const cvcInput = cvcFrame.locator('[name="cvc"]').first();
+    await cvcInput.waitFor({ state: 'visible', timeout });
+    await cvcInput.click();
+    await cvcInput.pressSequentially(cvc, { delay: 30 });
     
     try {
       const zipLocator = page.locator('input[name="postal-code"], input#postal-code, [placeholder*="ZIP" i]');
@@ -121,9 +135,14 @@ class PurchaseFlow {
       }
     } catch (e) {}
 
-    const payButton = page.locator('button[type="submit"]').filter({ hasText: /Pay|Subscribe/i });
+    const payButton = page.locator('button[type="submit"]')
+      .or(page.getByRole('button', { name: /Pay\s*(&|and)?\s*Subscribe|^Pay\s+\$|Subscribe Now|^Pay\b(?!\s*pal)/i }))
+      .or(page.locator('button:has-text("Pay & Subscribe"), button:has-text("Pay and Subscribe"), button:has-text("Pay Now"), button:has-text("Subscribe")'))
+      .filter({ hasNotText: /paypal/i })
+      .first();
+
     await payButton.waitFor({ state: 'visible', timeout: timeout });
-    await payButton.click();
+    await payButton.click({ force: true });
   }
 }
 
