@@ -8,7 +8,7 @@ const { RegenerateSticker } = require('../task/RegenerateWindowSticker');
 
 test.describe('Global Window Sticker Generation Flow', () => {
   test('CS-01 — Reverse Decode (motorcycle, ATV, Sticker generate)', async ({ page }, testInfo) => {
-    test.skip(testInfo.project.name !== 'sticker-mobile-safari', 'Runs on Safari only');
+    test.skip(testInfo.project.name !== 'sticker-mobile-chrome', 'Runs on Mobile Chrome only');
     test.setTimeout(300000);
 
     const actor = new Actor(page);
@@ -45,7 +45,7 @@ test.describe('Global Window Sticker Generation Flow', () => {
   });
 
   test('CS-02 — Classic Mapped VIN Sticker Generation', async ({ page }, testInfo) => {
-    test.skip(testInfo.project.name !== 'sticker-mobile-safari', 'Runs on Safari only');
+    test.skip(testInfo.project.name !== 'sticker-mobile-chrome', 'Runs on Mobile Chrome only');
     test.setTimeout(300000);
 
     const actor = new Actor(page);
@@ -79,7 +79,7 @@ test.describe('Global Window Sticker Generation Flow', () => {
   });
 
   test('CS-03 — Classic Unmapped VIN Sticker Generation (Dropdown Flow)', async ({ page }, testInfo) => {
-    test.skip(testInfo.project.name !== 'sticker-mobile-safari', 'Runs on Safari only');
+    test.skip(testInfo.project.name !== 'sticker-mobile-chrome', 'Runs on Mobile Chrome only');
     test.setTimeout(300000);
 
     const actor = new Actor(page);
@@ -113,7 +113,7 @@ test.describe('Global Window Sticker Generation Flow', () => {
   });
 
   test('CS-04 — EU Mapped VIN Sticker Generation', async ({ page }, testInfo) => {
-    test.skip(testInfo.project.name !== 'sticker-mobile-safari', 'Runs on Safari only');
+    test.skip(testInfo.project.name !== 'sticker-mobile-chrome', 'Runs on Mobile Chrome only');
     test.setTimeout(300000);
 
     const actor = new Actor(page);

@@ -142,7 +142,7 @@ ${f.snippet ? `CODE SNIPPET:\n${f.snippet}` : ''}
          - If element changed or was not found, switch to resilient semantic selectors (getByRole, getByPlaceholder, getByLabel, getByText, or text).
          - If strict mode violation (multiple matches), always append .locator('visible=true').first() or .first().
          - You may import and use helpers from '../utils/selfHealingLocator' (locateInputWithHealing, fastInputWithHealing, locateElementWithHealing, clickWithHealing).
-      2. RESPONSIVE / MOBILE SAFARI ISSUES:
+      2. RESPONSIVE / MOBILE CHROME ISSUES:
          - If element is reported "not visible" due to mobile/desktop duplicate DOM nodes, always use .locator('visible=true').first().
          - For text inputs, use fastInputWithHealing or evaluate JS fallback to handle mobile animations and trigger input/change events.
       3. TIMEOUT & SLOW ASYNC REDIRECTS / API CALLS:

@@ -2,8 +2,10 @@ const { test, expect } = require('@playwright/test');
 const Actor = require('../actor/Actor');
 const ConfigureBaseUrl = require('../task/ConfigureBaseUrl');
 const CaptureApiResponses = require('../task/CaptureApiResponses');
-const { GenerateVinReport, GenerateEUReport } = require('../task/GenerateVinReport');
+const { GenerateVinReport } = require('../task/GenerateVinReport');
+const GenerateEUReport = require('../task/GenerateEUReport');
 const { GenerateUSVIN, ClassicMappedVIN, EUMappedVIN } = require('../task/GenerateVINs');
+const FetchEUVIN = require('../task/FetchEUVIN');
 const GenerateUVCReport = require('../task/GenerateUVCReport');
 const SignupAuthFlow = require('../task/SignupAuthFlow');
 const SelectPlan = require('../task/SelectPlan');
@@ -27,13 +29,16 @@ test.describe('Global Member Area Report Generation Flow', () => {
     // 1. Configure Base URL
     await actor.attemptsTo(new ConfigureBaseUrl());
 
-    // 2. Direct Navigation to Dashboard (using cached session)
+    // 2. Start Dynamic US VIN generation asynchronously in background
+    const usVinPromise = actor.attemptsTo(new GenerateUSVIN('mongo'));
+
+    // 3. Direct Navigation to Dashboard (concurrent with VIN generation)
     console.log("Navigating directly to Dashboard...");
     await page.goto(actor.dashboardUrl, { waitUntil: 'domcontentloaded' });
     await page.waitForURL('**/dashboard**', { timeout: 60000 });
 
-    // 3. Generate Dynamic US VIN
-    await actor.attemptsTo(new GenerateUSVIN('mongo'));
+    // Await US VIN resolution
+    await usVinPromise;
 
     // 4. Generate US VIN Report
     await actor.attemptsTo(new GenerateVinReport(null, isSlowNetwork));
@@ -83,16 +88,19 @@ test.describe('Global Member Area Report Generation Flow', () => {
     // 1. Configure Base URL
     await actor.attemptsTo(new ConfigureBaseUrl());
 
-    // 2. Direct Navigation to Dashboard
+    // 2. Start EU VIN pre-fetch asynchronously in background
+    const vinFetchPromise = actor.attemptsTo(new FetchEUVIN());
+
+    // 3. Direct Navigation to Dashboard (concurrent with VIN pre-fetch)
     console.log("Navigating directly to Dashboard...");
     await page.goto(actor.dashboardUrl, { waitUntil: 'domcontentloaded' });
     await page.waitForURL('**/dashboard**', { timeout: 60000 });
 
-    // 3. Generate EU Mapped VIN
-    await actor.attemptsTo(new EUMappedVIN(['VF1AGVYB055491691', 'WAUZZZ8P6CA083445'], isSlowNetwork));
+    // Await VIN resolution (resolved in background)
+    await vinFetchPromise;
 
     // 4. Generate EU VIN Report
-    await actor.attemptsTo(new GenerateEUReport(null, isSlowNetwork));
+    await actor.attemptsTo(new GenerateEUReport(actor.euVin, isSlowNetwork));
 
     await expect(page).toHaveURL(/my-reports?|my-report/, { timeout: isSlowNetwork ? 120000 : 60000 });
     console.log("EU VIN report generation completed successfully.");

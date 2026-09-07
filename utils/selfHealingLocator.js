@@ -57,7 +57,7 @@ async function locateInputWithHealing(page, labelText, fallbackSelectors = [], o
 }
 
 /**
- * Fast and resilient input helper for Desktop Chrome & Mobile Safari.
+ * Fast and resilient input helper for Desktop & Mobile Chrome.
  * Combines self-healing visible field location with instant fill and native event dispatching.
  */
 async function fastInputWithHealing(page, labelText, value, fallbackSelectors = [], options = {}) {
@@ -69,7 +69,7 @@ async function fastInputWithHealing(page, labelText, value, fallbackSelectors = 
     await input.dispatchEvent('input').catch(() => {});
     await input.dispatchEvent('change').catch(() => {});
   } catch (err) {
-    // Ultra-fast JS evaluate fallback for Mobile Safari / WebKit DOM animations
+    // Ultra-fast JS evaluate fallback for Mobile Chrome / Chromium DOM animations
     await input.evaluate((el, val) => {
       el.focus();
       el.value = val;

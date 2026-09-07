@@ -16,10 +16,10 @@ class GenerateEUWindowSticker {
     const apiTimeout = this.isSlowNetwork ? 300000 : 180000;
     const checkTimeout = this.isSlowNetwork ? 15000 : 5000;
 
-    // 1. Pick provided base EU VIN pattern and randomize trailing characters
+    // 1. Pick provided base EU VIN pattern and randomize only the last character
     const baseVin = this.vins[Math.floor(Math.random() * this.vins.length)];
-    const prefix = baseVin.slice(0, 14);
-    const randomSuffix = Math.floor(100 + Math.random() * 900).toString();
+    const prefix = baseVin.slice(0, 16);
+    const randomSuffix = Math.floor(Math.random() * 10).toString();
     const randomizedVin = prefix + randomSuffix;
     console.log(`Starting EU Window Sticker Generate for VIN: ${randomizedVin}`);
 
@@ -43,18 +43,7 @@ class GenerateEUWindowSticker {
     console.log("VIN validation API call resolved.");
 
     // 3. Confirm EU popup if visible
-    const yesButton = page.locator('div:has-text("Europe")')
-      .getByRole('button', { name: 'Yes' })
-      .first();
-
-    try {
-      if (await yesButton.isVisible({ timeout: checkTimeout }).catch(() => false)) {
-        await yesButton.click().catch(() => yesButton.click({ force: true }));
-        console.log("✅ Clicked Yes on Europe popup.");
-      }
-    } catch (e) {
-      console.log(`Europe popup handling note: ${e.message}`);
-    }
+    await this.clickEuropeYesIfPresent(page, checkTimeout);
 
     // 4. Handle dynamic/unmapped dropdowns if present
     const yearCombobox = page.getByRole('combobox').filter({ hasText: 'Year' }).first()
@@ -180,6 +169,62 @@ class GenerateEUWindowSticker {
     }
 
     await page.waitForTimeout(1000);
+  }
+
+  async clickEuropeYesIfPresent(page, timeoutMs = 8000) {
+    console.log("Checking for Europe confirmation popup...");
+    const startTime = Date.now();
+
+    while (Date.now() - startTime < timeoutMs) {
+      if (page.url().includes('my-report')) {
+        return true;
+      }
+
+      const yesBtnRole = page.getByRole('button', { name: /^Yes$/i }).first();
+      if (await yesBtnRole.isVisible().catch(() => false)) {
+        console.log("🎯 Found Europe popup 'Yes' button (by role). Clicking...");
+        await yesBtnRole.click().catch(() => yesBtnRole.click({ force: true }));
+        console.log("✅ Clicked Yes on Europe popup.");
+        await page.waitForTimeout(1000);
+        return true;
+      }
+
+      const yesBtnText = page.locator('button:has-text("Yes"), [role="button"]:has-text("Yes")').first();
+      if (await yesBtnText.isVisible().catch(() => false)) {
+        console.log("🎯 Found Europe popup 'Yes' button (by text). Clicking...");
+        await yesBtnText.click().catch(() => yesBtnText.click({ force: true }));
+        console.log("✅ Clicked Yes on Europe popup.");
+        await page.waitForTimeout(1000);
+        return true;
+      }
+
+      const modalYesBtn = page.locator([
+        '[role="dialog"] button',
+        '[role="alertdialog"] button',
+        'div[class*="modal"] button',
+        'div[class*="popup"] button',
+        'div[class*="dialog"] button',
+        'div[data-radix-popper-content-wrapper] button'
+      ].join(', ')).filter({ hasText: /^Yes$/i }).first();
+
+      if (await modalYesBtn.isVisible().catch(() => false)) {
+        console.log("🎯 Found Europe popup 'Yes' button (inside modal container). Clicking...");
+        await modalYesBtn.click().catch(() => modalYesBtn.click({ force: true }));
+        console.log("✅ Clicked Yes on Europe popup.");
+        await page.waitForTimeout(1000);
+        return true;
+      }
+
+      const yearCombobox = page.getByRole('combobox').first();
+      if (await yearCombobox.isVisible().catch(() => false)) {
+        return false;
+      }
+
+      await page.waitForTimeout(400);
+    }
+
+    console.log("No Europe confirmation popup detected within timeout.");
+    return false;
   }
 }
 

@@ -1,19 +1,32 @@
+const FIRST_NAMES = [
+  'alex', 'david', 'jason', 'michael', 'daniel', 'marcus', 'brian', 
+  'ryan', 'eric', 'kevin', 'sarah', 'emily', 'rachel', 'claire', 'jessica'
+];
+
+const DOMAINS = ['gmail.com', 'outlook.com', 'yahoo.com', 'icloud.com'];
+
 class GenerateEmail {
-  constructor(prefix = 'test') {
-    this.prefix = prefix;
+  constructor(tag = null) {
+    this.tag = tag; // e.g. 'sticker', 'cancel', or null
   }
 
   async performAs(actor) {
-    const timeBase36 = Date.now().toString(36); // e.g. 'kru0tpxg' (8 characters)
-    const randomStr = Math.random().toString(36).substring(2, 6); // e.g. 'a8f3' (4 characters)
-    
-    actor.email = `${this.prefix}_${randomStr}@t${timeBase36}.com`;
-    
-    // Generate a dynamic password matching standard security requirements
-    actor.password = `Pass_${randomStr}${timeBase36}!`;
-    
-    console.log(`Generated unique email: ${actor.email}`);
-    console.log(`Generated unique password: ${actor.password}`);
+    const fn = FIRST_NAMES[Math.floor(Math.random() * FIRST_NAMES.length)];
+    const num = Math.floor(100 + Math.random() * 900); // 3-digit unique number (e.g. 742)
+    const domain = DOMAINS[Math.floor(Math.random() * DOMAINS.length)];
+
+    if (this.tag && this.tag !== 'test') {
+      const cleanTag = this.tag.toLowerCase().replace(/[^a-z0-9]/g, '');
+      actor.email = `memberareamonitoring.${cleanTag}.${fn}${num}@${domain}`;
+    } else {
+      actor.email = `memberareamonitoring.${fn}${num}@${domain}`;
+    }
+
+    // Strong, compliant password e.g. PassAlex742!
+    const capitalizedName = fn.charAt(0).toUpperCase() + fn.slice(1);
+    actor.password = `Pass${capitalizedName}${num}!`;
+
+    console.log(`Generated email: ${actor.email}`);
   }
 }
 

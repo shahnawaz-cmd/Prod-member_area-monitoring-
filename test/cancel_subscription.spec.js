@@ -5,6 +5,7 @@ const CaptureApiResponses = require('../task/CaptureApiResponses');
 const SignupAuthFlow = require('../task/SignupAuthFlow');
 const SelectPlan = require('../task/SelectPlan');
 const PurchaseFlow = require('../task/PurchaseFlow');
+const DashboardRedirectionCheck = require('../task/DashboardRedirectionCheck');
 const GenerateEmail = require('../task/GenerateEmail');
 const CancelSubscriptionFlow = require('../task/CancelSubscriptionFlow');
 
@@ -33,38 +34,11 @@ test.describe('Dedicated Subscription Cancellation Suite', () => {
     // 4. Select UVC Subscription Plan
     await actor.attemptsTo(new SelectPlan('UVC Subscription', isSlowNetwork));
 
-    // 5. Purchase Plan via Stripe & Set up Payment Update API Listener
-    console.log("Preparing to purchase and listen for payment-update API...");
-    const paymentUpdatePromise = page.waitForResponse(
-      res => res.url().includes('payment-update') && (res.status() === 200 || res.status() === 304),
-      { timeout: 120000 }
-    ).catch(() => null);
-
+    // 5. Purchase Plan via Stripe (awaits payment-update API automatically)
     await actor.attemptsTo(new PurchaseFlow({}, isSlowNetwork));
 
-    // 6. Wait for payment-update API success & navigate to dashboard
-    console.log("Waiting for payment-update API to resolve...");
-    const paymentRes = await paymentUpdatePromise;
-    if (paymentRes) {
-      console.log(`📥 payment-update API resolved with status: ${paymentRes.status()}`);
-    }
-
-    console.log("Navigating to Dashboard and waiting 3 seconds for session stabilization...");
-    try {
-      await page.waitForURL(
-        url => url.pathname.includes('dashboard') || url.pathname.includes('success-page'),
-        { timeout: 30000 }
-      );
-    } catch (e) {
-      console.log("Auto-redirect timed out; ensuring direct dashboard navigation...");
-    }
-
-    if (!page.url().includes('/dashboard')) {
-      await page.goto(actor.dashboardUrl, { waitUntil: 'domcontentloaded' });
-    }
-
-    console.log(`✅ Stabilized on dashboard: ${page.url()}. Waiting 3 seconds before cancel flow...`);
-    await page.waitForTimeout(3000);
+    // 6. Dashboard Redirection & Session Stabilization
+    await actor.attemptsTo(new DashboardRedirectionCheck(120000));
 
     // 7. Perform Subscription Cancellation (with Dynamic Subscription ID capture & UI verification)
     await actor.attemptsTo(new CancelSubscriptionFlow(isSlowNetwork));
