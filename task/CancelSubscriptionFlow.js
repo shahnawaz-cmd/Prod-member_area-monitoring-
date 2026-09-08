@@ -109,7 +109,7 @@ class CancelSubscriptionFlow {
 
     // Direct navigation to members/profile#subscriptions using current domain (actor.baseUrl)
     const base = actor.baseUrl ? actor.baseUrl.replace(/\/+$/, '') : "https://members.vehiclehistory.report";
-    const subProfileUrl = base.includes('/members') ? `${base}/profile#subscriptions` : `${base}/members/profile#subscriptions`;
+    const subProfileUrl = base.endsWith('/members') ? `${base}/profile#subscriptions` : `${base}/members/profile#subscriptions`;
 
     console.log(`Navigating directly to subscriptions profile URL after 1s delay: ${subProfileUrl}`);
     await page.goto(subProfileUrl, { waitUntil: 'domcontentloaded', timeout: timeout }).catch(() => {});
