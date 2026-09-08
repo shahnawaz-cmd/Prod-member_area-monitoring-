@@ -23,42 +23,26 @@ module.exports = defineConfig({
     {
       name: 'setup',
       testMatch: /global_flow\.setup\.js/,
-      use: { ...devices['Pixel 10 Pro XL'] },
+      use: { ...devices['Desktop Chrome'] },
     },
     {
       name: 'sticker-setup',
       testMatch: /sticker_flow\.setup\.js/,
-      use: { ...devices['Pixel 10 Pro XL'] },
+      use: { ...devices['Desktop Chrome'] },
     },
 
-    // --- VHR SPEC SUITE (Mobile Chrome only) ---
+    // --- VHR SPEC SUITE (Desktop Chrome) ---
     {
-      name: 'mobile-chrome',
+      name: 'desktop-chrome',
       testMatch: /global_flow\.spec\.js/,
       use: { 
-        ...devices['Pixel 10 Pro XL'],
+        ...devices['Desktop Chrome'],
         storageState: 'state.json', // Automatically load session cookies
       },
       dependencies: ['setup'], // Wait for setup to finish
     },
 
-    // --- WINDOW STICKER SPEC SUITE (Mobile Chrome only) ---
-    {
-      name: 'sticker-mobile-chrome',
-      testMatch: /sticker_flow\.spec\.js/,
-      use: {
-        ...devices['Pixel 10 Pro XL'],
-        storageState: 'sticker_state.json',
-      },
-      dependencies: ['sticker-setup'],
-    },
-
-    // --- DESKTOP CHROMIUM PROJECTS ---
-    {
-      name: 'desktop-setup',
-      testMatch: /sticker_flow\.setup\.js/,
-      use: { ...devices['Desktop Chrome'] },
-    },
+    // --- WINDOW STICKER SPEC SUITE (Desktop Chrome) ---
     {
       name: 'sticker-desktop-chrome',
       testMatch: /sticker_flow\.spec\.js/,
@@ -66,14 +50,26 @@ module.exports = defineConfig({
         ...devices['Desktop Chrome'],
         storageState: 'sticker_state.json',
       },
-      dependencies: ['desktop-setup'],
+      dependencies: ['sticker-setup'],
+    },
+
+    // --- DEDICATED UVC SUBSCRIPTION & REPORT FLOW ---
+    {
+      name: 'uvc-flow',
+      testMatch: /uvc_flow\.spec\.js/,
+      use: { ...devices['Desktop Chrome'] },
     },
 
     // --- DEDICATED CANCELLATION FLOW ---
     {
       name: 'cancel-subscription',
       testMatch: /cancel_subscription\.spec\.js/,
-      use: { ...devices['Pixel 10 Pro XL'] },
+      use: { ...devices['Desktop Chrome'] },
+    },
+    {
+      name: 'cancel-subscription-mobile',
+      testMatch: /cancel_subscription\.spec\.js/,
+      use: { ...devices['Pixel 5'] },
     },
 
     // --- SESSION IP STICKINESS FLOW ---

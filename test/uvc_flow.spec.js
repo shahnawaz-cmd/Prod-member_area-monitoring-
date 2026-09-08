@@ -7,13 +7,14 @@ const SelectPlan = require('../task/SelectPlan');
 const PurchaseFlow = require('../task/PurchaseFlow');
 const UVCDashboardRedirectionCheck = require('../task/UVCDashboardRedirectionCheck');
 const GenerateEmail = require('../task/GenerateEmail');
-const CancelSubscriptionFlow = require('../task/CancelSubscriptionFlow');
+const FetchUSVIN = require('../task/FetchUSVIN');
+const GenerateUVCReport = require('../task/GenerateUVCReport');
 
-test.describe('Dedicated Subscription Cancellation Suite', () => {
+test.describe('Independent UVC Subscription & Report Operations', () => {
   // Use clean isolated session state (no cached cookies)
   test.use({ storageState: { cookies: [], origins: [] } });
 
-  test('CS-09 — UVC Subscription Purchase and Cancel Flow', async ({ page }) => {
+  test('CS-08 — UVC Report purchase and generate', async ({ page }) => {
     test.setTimeout(300000); // 5 minutes budget
 
     const actor = new Actor(page);
@@ -22,11 +23,11 @@ test.describe('Dedicated Subscription Cancellation Suite', () => {
     // 0. Setup API Monitoring
     await actor.attemptsTo(new CaptureApiResponses());
 
-    // 1. Configure Base URL (Production)
+    // 1. Configure Base URL
     await actor.attemptsTo(new ConfigureBaseUrl());
 
     // 2. Generate Unique Email & Password
-    await actor.attemptsTo(new GenerateEmail('cancel'));
+    await actor.attemptsTo(new GenerateEmail('uvc'));
 
     // 3. Signup New Account
     await actor.attemptsTo(new SignupAuthFlow(null, null, isSlowNetwork));
@@ -34,15 +35,21 @@ test.describe('Dedicated Subscription Cancellation Suite', () => {
     // 4. Select UVC Subscription Plan
     await actor.attemptsTo(new SelectPlan('UVC Subscription', isSlowNetwork));
 
-    // 5. Purchase Plan via Stripe (awaits payment-update API automatically)
+    // 5. Purchase Plan via Stripe
     await actor.attemptsTo(new PurchaseFlow({}, isSlowNetwork));
 
-    // 6. Natural UVC Redirection (without static URL jumps)
+    // 6. Natural UVC System Redirection Sequence
     await actor.attemptsTo(new UVCDashboardRedirectionCheck(120000));
 
-    // 7. Perform Subscription Cancellation (with Dynamic Subscription ID capture & UI verification)
-    await actor.attemptsTo(new CancelSubscriptionFlow(isSlowNetwork));
+    // 7. Fetch Pure 17-Char US VIN from MongoDB
+    await actor.attemptsTo(new FetchUSVIN());
 
-    console.log("✅ CS-09: UVC Subscription purchase, automatic dashboard sync, and cancellation completed successfully.");
+    // 8. Generate UVC Report
+    await actor.attemptsTo(new GenerateUVCReport(actor.usVin, isSlowNetwork));
+
+    // 9. Expect Redirection to My Reports
+    await expect(page).toHaveURL(/my-reports?|my-report/, { timeout: isSlowNetwork ? 120000 : 60000 });
+    console.log("✅ CS-08: UVC report purchase and generation completed successfully.");
+    await page.close();
   });
 });

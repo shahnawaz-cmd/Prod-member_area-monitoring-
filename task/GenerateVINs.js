@@ -16,9 +16,13 @@ class GenerateUSVIN {
     try {
       await client.connect();
       const coll = client.db(DB_NAME).collection(COLL_NAME);
-      const randomSkip = Math.floor(Math.random() * 100);
-      const doc = await coll.findOne({}, { skip: randomSkip, projection: { vin: 1 }, maxTimeMS: 2000 });
-      return doc?.vin;
+      const randomSkip = Math.floor(Math.random() * 200);
+      const doc = await coll.findOne(
+        { $expr: { $eq: [{ $strLenCP: "$vin" }, 17] } },
+        { skip: randomSkip, projection: { vin: 1 }, maxTimeMS: 2000 }
+      );
+      const fetchedVin = doc?.vin ? doc.vin.trim() : null;
+      return (fetchedVin && fetchedVin.length === 17) ? fetchedVin : null;
     } catch (e) {
       console.warn(`MongoDB US VIN query skipped (${e.message}). Using instant fallback.`);
       return null;

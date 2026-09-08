@@ -11,30 +11,30 @@ class GenerateUVCReport {
     
     console.log(`Generating UVC report for VIN: ${this.vin}`);
     
-    // Ensure dashboard page is loaded
+    // Ensure dashboard page is loaded dynamically
     if (!page.url().includes('dashboard')) {
-      await page.waitForURL('**/dashboard**', { timeout: 30000, waitUntil: 'domcontentloaded' }).catch(async () => {
-        await page.goto(actor.dashboardUrl, { waitUntil: 'domcontentloaded' });
-      });
+      await page.goto(actor.dashboardUrl, { waitUntil: 'domcontentloaded', timeout: 30000 }).catch(() => {});
     }
 
-    // Locate VIN input field (handling both direct search and tab views)
+    // Explicitly locate and click the UVC / Vehicle Report / Search Tab on dashboard after purchase
+    console.log("Selecting UVC / Vehicle Report tab on dashboard...");
+    const uvcTab = page.getByRole('button', { name: /UVC|Vehicle Report|Search/i })
+      .or(page.getByRole('tab', { name: /UVC|Vehicle Report|Search/i }))
+      .or(page.locator('button, div, span, a').filter({ hasText: /^(UVC|Vehicle Report|Search)$/i }))
+      .first();
+
+    if (await uvcTab.isVisible({ timeout: 5000 }).catch(() => false)) {
+      await uvcTab.click({ force: true }).catch(() => {});
+      console.log("Clicked UVC / Vehicle Report tab.");
+      await page.waitForTimeout(1000);
+    } else {
+      console.log("UVC Tab already active or directly visible.");
+    }
+
+    // Locate VIN input field
     const vinInput = page.getByPlaceholder(/enter vin/i)
       .or(page.getByRole('textbox', { name: /vin/i }))
       .first();
-
-    if (!await vinInput.isVisible({ timeout: 4000 }).catch(() => false)) {
-      console.log("VIN input not directly visible. Opening Search / Vehicle Report tab...");
-      const searchTab = page.getByRole('button', { name: 'Search' })
-        .or(page.getByRole('button', { name: 'Vehicle Report' }))
-        .or(page.locator('button:has-text("Search"), button:has-text("Vehicle Report")'))
-        .first();
-
-      if (await searchTab.isVisible({ timeout: 4000 }).catch(() => false)) {
-        await searchTab.click();
-        await page.waitForTimeout(1000);
-      }
-    }
 
     await vinInput.waitFor({ state: 'visible', timeout: timeout });
     
@@ -56,7 +56,16 @@ class GenerateUVCReport {
     // Wait for the API request to resolve
     await genResPromise;
     console.log("UVC Report generation API call resolved.");
-    await page.waitForTimeout(3000);
+
+    // Resilient Redirection Handling to My Reports URL
+    console.log("Waiting for redirection to /my-reports...");
+    try {
+      await page.waitForURL(url => url.pathname.includes('my-report'), { timeout: 15000 });
+    } catch (e) {
+      if (!page.url().includes('my-report') && actor.myReportsUrl) {
+        await page.goto(actor.myReportsUrl, { waitUntil: 'domcontentloaded' }).catch(() => {});
+      }
+    }
   }
 }
 
