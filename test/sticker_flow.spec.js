@@ -9,7 +9,7 @@ const { RegenerateSticker } = require('../task/RegenerateWindowSticker');
 
 test.describe('Global Window Sticker Generation Flow', () => {
   test('CS-01 — Reverse Decode (motorcycle, ATV, Sticker generate)', async ({ page }, testInfo) => {
-    test.skip(testInfo.project.name !== 'sticker-mobile-chrome', 'Runs on Mobile Chrome only');
+    test.skip(testInfo.project.name !== 'sticker-mobile-chrome' && testInfo.project.name !== 'sticker-desktop-chrome', 'Runs on Chrome');
     test.setTimeout(300000);
 
     const actor = new Actor(page);
@@ -32,7 +32,10 @@ test.describe('Global Window Sticker Generation Flow', () => {
 
     // 4. Switch to Window Sticker Tab
     console.log("Switching to Window Sticker Tab...");
-    const wsTab = page.getByText('Window Sticker').nth(2);
+    const isMobile = page.viewportSize() ? page.viewportSize().width < 768 : false;
+    const wsTab = isMobile 
+      ? page.getByText('Window Sticker').nth(2) 
+      : page.getByText('Window Sticker').nth(1);
     await wsTab.waitFor({ state: 'visible', timeout: timeout });
     await wsTab.click();
 
@@ -46,7 +49,7 @@ test.describe('Global Window Sticker Generation Flow', () => {
   });
 
   test('CS-02 — Classic Mapped VIN Sticker Generation', async ({ page }, testInfo) => {
-    test.skip(testInfo.project.name !== 'sticker-mobile-chrome', 'Runs on Mobile Chrome only');
+    test.skip(testInfo.project.name !== 'sticker-mobile-chrome' && testInfo.project.name !== 'sticker-desktop-chrome', 'Runs on Chrome');
     test.setTimeout(300000);
 
     const actor = new Actor(page);
@@ -66,7 +69,10 @@ test.describe('Global Window Sticker Generation Flow', () => {
 
     // 3. Switch to Window Sticker Tab
     console.log("Switching to Window Sticker Tab...");
-    const wsTab = page.getByText('Window Sticker').nth(2);
+    const isMobile = page.viewportSize() ? page.viewportSize().width < 768 : false;
+    const wsTab = isMobile 
+      ? page.getByText('Window Sticker').nth(2) 
+      : page.getByText('Window Sticker').nth(1);
     await wsTab.waitFor({ state: 'visible', timeout: timeout });
     await wsTab.click();
 
@@ -80,7 +86,7 @@ test.describe('Global Window Sticker Generation Flow', () => {
   });
 
   test('CS-03 — Classic Unmapped VIN Sticker Generation (Dropdown Flow)', async ({ page }, testInfo) => {
-    test.skip(testInfo.project.name !== 'sticker-mobile-chrome', 'Runs on Mobile Chrome only');
+    test.skip(testInfo.project.name !== 'sticker-mobile-chrome' && testInfo.project.name !== 'sticker-desktop-chrome', 'Runs on Chrome');
     test.setTimeout(300000);
 
     const actor = new Actor(page);
@@ -100,7 +106,10 @@ test.describe('Global Window Sticker Generation Flow', () => {
 
     // 3. Switch to Window Sticker Tab
     console.log("Switching to Window Sticker Tab...");
-    const wsTab = page.getByText('Window Sticker').nth(2);
+    const isMobile = page.viewportSize() ? page.viewportSize().width < 768 : false;
+    const wsTab = isMobile 
+      ? page.getByText('Window Sticker').nth(2) 
+      : page.getByText('Window Sticker').nth(1);
     await wsTab.waitFor({ state: 'visible', timeout: timeout });
     await wsTab.click();
 
@@ -144,8 +153,8 @@ test.describe('Global Window Sticker Generation Flow', () => {
     await wsTab.waitFor({ state: 'visible', timeout: timeout });
     await wsTab.click();
 
-    // 5. Perform EU VIN Sticker Generation with fetched EU VIN
-    await actor.attemptsTo(new GenerateEUSticker(actor.euVin, isSlowNetwork));
+    // 5. Perform EU VIN Sticker Generation with static EU VIN
+    await actor.attemptsTo(new GenerateEUSticker(null, isSlowNetwork));
 
     // 6. Expect Redirection to My Reports, Classic, Europe, or Sticker Tool Page
     await expect(page).toHaveURL(/my-reports?|my-report|classic|europe|sticker-tool/, { timeout: isSlowNetwork ? 120000 : 60000 });

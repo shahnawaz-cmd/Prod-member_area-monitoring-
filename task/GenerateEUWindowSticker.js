@@ -1,3 +1,11 @@
+const STATIC_PRESETS = [
+  { year: '1963', make: 'Oldsmobile', model: 'Starfire', trim: 'Hardtop Coupe 6.5 V8 V8' },
+  { year: '1943', make: 'Willys Overland', model: 'Jeep', trim: 'Mb Inline' },
+  { year: '1976', make: 'Alfa Romeo', model: 'Spider Series', trim: 'Junior Inline 4' },
+  { year: '1920', make: 'Paige', model: 'Glenbrook', trim: 'Touring 6 42 Inline' },
+  { year: '1957', make: 'Jensen', model: '541', trim: 'R Inline' }
+];
+
 /**
  * Task: GenerateEUWindowSticker
  * Preserves the provided EU VIN pattern (e.g. VF1 Renault / WAUZZZ Audi)
@@ -5,8 +13,8 @@
  * Handles both direct generation and unmapped dynamic/static Year-Make-Model-Trim dropdown flows.
  */
 class GenerateEUWindowSticker {
-  constructor(vins = ['VF1AGVYB055491691', 'WAUZZZ8P6CA083445'], isSlowNetwork = false) {
-    this.vins = Array.isArray(vins) ? vins : [vins];
+  constructor(vin = null, isSlowNetwork = false) {
+    this.vin = vin;
     this.isSlowNetwork = isSlowNetwork;
   }
 
@@ -16,14 +24,26 @@ class GenerateEUWindowSticker {
     const apiTimeout = this.isSlowNetwork ? 300000 : 180000;
     const checkTimeout = this.isSlowNetwork ? 15000 : 5000;
 
-    // 1. Pick provided base EU VIN pattern and randomize only the last character
-    const baseVin = this.vins[Math.floor(Math.random() * this.vins.length)];
-    const prefix = baseVin.slice(0, 16);
-    const randomSuffix = Math.floor(Math.random() * 10).toString();
-    const randomizedVin = prefix + randomSuffix;
+    // Static list of verified EU VINs for sticker generation
+    const staticEuVins = ['VF1AGVYB055491691', 'WAUZZZ8P6CA083445', 'WAUZZZ8V5DA002440', 'WV1ZZZSYZL9025249'];
+    let baseVin = this.vin;
+    if (!baseVin) {
+      baseVin = staticEuVins[Math.floor(Math.random() * staticEuVins.length)];
+    } else if (Array.isArray(baseVin)) {
+      baseVin = baseVin[Math.floor(Math.random() * baseVin.length)];
+    }
+
+    const prefix = baseVin.slice(0, 12);
+    // Randomize last 5 characters (positions 13-17) using alphanumeric characters (numbers + uppercase letters, excluding I, O, Q)
+    const validVinChars = '0123456789ABCDEFGHJKLMNPRSTUVWXYZ';
+    let randomSuffix = '';
+    for (let i = 0; i < 5; i++) {
+      randomSuffix += validVinChars.charAt(Math.floor(Math.random() * validVinChars.length));
+    }
+    const randomizedVin = prefix.length === 12 ? prefix + randomSuffix : baseVin;
     console.log(`Starting EU Window Sticker Generate for VIN: ${randomizedVin}`);
 
-    // 2. Fill VIN and submit
+    // 1. VIN Decode (Fill VIN & click Get Window Sticker)
     const vinInput = page.getByRole('textbox', { name: 'VIN Number' });
     await vinInput.waitFor({ state: 'visible', timeout });
     await vinInput.click();
@@ -34,189 +54,147 @@ class GenerateEUWindowSticker {
       { timeout: apiTimeout }
     ).catch(() => null);
 
-    const submitBtn = page.getByRole('button', { name: 'Get Window Sticker' });
+    const submitBtn = page.getByRole('button', { name: 'Get Window Sticker' })
+      .or(page.getByRole('button', { name: 'Get Vehicle History' }))
+      .or(page.locator('button:has-text("Get Vehicle History")'))
+      .first();
     await submitBtn.waitFor({ state: 'visible', timeout });
     await submitBtn.click();
-    console.log("Clicked 'Get Window Sticker' button.");
+    console.log("Clicked 'Get Window Sticker' / 'Get Vehicle History' button.");
 
     await validatePromise;
     console.log("VIN validation API call resolved.");
 
-    // 3. Confirm EU popup if visible
+    // 2. Click Yes on Europe confirmation popup
     await this.clickEuropeYesIfPresent(page, checkTimeout);
 
-    // 4. Handle dynamic/unmapped dropdowns if present
+    // Check if directly navigated to my-reports page (e.g. mapped VIN or direct system redirect)
+    if (page.url().includes('my-report')) {
+      console.log("✅ Directly navigated to my-reports page. Flow completed successfully.");
+      return;
+    }
+
+    // 3. System navigation auto-land on YMMT dropdown -> Wait until dropdown appears and stabilizes ~3 seconds
+    console.log("Waiting for YMMT dropdown to appear and stabilize...");
     const yearCombobox = page.getByRole('combobox').filter({ hasText: 'Year' }).first()
       .or(page.getByRole('combobox').nth(0));
-    await yearCombobox.waitFor({ state: 'visible', timeout: 10000 }).catch(() => {});
-
-    if (await yearCombobox.isVisible().catch(() => false)) {
-      console.log("EU VIN unmapped dropdown flow detected. Selecting Year, Make, Model, Trim...");
-
-      try {
-        // Select Year (Preferred: '1980' for Audi, or dynamic live DOM)
-        await this.selectDropdownOption(page, yearCombobox, 'Year', '1980');
-
-        // Select Make (Preferred: 'Audi', or dynamic live DOM)
-        const makeCombobox = page.getByRole('combobox').filter({ hasText: 'Make' }).first()
-          .or(page.getByRole('combobox').nth(1));
-        await this.selectDropdownOption(page, makeCombobox, 'Make', 'Audi');
-
-        // Select Model (Preferred: '200', or dynamic live DOM)
-        const modelCombobox = page.getByRole('combobox').filter({ hasText: 'Model' }).first()
-          .or(page.getByRole('combobox').nth(2));
-        await this.selectDropdownOption(page, modelCombobox, 'Model', '200');
-
-        // Select Trim (Preferred: '/e Inline 5' or 'Inline 5', or dynamic live DOM)
-        const trimCombobox = page.getByRole('combobox').filter({ hasText: 'Trim' }).first()
-          .or(page.getByRole('combobox').nth(3));
-        await this.selectDropdownOption(page, trimCombobox, 'Trim', '/e Inline 5');
-
-        // Set up generation listener
-        const generatePromise = page.waitForResponse(
-          res => res.url().includes('generate_classic_sticker') || res.url().includes('generate_sticker') || res.url().includes('generate-sticker'),
-          { timeout: apiTimeout }
-        ).catch(() => null);
-
-        // Submit selections
-        console.log("Submitting dropdown selections...");
-        const finalSubmitBtn = page.getByRole('button', { name: 'Get Window Sticker' });
-        await finalSubmitBtn.waitFor({ state: 'visible', timeout });
-        await finalSubmitBtn.click({ force: true });
-        console.log("Clicked 'Get Window Sticker' after dropdown selection.");
-
-        await generatePromise;
-        console.log("Sticker generation API call resolved.");
-        await page.waitForTimeout(3000);
-      } catch (err) {
-        console.error("⚠️ Dropdown interactions encountered note, proceeding:", err.message);
-      }
-    }
-  }
-
-  /**
-   * Selects an option from a dropdown:
-   * First attempts to select preferredName if visible, otherwise dynamically picks an option strictly from the open dropdown menu.
-   */
-  async selectDropdownOption(page, combobox, label, preferredName = null) {
-    await combobox.waitFor({ state: 'visible', timeout: 15000 });
-    await combobox.click();
-    await page.waitForTimeout(1000);
-
-    // 1. Try preferred named button first if available
-    if (preferredName) {
-      const preferredBtn = page.getByRole('button', { name: preferredName, exact: false }).first()
-        .or(page.getByRole('button', { name: /Inline 5/i }).first())
-        .or(page.locator(`button:has-text("${preferredName}")`).first())
-        .or(page.locator('[role="option"]').filter({ hasText: preferredName }).first());
-
-      if (await preferredBtn.isVisible({ timeout: 2500 }).catch(() => false)) {
-        const text = await preferredBtn.innerText().catch(() => preferredName.toString());
-        console.log(`🎯 [Dropdown] Selected preferred option for ${label}: "${text.trim()}"`);
-        await preferredBtn.click().catch(() => preferredBtn.click({ force: true }));
-        await page.waitForTimeout(1000);
+    
+    // Wait for combobox or direct my-report URL redirect
+    const yearVisible = await yearCombobox.waitFor({ state: 'visible', timeout: 15000 }).then(() => true).catch(() => false);
+    if (!yearVisible || page.url().includes('my-report')) {
+      if (page.url().includes('my-report')) {
+        console.log("✅ Directly navigated to my-reports page during dropdown wait. Flow completed successfully.");
         return;
       }
     }
+    console.log("YMMT Year dropdown visible. Stabilizing for 3 seconds...");
+    await page.waitForTimeout(3000);
 
-    // 2. Strict scoped locator targeting only the open menu/popover container
-    const openMenu = page.locator([
-      '[role="listbox"]:visible',
-      '[role="menu"]:visible',
-      '[data-radix-popper-content-wrapper]:visible',
-      'div[class*="popover"]:visible',
-      'div[class*="dropdown-menu"]:visible',
-      'div[class*="select-options"]:visible',
-      'div[class*="select-dropdown"]:visible',
-      'div[class*="menu-items"]:visible'
-    ].join(', ')).first();
+    // 4. Select data from dropdowns (random preset from pool)
+    const preset = STATIC_PRESETS[Math.floor(Math.random() * STATIC_PRESETS.length)];
+    console.log(`Selecting YMMT preset: ${preset.year} ${preset.make} ${preset.model} (${preset.trim})`);
 
-    const isMenuVisible = await openMenu.isVisible({ timeout: 2000 }).catch(() => false);
-    const container = isMenuVisible ? openMenu : page;
+    // Select Year
+    await this.selectDropdownOption(page, yearCombobox, 'Year', preset.year);
 
-    // Filter out all global navigation labels
-    const optionLocator = isMenuVisible
-      ? container.locator('button, [role="option"], [role="menuitem"], li').filter({
-          hasNotText: /Get Window Sticker|Window Sticker|Vehicle Report|Proceed|Confirm|Cancel|Select|Search|Order Credits|Help|Subscriptions|Decode|Tools|Dealers|My Reports|Saved Cars|Rate your experience|Basic Account/i
-        })
-      : page.locator('[role="listbox"] [role="option"], [role="listbox"] button, [role="option"]').filter({
-          hasNotText: /Get Window Sticker|Window Sticker|Vehicle Report|Proceed|Confirm|Cancel|Select|Search|Order Credits|Help|Subscriptions|Decode|Tools|Dealers|My Reports|Saved Cars|Rate your experience|Basic Account/i
-        });
+    // Select Make
+    const makeCombobox = page.getByRole('combobox').filter({ hasText: 'Make' }).first()
+      .or(page.getByRole('combobox').nth(1));
+    await this.selectDropdownOption(page, makeCombobox, 'Make', preset.make);
 
-    const count = await optionLocator.count().catch(() => 0);
-    if (count > 0) {
-      const randomIndex = Math.floor(Math.random() * count);
-      const chosen = optionLocator.nth(randomIndex);
-      const text = await chosen.innerText().catch(() => `Option #${randomIndex}`);
-      console.log(`🎯 [Dynamic Dropdown] Found ${count} available ${label} options. Selected (${randomIndex + 1}/${count}): "${text.trim()}"`);
-      await chosen.click().catch(() => chosen.click({ force: true }));
-    } else {
-      // 3. Fallback: try first button or item inside openMenu
-      if (isMenuVisible) {
-        const firstItem = openMenu.locator('button, [role="option"], li').filter({
-          hasNotText: /Get Window Sticker|Window Sticker|Vehicle Report|Proceed|Confirm|Cancel|Select|Search|Order Credits|Help|Subscriptions|Decode|Tools|Dealers|My Reports|Saved Cars/i
-        }).first();
-        if (await firstItem.isVisible({ timeout: 2000 }).catch(() => false)) {
-          const text = await firstItem.innerText().catch(() => 'First item');
-          console.log(`🎯 [Fallback Dropdown] Clicked first available item for ${label}: "${text.trim()}"`);
-          await firstItem.click({ force: true }).catch(() => {});
-        } else {
-          console.warn(`⚠️ [Dropdown] No options detected for ${label}.`);
-        }
-      } else {
-        console.warn(`⚠️ [Dropdown] No open menu container detected for ${label}.`);
-      }
+    // Select Model
+    const modelCombobox = page.getByRole('combobox').filter({ hasText: 'Model' }).first()
+      .or(page.getByRole('combobox').nth(2));
+    await this.selectDropdownOption(page, modelCombobox, 'Model', preset.model);
+
+    // Select Trim
+    const trimCombobox = page.getByRole('combobox').filter({ hasText: 'Trim' }).first()
+      .or(page.getByRole('combobox').nth(3));
+    await this.selectDropdownOption(page, trimCombobox, 'Trim', preset.trim);
+
+    // Ensure open dropdown popover is closed before clicking submit button
+    await page.keyboard.press('Escape').catch(() => {});
+    await page.waitForTimeout(500);
+
+    // 5. Get Sticker button click & wait API call finish
+    const generatePromise = page.waitForResponse(
+      res => (res.url().includes('/api-cwa/generate_sticker') || res.url().includes('generate_sticker')) && res.status() === 200,
+      { timeout: apiTimeout }
+    ).catch(() => null);
+
+    console.log("Submitting dropdown selections via CTA button...");
+    const finalSubmitBtn = page.locator('button, [role="button"]').filter({ hasText: /Get.*(Sticker|History)/i }).first();
+
+    await finalSubmitBtn.waitFor({ state: 'visible', timeout: timeout });
+    await finalSubmitBtn.scrollIntoViewIfNeeded().catch(() => {});
+    console.log("Clicking CTA button...");
+    await finalSubmitBtn.click({ force: true }).catch(async () => {
+      await finalSubmitBtn.dispatchEvent('click').catch(() => {});
+    });
+
+    console.log("Awaiting generate_sticker API resolution...");
+    const genRes = await generatePromise;
+    if (genRes) {
+      console.log("✅ Sticker generation API call resolved with status 200.");
     }
 
-    await page.waitForTimeout(1000);
+    // 6. Wait system navigation when pattern URL matches (my-reports/classic/europe/sticker-tool)
+    console.log("Waiting for native system navigation pattern URL match...");
+    await page.waitForURL(
+      url => url.pathname.includes('my-report') || url.pathname.includes('classic') || url.pathname.includes('europe') || url.pathname.includes('sticker-tool'),
+      { timeout: apiTimeout }
+    );
+    console.log("Native system navigation complete. URL pattern matched successfully.");
+  }
+
+  /**
+   * Selects a static option from a dropdown by name with smart wait.
+   */
+  async selectDropdownOption(page, combobox, label, targetName) {
+    await combobox.waitFor({ state: 'visible', timeout: 15000 });
+    await combobox.click();
+
+    const optionBtn = page.getByRole('button', { name: targetName })
+      .or(page.getByRole('option', { name: targetName }))
+      .or(page.locator(`text=${targetName}`))
+      .first();
+
+    // Smart wait for option button to become visible instead of hardcoded timeouts
+    await optionBtn.waitFor({ state: 'visible', timeout: 15000 }).catch(async () => {
+      // If click didn't open menu, attempt re-click combobox once
+      await combobox.click().catch(() => {});
+      await optionBtn.waitFor({ state: 'visible', timeout: 5000 });
+    });
+
+    const text = await optionBtn.innerText().catch(() => targetName);
+    console.log(`🎯 [Dropdown] Selected option for ${label}: "${text.trim()}"`);
+    await optionBtn.click({ force: true }).catch(() => {});
+
+    // Smart wait for dropdown menu/popover to close/settle
+    await page.waitForLoadState('domcontentloaded').catch(() => {});
   }
 
   async clickEuropeYesIfPresent(page, timeoutMs = 8000) {
     console.log("Checking for Europe confirmation popup...");
     const startTime = Date.now();
 
+    const yesBtn = page.getByRole('button', { name: /^Yes$/i })
+      .or(page.locator('button:has-text("Yes")'))
+      .or(page.locator('[role="button"]:has-text("Yes")'))
+      .first();
+
     while (Date.now() - startTime < timeoutMs) {
-      if (page.url().includes('my-report')) {
-        return true;
-      }
+      if (page.url().includes('my-report')) return true;
 
-      const yesBtnRole = page.getByRole('button', { name: /^Yes$/i }).first();
-      if (await yesBtnRole.isVisible().catch(() => false)) {
-        console.log("🎯 Found Europe popup 'Yes' button (by role). Clicking...");
-        await yesBtnRole.click().catch(() => yesBtnRole.click({ force: true }));
+      if (await yesBtn.isVisible().catch(() => false)) {
+        console.log("🎯 Found Europe popup 'Yes' button. Clicking...");
+        await yesBtn.click().catch(() => yesBtn.click({ force: true }));
         console.log("✅ Clicked Yes on Europe popup.");
         await page.waitForTimeout(1000);
         return true;
       }
 
-      const yesBtnText = page.locator('button:has-text("Yes"), [role="button"]:has-text("Yes")').first();
-      if (await yesBtnText.isVisible().catch(() => false)) {
-        console.log("🎯 Found Europe popup 'Yes' button (by text). Clicking...");
-        await yesBtnText.click().catch(() => yesBtnText.click({ force: true }));
-        console.log("✅ Clicked Yes on Europe popup.");
-        await page.waitForTimeout(1000);
-        return true;
-      }
-
-      const modalYesBtn = page.locator([
-        '[role="dialog"] button',
-        '[role="alertdialog"] button',
-        'div[class*="modal"] button',
-        'div[class*="popup"] button',
-        'div[class*="dialog"] button',
-        'div[data-radix-popper-content-wrapper] button'
-      ].join(', ')).filter({ hasText: /^Yes$/i }).first();
-
-      if (await modalYesBtn.isVisible().catch(() => false)) {
-        console.log("🎯 Found Europe popup 'Yes' button (inside modal container). Clicking...");
-        await modalYesBtn.click().catch(() => modalYesBtn.click({ force: true }));
-        console.log("✅ Clicked Yes on Europe popup.");
-        await page.waitForTimeout(1000);
-        return true;
-      }
-
-      const yearCombobox = page.getByRole('combobox').first();
-      if (await yearCombobox.isVisible().catch(() => false)) {
+      if (await page.getByRole('combobox').first().isVisible().catch(() => false)) {
         return false;
       }
 
