@@ -22,13 +22,9 @@ env:
   BASE_URL: ${{ secrets.BASE_URL || 'https://members.vehiclehistory.report' }}
 
 jobs:
-  test:
-    timeout-minutes: 120
+  setup:
+    timeout-minutes: 30
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        project: [desktop-chrome, uvc-flow, sticker-desktop-chrome, cancel-subscription-mobile, session-ip-stickiness]
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
@@ -63,8 +59,75 @@ jobs:
         echo "::add-mask::${{ secrets.MONGO_URI }}"
         echo "::add-mask::${{ secrets.GEMINI_API_KEY }}"
         echo "::add-mask::${{ secrets.SLACK_WEBHOOK_URL }}"
+
+    - name: Run Global Session Setup (Signup & Purchase)
+      env:
+        MONGO_URI: ${{ secrets.MONGO_URI }}
+        MONGO_DB_NAME: ${{ secrets.MONGO_DB_NAME }}
+        MONGO_COLL_NAME: ${{ secrets.MONGO_COLL_NAME }}
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        SLOW_NETWORK: 'false'
+      run: npx playwright test --project=setup --project=sticker-setup
+
+    - name: Upload Session States
+      uses: actions/upload-artifact@v4
+      with:
+        name: session-states
+        path: |
+          state.json
+          sticker_state.json
+        retention-days: 1
+
+  test:
+    needs: setup
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shardIndex: [1, 2, 3, 4]
+        shardTotal: [4]
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: lts/*
+        cache: 'npm'
+    - name: Install dependencies
+      run: npm ci
       
-    - name: Run Playwright tests
+    - name: Get Playwright version
+      run: echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('@playwright/test/package.json').version)")" >> $GITHUB_ENV
+      
+    - name: Cache Playwright Browsers
+      id: playwright-cache
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/ms-playwright
+        key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
+        restore-keys: |
+          ${{ runner.os }}-playwright-
+          
+    - name: Install Playwright Browsers
+      if: steps.playwright-cache.outputs.cache-hit != 'true'
+      run: npx playwright install --with-deps
+      
+    - name: Install Playwright System Dependencies
+      if: steps.playwright-cache.outputs.cache-hit == 'true'
+      run: npx playwright install-deps
+
+    - name: Download Session States
+      uses: actions/download-artifact@v4
+      with:
+        name: session-states
+
+    - name: Mask Sensitive Secrets in CI Logs
+      run: |
+        echo "::add-mask::${{ secrets.MONGO_URI }}"
+        echo "::add-mask::${{ secrets.GEMINI_API_KEY }}"
+        echo "::add-mask::${{ secrets.SLACK_WEBHOOK_URL }}"
+      
+    - name: Run Playwright tests (Sharded)
       id: playwright-run
       continue-on-error: true
       env:
@@ -73,13 +136,13 @@ jobs:
         MONGO_COLL_NAME: ${{ secrets.MONGO_COLL_NAME }}
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         SLOW_NETWORK: 'false'
-      run: npx playwright test --project=${{ matrix.project }} --reporter=blob
+      run: npx playwright test --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }} --reporter=blob
 
     - name: Upload Failure Artifacts (Videos, Traces, Screenshots)
       uses: actions/upload-artifact@v4
       if: failure()
       with:
-        name: failure-artifacts-${{ matrix.project }}
+        name: failure-artifacts-shard-${{ matrix.shardIndex }}
         path: test-results/
         retention-days: 3
       
@@ -87,7 +150,7 @@ jobs:
       uses: actions/upload-artifact@v4
       if: always()
       with:
-        name: blob-report-${{ matrix.project }}
+        name: blob-report-shard-${{ matrix.shardIndex }}
         path: blob-report
         retention-days: 1
 
