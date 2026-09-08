@@ -52,34 +52,43 @@ class GenerateUSVIN {
   }
 }
 
+const CLASSIC_MAPPED_VIN_POOL = [
+  'XP29G72104639',
+  '3N67K5M340214',
+  '242378Z126752',
+  '242176P1487190',
+  '233356P614878',
+  '242177K129818',
+  '1H57H5Z447879'
+];
+
 class ClassicMappedVIN {
-  constructor(baseVin = '228871N111628', isSlowNetwork = false) {
+  constructor(baseVin = null, isSlowNetwork = false) {
     this.baseVin = baseVin;
     this.isSlowNetwork = isSlowNetwork;
   }
 
   async performAs(actor) {
     const timeout = this.isSlowNetwork ? 10000 : 5000;
-    console.log(`Using base Classic Mapped VIN directly (Condition-based timeout check: ${timeout}ms)...`);
-    
-    // Simulating a condition-based timeout delay if needed
-    await actor.page.waitForTimeout(timeout / 5); 
+    await actor.page.waitForTimeout(timeout / 5);
 
-    /*
-    const chars = this.baseVin.split('');
+    let vinToUse = this.baseVin;
+    if (!vinToUse) {
+      vinToUse = CLASSIC_MAPPED_VIN_POOL[Math.floor(Math.random() * CLASSIC_MAPPED_VIN_POOL.length)];
+    }
+
+    // Randomize the trailing 2 numeric digits to ensure fresh generation while maintaining mapped specs
+    const chars = vinToUse.split('');
     const random1 = Math.floor(Math.random() * 10).toString();
     const random2 = Math.floor(Math.random() * 10).toString();
-    
+
     if (chars.length >= 2) {
-      chars[chars.length - 1] = random1; // Last character (numeric)
-      chars[chars.length - 2] = random2; // 2nd to last character (numeric)
+      chars[chars.length - 1] = random1;
+      chars[chars.length - 2] = random2;
     }
-    
+
     actor.classicVin = chars.join('');
-    */
-    
-    actor.classicVin = this.baseVin;
-    console.log(`Classic VIN set to base value: ${actor.classicVin}`);
+    console.log(`Classic Mapped VIN set on actor (randomized last 2 digits): ${actor.classicVin}`);
   }
 }
 

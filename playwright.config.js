@@ -60,12 +60,7 @@ module.exports = defineConfig({
       use: { ...devices['Desktop Chrome'] },
     },
 
-    // --- DEDICATED CANCELLATION FLOW ---
-    {
-      name: 'cancel-subscription',
-      testMatch: /cancel_subscription\.spec\.js/,
-      use: { ...devices['Desktop Chrome'] },
-    },
+    // --- DEDICATED CANCELLATION FLOW (MOBILE ONLY) ---
     {
       name: 'cancel-subscription-mobile',
       testMatch: /cancel_subscription\.spec\.js/,
