@@ -51,7 +51,7 @@ class PurchaseFlow {
     const frame = page.frameLocator('iframe[title*="payment" i], iframe[title*="Payment" i], iframe[src*="elements-inner-card"]').first();
 
     const number = this.cardData.cardNum || '4242424242424242';
-    let exp = this.cardData.expiry || '12/26';
+    let exp = this.cardData.expiry || '12/28';
     if (exp.length === 4 && !exp.includes('/')) {
       exp = `${exp.substring(0, 2)}/${exp.substring(2, 4)}`;
     }
@@ -85,9 +85,25 @@ class PurchaseFlow {
       }
     } catch (e) {}
 
-    const payButton = page.getByRole('button', { name: /^Pay\b/i }).first();
+    // Flow control: wait for payment-update API response
+    const paymentUpdatePromise = page.waitForResponse(
+      res => res.url().includes('payment-update'),
+      { timeout: this.isSlowNetwork ? 180000 : 120000 }
+    ).catch(() => null);
+
+    const payButton = page.locator('button[type="submit"]')
+      .or(page.getByRole('button', { name: /Pay\s*(&|and)?\s*Subscribe|^Pay\s+\$|Subscribe Now|^Pay\b(?!\s*pal)/i }))
+      .or(page.locator('button:has-text("Pay & Subscribe"), button:has-text("Pay and Subscribe"), button:has-text("Pay Now"), button:has-text("Subscribe")'))
+      .filter({ hasNotText: /paypal/i })
+      .first();
+
     await payButton.waitFor({ state: 'visible', timeout: timeout });
-    await payButton.click();
+    await payButton.click({ force: true });
+
+    const paymentRes = await paymentUpdatePromise;
+    if (paymentRes) {
+      console.log(`📥 payment-update API resolved with status: ${paymentRes.status()}`);
+    }
   }
 
   async performMultiFrameCheckout(page, timeout) {
@@ -103,11 +119,10 @@ class PurchaseFlow {
     const cvcFrame = page.frameLocator('iframe[src*="componentName=cardCvc"], iframe[title*="Secure CVC input frame" i]').first();
 
     const number = this.cardData.cardNum || '5454545454545454';
-    const exp = this.cardData.expiry || '0232';
+    const exp = (this.cardData.expiry || '0232').replace(/\D/g, '');
     const cvc = this.cardData.cvc || '123';
     const zip = this.cardData.zip || '12345';
 
-    await page.waitForTimeout(1000);
     await cardFrame.locator('[name="cardnumber"]').fill(number);
     await expiryFrame.locator('[name="exp-date"]').fill(exp);
     await cvcFrame.locator('[name="cvc"]').fill(cvc);
@@ -119,9 +134,25 @@ class PurchaseFlow {
       }
     } catch (e) {}
 
-    const payButton = page.locator('button[type="submit"]').filter({ hasText: /Pay|Subscribe/i });
+    // Flow control: wait for payment-update API response
+    const paymentUpdatePromise = page.waitForResponse(
+      res => res.url().includes('payment-update'),
+      { timeout: this.isSlowNetwork ? 180000 : 120000 }
+    ).catch(() => null);
+
+    const payButton = page.locator('button[type="submit"]')
+      .or(page.getByRole('button', { name: /Pay\s*(&|and)?\s*Subscribe|^Pay\s+\$|Subscribe Now|^Pay\b(?!\s*pal)/i }))
+      .or(page.locator('button:has-text("Pay & Subscribe"), button:has-text("Pay and Subscribe"), button:has-text("Pay Now"), button:has-text("Subscribe")'))
+      .filter({ hasNotText: /paypal/i })
+      .first();
+
     await payButton.waitFor({ state: 'visible', timeout: timeout });
-    await payButton.click();
+    await payButton.click({ force: true });
+
+    const paymentRes = await paymentUpdatePromise;
+    if (paymentRes) {
+      console.log(`📥 payment-update API resolved with status: ${paymentRes.status()}`);
+    }
   }
 }
 

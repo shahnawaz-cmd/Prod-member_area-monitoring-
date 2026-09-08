@@ -4,9 +4,10 @@
       "C:\\Program Files\\nodejs\\node.exe",
       "C:\\Users\\Shahnawaz\\Desktop\\PROD STABILITY MONITOR\\Member area monitoring\\node_modules\\@playwright\\test\\cli.js",
       "test",
+      "test/global_flow.spec.js",
       "-g",
-      "CS-05|CS-06",
-      "--project=sticker-desktop-chrome",
+      "CS-04",
+      "--project=mobile-chrome",
       "--headed"
     ],
     "configFile": "C:\\Users\\Shahnawaz\\Desktop\\PROD STABILITY MONITOR\\Member area monitoring\\playwright.config.js",
@@ -64,8 +65,8 @@
         "metadata": {
           "actualWorkers": 1
         },
-        "id": "mobile-safari",
-        "name": "mobile-safari",
+        "id": "mobile-chrome",
+        "name": "mobile-chrome",
         "testDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test",
         "testIgnore": [],
         "testMatch": [
@@ -80,8 +81,8 @@
         "metadata": {
           "actualWorkers": 1
         },
-        "id": "sticker-mobile-safari",
-        "name": "sticker-mobile-safari",
+        "id": "sticker-mobile-chrome",
+        "name": "sticker-mobile-chrome",
         "testDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test",
         "testIgnore": [],
         "testMatch": [
@@ -120,10 +121,46 @@
           "/sticker_flow\\.spec\\.js/"
         ],
         "timeout": 5400000
+      },
+      {
+        "outputDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "cancel-subscription",
+        "name": "cancel-subscription",
+        "testDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test",
+        "testIgnore": [],
+        "testMatch": [
+          "/cancel_subscription\\.spec\\.js/"
+        ],
+        "timeout": 5400000
+      },
+      {
+        "outputDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "session-ip-stickiness",
+        "name": "session-ip-stickiness",
+        "testDir": "C:/Users/Shahnawaz/Desktop/PROD STABILITY MONITOR/Member area monitoring/test",
+        "testIgnore": [],
+        "testMatch": [
+          "/session_ip_stickiness\\.spec\\.js/"
+        ],
+        "timeout": 5400000
       }
     ],
-    "quiet": false,
+    "quiet": true,
     "reporter": [
+      [
+        "list",
+        null
+      ],
       [
         "html",
         {
@@ -151,13 +188,13 @@
   },
   "suites": [
     {
-      "title": "sticker_flow.setup.js",
-      "file": "sticker_flow.setup.js",
+      "title": "global_flow.setup.js",
+      "file": "global_flow.setup.js",
       "column": 0,
       "line": 0,
       "specs": [
         {
-          "title": "Setup Session — Window Sticker Signup and Purchase Flow",
+          "title": "Setup Session — Full Signup, Plan Selection, and Purchase Flow",
           "ok": true,
           "tags": [],
           "tests": [
@@ -165,96 +202,39 @@
               "timeout": 300000,
               "annotations": [],
               "expectedStatus": "passed",
-              "projectId": "desktop-setup",
-              "projectName": "desktop-setup",
+              "projectId": "setup",
+              "projectName": "setup",
               "results": [
                 {
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 82050,
+                  "duration": 66334,
                   "errors": [],
                   "stdout": [
-                    {
-                      "text": "Blocked non-essential resources (images, fonts, trackers) for speed optimization.\n"
-                    },
-                    {
-                      "text": "Setting up listener for: /api-cwa/search-page\n"
-                    },
-                    {
-                      "text": "Setting up listener for: /api-cwa/payment-update\n"
-                    },
-                    {
-                      "text": "Setting up listener for: /api-cwa/vin-validate\n"
-                    },
-                    {
-                      "text": "Setting up listener for: /api-cwa/generate-report\n"
-                    },
-                    {
-                      "text": "Setting up listener for: /api-cwa/generate_uvc_report\n"
-                    },
-                    {
-                      "text": "Setting up listener for: /api-cwa/autoloading-stickerdata\n"
-                    },
-                    {
-                      "text": "Setting up listener for: /api-cwa/get-vymmtautoblog-forumData\n"
-                    },
-                    {
-                      "text": "Setting up listener for: /api-cwa/confirm-sticker\n"
-                    },
-                    {
-                      "text": "Setting up listener for: cancel-subscription\n"
-                    },
-                    {
-                      "text": "Setting up listener for: license_plate_decode\n"
-                    },
-                    {
-                      "text": "Setting up listener for: generate_sticker\n"
-                    },
-                    {
-                      "text": "Setting up listener for: generate-sticker\n"
-                    },
-                    {
-                      "text": "Setting up listener for: classicmapping\n"
-                    },
-                    {
-                      "text": "Setting up listener for: generate_classic_sticker\n"
-                    },
-                    {
-                      "text": "API listeners attached with report attachments (one-time capture).\n"
-                    },
                     {
                       "text": "Base URL configured to: https://members.vehiclehistory.report\n"
                     },
                     {
-                      "text": "Generated unique email: sticker_motr@tmsf8h0gi.com\n"
+                      "text": "Generated email: memberareamonitoring.claire435@gmail.com\n"
                     },
                     {
-                      "text": "Generated unique password: Pass_motrmsf8h0gi!\n"
+                      "text": "Navigating to Signup: https://members.vehiclehistory.report/members/signup\n"
                     },
                     {
-                      "text": "Navigating to Signup URL: https://members.vehiclehistory.report/members/signup (Timeout: 60000ms)\n"
+                      "text": "Clicked signup submit button.\n"
                     },
                     {
-                      "text": "Signup successful.\n"
+                      "text": "✅ Signup successful and redirected to: https://members.vehiclehistory.report/members/dashboard\n"
                     },
                     {
-                      "text": "📥 Intercepted and saved API Response payload for: /api-cwa/search-page\n"
+                      "text": "Mobile view detected, opening side navigation...\n"
                     },
                     {
-                      "text": "Clicked 'Window Sticker' tab. (Timeout: 30000ms)\n"
+                      "text": "Locating the highest report package option available on the page...\n"
                     },
                     {
-                      "text": "Locating the highest sticker package option available on the page...\n"
-                    },
-                    {
-                      "text": "Waiting for plan cards to render...\n"
-                    },
-                    {
-                      "text": "⚠️ Timeout waiting for '25 Stickers' card to render. Proceeding to scan remaining plans...\n"
-                    },
-                    {
-                      "text": "Found and selecting plan matching pattern: /10\\s*Stickers/i\n"
+                      "text": "Found and selecting plan matching pattern: /10\\s*Reports/i\n"
                     },
                     {
                       "text": "Clicked 'Proceed' button.\n"
@@ -272,62 +252,59 @@
                       "text": "Proceeding with Multi-Frame Checkout Strategy.\n"
                     },
                     {
+                      "text": "📥 payment-update API resolved with status: 200\n"
+                    },
+                    {
                       "text": "Purchase flow completed.\n"
                     },
                     {
-                      "text": "Waiting for redirection to dashboard...\n"
+                      "text": "Awaiting post-payment redirection to Dashboard...\n"
                     },
                     {
-                      "text": "📥 Intercepted and saved API Response payload for: /api-cwa/payment-update\n"
+                      "text": "Navigating directly to Dashboard URL...\n"
                     },
                     {
-                      "text": "Successfully redirected to: https://members.vehiclehistory.report/members/dashboard#window-sticker\n"
+                      "text": "✅ Successfully stabilized on dashboard: https://members.vehiclehistory.report/members/dashboard\n"
                     },
                     {
-                      "text": "Sticker setup flow completed successfully. Saving session state...\n"
+                      "text": "Global setup flow completed successfully. Saving session state...\n"
                     },
                     {
-                      "text": "Session state saved to sticker_state.json.\n"
+                      "text": "Session state saved to state.json.\n"
                     }
                   ],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-04T22:32:17.331Z",
+                  "startTime": "2026-09-07T18:47:11.790Z",
                   "annotations": [],
-                  "attachments": [
-                    {
-                      "name": "trace",
-                      "contentType": "application/zip",
-                      "path": "C:\\Users\\Shahnawaz\\Desktop\\PROD STABILITY MONITOR\\Member area monitoring\\test-results\\sticker_flow.setup.js-Setu-25409-er-Signup-and-Purchase-Flow-desktop-setup\\trace.zip"
-                    }
-                  ]
+                  "attachments": []
                 }
               ],
               "status": "expected"
             }
           ],
-          "id": "003ff80f0b75e7e6c584-73ed4fc3f269828ac3f7",
-          "file": "sticker_flow.setup.js",
+          "id": "7b25eb415c3688f67989-eac2dec3b5888af0b7f7",
+          "file": "global_flow.setup.js",
           "line": 11,
           "column": 1
         }
       ]
     },
     {
-      "title": "sticker_flow.spec.js",
-      "file": "sticker_flow.spec.js",
+      "title": "global_flow.spec.js",
+      "file": "global_flow.spec.js",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "Global Window Sticker Generation Flow",
-          "file": "sticker_flow.spec.js",
-          "line": 8,
+          "title": "Global Member Area Report Generation Flow",
+          "file": "global_flow.spec.js",
+          "line": 19,
           "column": 6,
           "specs": [
             {
-              "title": "CS-05 — Dynamic Window Sticker Generation (Multi-Trim Flow)",
+              "title": "CS-04 — EU Mapped VIN report generate",
               "ok": true,
               "tags": [],
               "tests": [
@@ -335,64 +312,16 @@
                   "timeout": 300000,
                   "annotations": [],
                   "expectedStatus": "passed",
-                  "projectId": "sticker-desktop-chrome",
-                  "projectName": "sticker-desktop-chrome",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
                   "results": [
                     {
                       "workerIndex": 1,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 87306,
+                      "duration": 42003,
                       "errors": [],
                       "stdout": [
-                        {
-                          "text": "Blocked non-essential resources (images, fonts, trackers) for speed optimization.\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/search-page\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/payment-update\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/vin-validate\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/generate-report\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/generate_uvc_report\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/autoloading-stickerdata\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/get-vymmtautoblog-forumData\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/confirm-sticker\n"
-                        },
-                        {
-                          "text": "Setting up listener for: cancel-subscription\n"
-                        },
-                        {
-                          "text": "Setting up listener for: license_plate_decode\n"
-                        },
-                        {
-                          "text": "Setting up listener for: generate_sticker\n"
-                        },
-                        {
-                          "text": "Setting up listener for: generate-sticker\n"
-                        },
-                        {
-                          "text": "Setting up listener for: classicmapping\n"
-                        },
-                        {
-                          "text": "Setting up listener for: generate_classic_sticker\n"
-                        },
-                        {
-                          "text": "API listeners attached with report attachments (one-time capture).\n"
-                        },
                         {
                           "text": "Base URL configured to: https://members.vehiclehistory.report\n"
                         },
@@ -400,258 +329,49 @@
                           "text": "Navigating directly to Dashboard...\n"
                         },
                         {
-                          "text": "Switching to Window Sticker Tab...\n"
+                          "text": "EU VIN set on actor (randomized last char): WAUZZZ8P44A035472\n"
                         },
                         {
-                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/search-page\n"
+                          "text": "Fetched 100% EU VIN from MongoDB -> VIN: WVWZZZ6NZWW046414 | Make: Volkswagen\n"
                         },
                         {
-                          "text": "Generating initial Window Sticker...\n"
+                          "text": "Generating EU report for VIN: WAUZZZ8P44A035472 (Attempt: 1)\n"
                         },
                         {
-                          "text": "Starting GenerateSticker for VIN: 1FTBF2B66HEE83884\n"
+                          "text": "Clicked 'Get Vehicle History' button.\n"
                         },
                         {
-                          "text": "Clicked 'Get Window Sticker' button.\n"
+                          "text": "Checking for Europe confirmation popup...\n"
                         },
                         {
-                          "text": "Awaiting vin-validate API response...\n"
+                          "text": "🎯 Found Europe popup 'Yes' button (by role). Clicking...\n"
                         },
                         {
-                          "text": "Awaiting generate_sticker API response...\n"
+                          "text": "✅ Clicked Yes on Europe popup.\n"
                         },
                         {
-                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/vin-validate\n"
+                          "text": "Waiting for redirection to /my-reports...\n"
                         },
                         {
-                          "text": "Awaiting autoloading-stickerdata API response...\n"
+                          "text": "Successfully navigated to /my-reports\n"
                         },
                         {
-                          "text": "📥 Intercepted and saved API Response payload for: generate-sticker\n"
-                        },
-                        {
-                          "text": "Starting simplified multi-trim flow...\n"
-                        },
-                        {
-                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/autoloading-stickerdata\n"
-                        },
-                        {
-                          "text": "Trim modal dialog detected.\n"
-                        },
-                        {
-                          "text": "Found 1 dynamic trim options.\n"
-                        },
-                        {
-                          "text": "Skipping alternative trim selection (only 1 options found).\n"
-                        },
-                        {
-                          "text": "Waiting for Confirm button to become visible...\n"
-                        },
-                        {
-                          "text": "Clicking Confirm button...\n"
-                        },
-                        {
-                          "text": "Waiting for api-cwa/confirm-sticker response...\n"
-                        },
-                        {
-                          "text": "api-cwa/confirm-sticker API resolved.\n"
-                        },
-                        {
-                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/confirm-sticker\n"
-                        },
-                        {
-                          "text": "Dynamic Window Sticker generation completed successfully.\n"
+                          "text": "EU VIN report generation completed successfully.\n"
                         }
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-08-04T22:33:46.660Z",
+                      "startTime": "2026-09-07T18:48:25.480Z",
                       "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "C:\\Users\\Shahnawaz\\Desktop\\PROD STABILITY MONITOR\\Member area monitoring\\test-results\\sticker_flow-Global-Window-3f0e9-Generation-Multi-Trim-Flow--sticker-desktop-chrome\\trace.zip"
-                        }
-                      ]
+                      "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "a956471b4d38c23c3243-8638fed163916a9c5536",
-              "file": "sticker_flow.spec.js",
-              "line": 145,
-              "column": 3
-            },
-            {
-              "title": "CS-06 — Window Sticker Regeneration Flow",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 300000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "sticker-desktop-chrome",
-                  "projectName": "sticker-desktop-chrome",
-                  "results": [
-                    {
-                      "workerIndex": 1,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 97591,
-                      "errors": [],
-                      "stdout": [
-                        {
-                          "text": "Blocked non-essential resources (images, fonts, trackers) for speed optimization.\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/search-page\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/payment-update\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/vin-validate\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/generate-report\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/generate_uvc_report\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/autoloading-stickerdata\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/get-vymmtautoblog-forumData\n"
-                        },
-                        {
-                          "text": "Setting up listener for: /api-cwa/confirm-sticker\n"
-                        },
-                        {
-                          "text": "Setting up listener for: cancel-subscription\n"
-                        },
-                        {
-                          "text": "Setting up listener for: license_plate_decode\n"
-                        },
-                        {
-                          "text": "Setting up listener for: generate_sticker\n"
-                        },
-                        {
-                          "text": "Setting up listener for: generate-sticker\n"
-                        },
-                        {
-                          "text": "Setting up listener for: classicmapping\n"
-                        },
-                        {
-                          "text": "Setting up listener for: generate_classic_sticker\n"
-                        },
-                        {
-                          "text": "API listeners attached with report attachments (one-time capture).\n"
-                        },
-                        {
-                          "text": "Base URL configured to: https://members.vehiclehistory.report\n"
-                        },
-                        {
-                          "text": "Navigating directly to Dashboard...\n"
-                        },
-                        {
-                          "text": "Navigating to My Reports page...\n"
-                        },
-                        {
-                          "text": "Starting Regenerate Sticker Flow...\n"
-                        },
-                        {
-                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/search-page\n"
-                        },
-                        {
-                          "text": "Clicked Regenerate Sticker. Awaiting vin-validate, generate-sticker, and autoloading APIs to complete...\n"
-                        },
-                        {
-                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/vin-validate\n"
-                        },
-                        {
-                          "text": "📥 Intercepted and saved API Response payload for: generate-sticker\n"
-                        },
-                        {
-                          "text": "Regeneration loading APIs resolved. Checking for tour popup...\n"
-                        },
-                        {
-                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/autoloading-stickerdata\n"
-                        },
-                        {
-                          "text": "Tour popup closed.\n"
-                        },
-                        {
-                          "text": "Trim clicked. Waiting for getYMMT forumData API response to resolve...\n"
-                        },
-                        {
-                          "text": "getYMMT forumData API call resolved. Trim clicked successfully.\n"
-                        },
-                        {
-                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/get-vymmtautoblog-forumData\n"
-                        },
-                        {
-                          "text": "Next button clicked.\n"
-                        },
-                        {
-                          "text": "Tour popup on color selection page closed.\n"
-                        },
-                        {
-                          "text": "Exterior color Blue Jeans Metallic selected.\n"
-                        },
-                        {
-                          "text": "Interior color selected.\n"
-                        },
-                        {
-                          "text": "Second Next button clicked.\n"
-                        },
-                        {
-                          "text": "Options page tour closed.\n"
-                        },
-                        {
-                          "text": "Axle Ratio dropdown expanded.\n"
-                        },
-                        {
-                          "text": "Axle ratio option selected.\n"
-                        },
-                        {
-                          "text": "Option added successfully.\n"
-                        },
-                        {
-                          "text": "Clicked final Confirm button. Waiting for update responses...\n"
-                        },
-                        {
-                          "text": "Regeneration complete and confirmed.\n"
-                        },
-                        {
-                          "text": "Window Sticker regeneration completed successfully.\n"
-                        },
-                        {
-                          "text": "📥 Intercepted and saved API Response payload for: /api-cwa/confirm-sticker\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-08-04T22:35:17.346Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "trace",
-                          "contentType": "application/zip",
-                          "path": "C:\\Users\\Shahnawaz\\Desktop\\PROD STABILITY MONITOR\\Member area monitoring\\test-results\\sticker_flow-Global-Window-33533-w-Sticker-Regeneration-Flow-sticker-desktop-chrome\\trace.zip"
-                        }
-                      ]
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "a956471b4d38c23c3243-1ac96cf1e6ad38f92dcc",
-              "file": "sticker_flow.spec.js",
-              "line": 183,
+              "id": "33d8e9c5e66333882a2a-ae40ad85045b32cac8f5",
+              "file": "global_flow.spec.js",
+              "line": 79,
               "column": 3
             }
           ]
@@ -661,9 +381,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-08-04T22:32:15.240Z",
-    "duration": 284751.131,
-    "expected": 3,
+    "startTime": "2026-09-07T18:47:04.669Z",
+    "duration": 125785.665,
+    "expected": 2,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

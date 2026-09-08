@@ -28,7 +28,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        project: [mobile-safari, sticker-desktop-chrome, sticker-mobile-safari, cancel-subscription, session-ip-stickiness]
+        project: [desktop-chrome, uvc-flow, sticker-desktop-chrome, cancel-subscription, cancel-subscription-mobile, session-ip-stickiness]
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4

@@ -3,12 +3,13 @@ const Actor = require('../actor/Actor');
 const ConfigureBaseUrl = require('../task/ConfigureBaseUrl');
 const CaptureApiResponses = require('../task/CaptureApiResponses');
 const FetchMotorcycleVIN = require('../task/FetchMotorcycleVIN');
+const FetchEUVIN = require('../task/FetchEUVIN');
 const { ReverseDecode, ClassicMappedSticker, ClassicUnmappedSticker, GenerateEUSticker, GenerateSticker } = require('../task/GenerateWindowStickers');
 const { RegenerateSticker } = require('../task/RegenerateWindowSticker');
 
 test.describe('Global Window Sticker Generation Flow', () => {
   test('CS-01 — Reverse Decode (motorcycle, ATV, Sticker generate)', async ({ page }, testInfo) => {
-    test.skip(testInfo.project.name !== 'sticker-mobile-safari', 'Runs on Safari only');
+    test.skip(testInfo.project.name !== 'sticker-mobile-chrome', 'Runs on Mobile Chrome only');
     test.setTimeout(300000);
 
     const actor = new Actor(page);
@@ -45,7 +46,7 @@ test.describe('Global Window Sticker Generation Flow', () => {
   });
 
   test('CS-02 — Classic Mapped VIN Sticker Generation', async ({ page }, testInfo) => {
-    test.skip(testInfo.project.name !== 'sticker-mobile-safari', 'Runs on Safari only');
+    test.skip(testInfo.project.name !== 'sticker-mobile-chrome', 'Runs on Mobile Chrome only');
     test.setTimeout(300000);
 
     const actor = new Actor(page);
@@ -79,7 +80,7 @@ test.describe('Global Window Sticker Generation Flow', () => {
   });
 
   test('CS-03 — Classic Unmapped VIN Sticker Generation (Dropdown Flow)', async ({ page }, testInfo) => {
-    test.skip(testInfo.project.name !== 'sticker-mobile-safari', 'Runs on Safari only');
+    test.skip(testInfo.project.name !== 'sticker-mobile-chrome', 'Runs on Mobile Chrome only');
     test.setTimeout(300000);
 
     const actor = new Actor(page);
@@ -113,7 +114,7 @@ test.describe('Global Window Sticker Generation Flow', () => {
   });
 
   test('CS-04 — EU Mapped VIN Sticker Generation', async ({ page }, testInfo) => {
-    test.skip(testInfo.project.name !== 'sticker-mobile-safari', 'Runs on Safari only');
+    test.skip(testInfo.project.name !== 'sticker-mobile-chrome' && testInfo.project.name !== 'sticker-desktop-chrome', 'Runs on Chrome');
     test.setTimeout(300000);
 
     const actor = new Actor(page);
@@ -126,21 +127,27 @@ test.describe('Global Window Sticker Generation Flow', () => {
     // 1. Configure Base URL
     await actor.attemptsTo(new ConfigureBaseUrl());
 
-    // 2. Direct Navigation to Dashboard (using cached sticker session)
+    // 2. Fetch EU VIN dynamically (MongoDB with verified fallback)
+    await actor.attemptsTo(new FetchEUVIN());
+
+    // 3. Direct Navigation to Dashboard (using cached sticker session)
     console.log("Navigating directly to Dashboard...");
     await page.goto(actor.dashboardUrl, { waitUntil: 'domcontentloaded' });
     await page.waitForURL('**/dashboard**', { timeout: 60000 });
 
-    // 3. Switch to Window Sticker Tab
+    // 4. Switch to Window Sticker Tab
     console.log("Switching to Window Sticker Tab...");
-    const wsTab = page.getByText('Window Sticker').nth(2);
+    const isMobile = page.viewportSize() ? page.viewportSize().width < 768 : false;
+    const wsTab = isMobile 
+      ? page.getByText('Window Sticker').nth(2) 
+      : page.getByText('Window Sticker').nth(1);
     await wsTab.waitFor({ state: 'visible', timeout: timeout });
     await wsTab.click();
 
-    // 4. Perform EU VIN Sticker Generation with provided VINs and randomize feature
-    await actor.attemptsTo(new GenerateEUSticker(['VF1AGVYB055491691', 'WAUZZZ8P6CA083445'], isSlowNetwork));
+    // 5. Perform EU VIN Sticker Generation with fetched EU VIN
+    await actor.attemptsTo(new GenerateEUSticker(actor.euVin, isSlowNetwork));
 
-    // 5. Expect Redirection to My Reports, Classic, Europe, or Sticker Tool Page
+    // 6. Expect Redirection to My Reports, Classic, Europe, or Sticker Tool Page
     await expect(page).toHaveURL(/my-reports?|my-report|classic|europe|sticker-tool/, { timeout: isSlowNetwork ? 120000 : 60000 });
     console.log("EU Window Sticker generation completed successfully.");
     await page.close();

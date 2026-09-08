@@ -49,7 +49,7 @@ class CancelSubscriptionFlow {
             // Step 2: Retry with injected valid Stripe gateway
             const retryPayload = {
               ...postData,
-              gateway: 'stripe' // lowercase stripe
+              gateway: 'stripe'
             };
             console.log(`💉 Step 2 Forwarding Injected Payload:`, JSON.stringify(retryPayload));
 
@@ -104,34 +104,29 @@ class CancelSubscriptionFlow {
       }
     });
 
-    // 2. Direct Navigation to Profile / Basic Account page
-    const profileUrl = baseUrl.includes('members.vehiclehistory.report') ? `${baseUrl}/members/profile` : `${baseUrl}/profile`;
-    console.log("Navigating directly to Basic Account Profile page:", profileUrl);
-    await page.goto(profileUrl, { waitUntil: 'domcontentloaded', timeout: timeout });
-    await page.waitForURL('**/profile**', { timeout: timeout });
+    // Wait 1 sec after subscription purchase auto-navigation settling
+    await page.waitForTimeout(1000);
+
+    // Direct navigation to members/profile#subscriptions using current domain (actor.baseUrl)
+    const base = actor.baseUrl ? actor.baseUrl.replace(/\/+$/, '') : "https://members.vehiclehistory.report";
+    const subProfileUrl = base.includes('/members') ? `${base}/profile#subscriptions` : `${base}/members/profile#subscriptions`;
+
+    console.log(`Navigating directly to subscriptions profile URL after 1s delay: ${subProfileUrl}`);
+    await page.goto(subProfileUrl, { waitUntil: 'domcontentloaded', timeout: timeout }).catch(() => {});
     await page.waitForTimeout(2000);
 
-    // 3. Directly Click "Subscription(s)" Tab
-    console.log("Directly clicking visible Subscription(s) tab...");
-    const subTab = page.locator('div, span, button, a, p')
-      .filter({ hasText: /^Subscription\(s\)$/ })
-      .locator('visible=true')
-      .first();
+    // 3. Check for Cancel Subscription button on members/profile#subscriptions page
+    console.log("Locating Cancel Subscription trigger...");
 
-    await subTab.waitFor({ state: 'visible', timeout: timeout });
-    await subTab.click({ force: true });
-    console.log("Clicked Subscription(s) tab. Waiting for active subscription card...");
-    await page.waitForTimeout(3000);
-
-    // 4. Locate and click visible "Cancel Subscription" button / link
-    console.log("Locating visible Cancel Subscription trigger...");
+    // 4. Locate and click Cancel button
+    console.log("Locating Cancel Subscription trigger...");
     const cancelTrigger = page.locator('button, a')
-      .filter({ hasText: /Cancel Subscription|Cancel Plan/i })
+      .filter({ hasText: /^Cancel$|Cancel Subscription|Cancel Plan/i })
       .locator('visible=true')
       .first();
 
     await cancelTrigger.waitFor({ state: 'visible', timeout: timeout });
-    
+
     // Set up API listener before confirming cancellation
     const cancelPromise = page.waitForResponse(
       res => res.url().includes('cancel-subscription'),

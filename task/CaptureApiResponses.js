@@ -29,6 +29,11 @@ class CaptureApiResponses {
       const url = route.request().url().toLowerCase();
       const resourceType = route.request().resourceType();
 
+      // Never block Stripe or payment provider endpoints
+      if (url.includes('stripe') || url.includes('paypal') || url.includes('api-cwa')) {
+        return route.continue().catch(() => {});
+      }
+
       if (
         resourceType === 'image' ||
         resourceType === 'font' ||
@@ -37,7 +42,6 @@ class CaptureApiResponses {
         url.includes('googletagmanager') ||
         url.includes('hotjar') ||
         url.includes('facebook') ||
-        url.includes('pixel') ||
         url.includes('mixpanel') ||
         url.includes('amplitude')
       ) {
@@ -46,12 +50,9 @@ class CaptureApiResponses {
         route.continue().catch(() => {});
       }
     });
-    console.log("Blocked non-essential resources (images, fonts, trackers) for speed optimization.");
 
     // 2. Set up AJAX API listeners
     for (const pattern of this.apiPatterns) {
-      console.log(`Setting up listener for: ${pattern}`);
-      
       const listener = async (response) => {
         if (page.isClosed()) return;
         if (response.url().includes(pattern) && !captured[pattern]) {
@@ -59,7 +60,6 @@ class CaptureApiResponses {
           
           try {
             const body = await response.json().catch(() => ({}));
-            console.log(`📥 Intercepted and saved API Response payload for: ${pattern}`);
 
             // Attach to Playwright test report as separate JSON file entries
             const cleanName = pattern.replace(/^\/api-cwa\//, '').replace(/\//g, '_');
@@ -72,7 +72,6 @@ class CaptureApiResponses {
               }).catch(() => {});
             }
           } catch (e) {
-            console.warn(`Failed to process/attach API response for ${pattern}:`, e.message);
           } finally {
             // Remove listener after capture
             page.removeListener('response', listener);
@@ -82,8 +81,6 @@ class CaptureApiResponses {
       
       page.on('response', listener);
     }
-
-    console.log("API listeners attached with report attachments (one-time capture).");
   }
 }
 
